@@ -359,6 +359,10 @@ body {
     font-size: 3rem;
 }
 
+.food-card:hover .food-image {
+    transform: scale(1.05);
+}
+
 .food-content {
     padding: 1.25rem;
 }
