@@ -6,26 +6,32 @@ const Storage = {
 
 // ===== 内置美食数据（仅保留有图片的） =====
 const foodData = [
-    { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/9e9167f4-6d9b-4b12-b0f9-9a15e3125939_53792f7d-0560-4f78-bc1c-e6cd069536ce_一堂拌面扁肉.jpg' },
-    { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', emoji: '🥘', tag: '推荐', image: 'images/cff45d94-3f4b-4701-9a29-1fb12d453a4d_ebb733a5-1f5f-4286-804a-c824e8a6f374_一堂肴伯黑鸭煲.jpg' },
-    { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', emoji: '🍝', tag: '推荐', image: 'images/5ba9d661-9a3c-49af-99d6-fce9cef7ab9d_17a2bffb-fdd4-4db4-a927-e788bafa21cf_一堂意面.jpg' },
-    { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', emoji: '🍖', tag: '推荐', image: 'images/269865fc-ab56-4e60-9bc8-328c1f5bf576_041ccc9f-56b7-47ff-ac38-b2b27f860612_二堂干蒸菜.jpg' },
-    { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', emoji: '🧋', tag: '推荐', image: 'images/fc3ab460-7a72-4ca8-b26f-3bea6f22efd5_3b658268-5ff6-4609-b0ba-1459bb84fed0_二堂古茗.jpg' },
-    { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/4f0919de-66d8-445b-8e26-0635342be3a4_8b609358-965a-4c83-af70-e89d0b6a5b97_二堂老丈人牛肉面.jpg' },
-    { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', emoji: '🍲', tag: '推荐', image: 'images/50565149-5c3e-4e00-b41e-903d8c5cfbb7_df45bb0d-5f27-4161-943f-67aee68a6e79_二堂麻辣烫.jpg' },
-    { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', emoji: '🍱', tag: '推荐', image: 'images/0847455b-d8bf-4625-9b7a-82a9d07c0125_e4a6713d-f404-46b9-8d7a-e4b08a150201_二堂米婆婆.jpg' },
-    { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', emoji: '🍚', tag: '推荐', image: 'images/e3907b1e-5f84-4343-bfbf-723ef91efbf3_69ab9681-d50a-459f-93fd-9d9b759df34d_二堂石锅拌饭.jpg' },
-    { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', emoji: '🍓', tag: '推荐', image: 'images/d12adb80-a1a8-4e48-843f-b5c13200220e_663d3184-b538-4b98-bc66-35670c15564c_二堂水果捞.jpg' },
-    { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/d34aff2c-99fa-4992-92b4-d3bf5dbd5d72_7bbe0e04-e164-48b3-b8b9-a1765b95f4fe_二堂五谷渔粉.jpg' },
-    { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/55033f90-dce4-4a1b-8603-986c18d7e7c8_cfd5ad27-d9ba-44d5-8ddc-48959d8c04a2_二堂云南鸡汤米线.jpg' },
-    { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', emoji: '🍳', tag: '推荐', image: 'images/a0d5a1b9-c288-4245-800a-643940b81b66_8cdde32b-ce36-4c0b-b7b2-6e9d2b077594_三堂烤盘饭.jpg' },
-    { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', emoji: '🥘', tag: '推荐', image: 'images/9d08f799-25e5-4e2f-8d61-8dff5373de33_0b33ae1a-3d6e-4319-aac4-44ea68ae11e8_三堂麻辣香锅.jpg' },
-    { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', emoji: '🍱', tag: '推荐', image: 'images/9023dc97-1fc8-40ca-b354-adadcd40fced_8e3bfbab-25fb-4dd3-aa3e-213a57f10230_三堂汤先生.jpg' },
-    { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', canteen: null, type: 'offcampus', emoji: '🍜', tag: '推荐', image: 'images/8399f793-9202-46f5-95f8-e08769636b78_0524aff2-a4a0-43cc-bd7d-eee9096562da_北门肥姨妈螺蛳粉.jpg' },
-    { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', canteen: null, type: 'offcampus', emoji: '🍧', tag: '推荐', image: 'images/6e775426-85bd-4c58-beca-dae12bc56cbf_ababea71-ae57-48f6-92f6-b34486fab972_北门贵州冰浆2.jpg' },
-    { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', canteen: null, type: 'offcampus', emoji: '🍲', tag: '推荐', image: 'images/70db5130-6bb5-4557-b7b8-e1ebbcb20307_c0c3d3d5-7b62-4878-82fc-5b5585b20996_北门花甲粉.jpg' },
-    { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', canteen: null, type: 'offcampus', emoji: '🍗', tag: '推荐', image: 'images/eb790cb1-8731-44f9-98bd-74422ce2a002_9ad194b4-ad28-44bd-a1a2-ba88ab3a2dfc_北门铜锅鸡1.jpg' },
-    { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, type: 'offcampus', emoji: '🌶️', tag: '推荐', image: 'images/fb1b493f-df44-4148-a527-cfd33f388263_fd37e48e-c994-4b40-8812-224953b61a5a_北门云贵川小吃.jpg' }
+    { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/一堂拌面扁肉.jpg' },
+    { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', emoji: '🥘', tag: '推荐', image: 'images/一堂肴伯黑鸭煲.jpg' },
+    { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', emoji: '🍝', tag: '推荐', image: 'images/一堂意面.jpg' },
+    { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', emoji: '🍖', tag: '推荐', image: 'images/二堂干蒸菜.jpg' },
+    { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', emoji: '🧋', tag: '推荐', image: 'images/二堂古茗.jpg' },
+    { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/二堂老丈人牛肉面.jpg' },
+    { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', emoji: '🍲', tag: '推荐', image: 'images/二堂麻辣烫.jpg' },
+    { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', emoji: '🍱', tag: '推荐', image: 'images/二堂米婆婆.jpg' },
+    { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', emoji: '🍚', tag: '推荐', image: 'images/二堂石锅拌饭.jpg' },
+    { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', emoji: '🍓', tag: '推荐', image: 'images/二堂水果捞.jpg' },
+    { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/二堂五谷渔粉.jpg' },
+    { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/二堂云南鸡汤米线.jpg' },
+    { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', emoji: '🍳', tag: '推荐', image: 'images/三堂烤盘饭.jpg' },
+    { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', emoji: '🥘', tag: '推荐', image: 'images/三堂麻辣香锅.jpg' },
+    { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', emoji: '🍱', tag: '推荐', image: 'images/三堂汤先生.jpg' },
+    { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', canteen: null, type: 'offcampus', emoji: '🍜', tag: '推荐', image: 'images/北门肥姨妈螺蛳粉.jpg' },
+    { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', canteen: null, type: 'offcampus', emoji: '🍧', tag: '推荐', image: 'images/北门贵州冰浆2.jpg' },
+    { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', canteen: null, type: 'offcampus', emoji: '🍲', tag: '推荐', image: 'images/北门花甲粉.jpg' },
+    { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', canteen: null, type: 'offcampus', emoji: '🍗', tag: '推荐', image: 'images/北门铜锅鸡1.jpg' },
+    { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, type: 'offcampus', emoji: '🌶️', tag: '推荐', image: 'images/北门云贵川小吃.jpg' },
+    // 第四食堂数据（待同学们提交真实测评）
+    { id: 21, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
+    { id: 22, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
+    { id: 23, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
+    { id: 24, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
+    { id: 25, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null }
 ];
 
 // ===== 美食MBTI人格库 =====
@@ -130,6 +136,8 @@ function switchPage(page) {
         case 'cafeteria': renderCafeteria('all'); break;
         case 'offcampus': renderOffCampus('all'); break;
         case 'favorites': renderFavorites(); break;
+        case 'mealplan': renderMealPlan(); break;
+        case 'badreview': renderBadReviews(); break;
     }
 }
 
@@ -177,7 +185,7 @@ function renderFoodCard(food) {
     const tagClass = food.rating >= 4.5 ? 'excellent' : food.rating >= 3 ? 'good' : 'bad';
     const imageHtml = food.image
         ? `<img src="${food.image}" alt="${food.name}" class="food-image" loading="lazy">`
-        : `<div class="food-image">${food.emoji}</div>`;
+        : `<div class="food-image-placeholder">${food.emoji}</div>`;
     return `
         <div class="food-card" onclick="openDetail(${food.id})">
             ${imageHtml}
@@ -492,6 +500,7 @@ function generateSticker() {
     const taste = parseFloat(document.getElementById('taste-slider').value);
     const portion = parseFloat(document.getElementById('portion-slider').value);
     const value = parseFloat(document.getElementById('value-slider').value);
+    const comment = document.getElementById('sticker-comment').value.trim();
 
     // 显示AI处理动画
     document.getElementById('ai-processing').classList.remove('hidden');
@@ -507,23 +516,23 @@ function generateSticker() {
         document.getElementById('ai-step-3').className = 'ai-step done';
         document.getElementById('ai-processing').classList.add('hidden');
         document.getElementById('generate-btn').disabled = false;
-        renderSticker(taste, portion, value);
+        renderSticker(taste, portion, value, comment);
     }, 2600);
 }
 
-function renderSticker(taste, portion, value) {
+function renderSticker(taste, portion, value, comment) {
     const canvas = document.getElementById('sticker-canvas');
     const ctx = canvas.getContext('2d');
 
-    if (stickerStyle === 'polaroid') renderPolaroid(ctx, canvas, taste, portion, value);
-    else if (stickerStyle === 'circle') renderCircle(ctx, canvas, taste, portion, value);
-    else renderCard(ctx, canvas, taste, portion, value);
+    if (stickerStyle === 'polaroid') renderPolaroid(ctx, canvas, taste, portion, value, comment);
+    else if (stickerStyle === 'circle') renderCircle(ctx, canvas, taste, portion, value, comment);
+    else renderCard(ctx, canvas, taste, portion, value, comment);
 
     const dataUrl = canvas.toDataURL('image/png');
 
     // 保存到收藏
     const stickers = Storage.get('mjufav_stickers');
-    stickers.push({ id: Date.now(), src: dataUrl, date: new Date().toLocaleDateString(), taste, portion, value });
+    stickers.push({ id: Date.now(), src: dataUrl, date: new Date().toLocaleDateString(), taste, portion, value, comment });
     Storage.set('mjufav_stickers', stickers);
 
     const result = document.getElementById('sticker-result');
@@ -537,12 +546,13 @@ function renderSticker(taste, portion, value) {
     showToast('测评贴纸生成成功！');
 }
 
-function renderPolaroid(ctx, canvas, taste, portion, value) {
+function renderPolaroid(ctx, canvas, taste, portion, value, comment) {
     const maxW = 500, pad = 40, bottom = 160;
+    const commentOffset = comment ? 30 : 0;
     const scale = Math.min(1, maxW / stickerImage.width);
     const w = stickerImage.width * scale, h = stickerImage.height * scale;
     canvas.width = w + pad * 2;
-    canvas.height = h + pad + bottom;
+    canvas.height = h + pad + bottom + commentOffset;
 
     // 白色背景
     ctx.fillStyle = '#fff';
@@ -560,16 +570,24 @@ function renderPolaroid(ctx, canvas, taste, portion, value) {
     ctx.fillStyle = '#1a1a2e';
     ctx.font = 'bold 18px "Segoe UI", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('🍜 舌尖闽大 · 测评', canvas.width / 2, h + pad + 30);
+    ctx.fillText('舌尖闽大 · 测评', canvas.width / 2, h + pad + 30);
+
+    // 评论文字
+    if (comment) {
+        ctx.fillStyle = '#ff6b35';
+        ctx.font = '14px "Segoe UI", sans-serif';
+        ctx.fillText(`"${comment}"`, canvas.width / 2, h + pad + 50);
+    }
 
     const ratings = [
         { label: '口味', val: taste, color: '#ff6b35' },
         { label: '分量', val: portion, color: '#2ec4b6' },
         { label: '性价比', val: value, color: '#ffc107' }
     ];
+    const barStartY = h + pad + 50 + (comment ? 35 : 15);
     const barW = 180, barH = 14, startX = (canvas.width - barW) / 2;
     ratings.forEach((r, i) => {
-        const y = h + pad + 50 + i * 35;
+        const y = barStartY + i * 30;
         ctx.fillStyle = '#1a1a2e'; ctx.font = '13px "Segoe UI", sans-serif'; ctx.textAlign = 'right';
         ctx.fillText(r.label, startX - 8, y + 11);
         ctx.fillStyle = '#e9ecef'; ctx.fillRect(startX, y, barW, barH);
@@ -579,10 +597,11 @@ function renderPolaroid(ctx, canvas, taste, portion, value) {
     });
 }
 
-function renderCircle(ctx, canvas, taste, portion, value) {
+function renderCircle(ctx, canvas, taste, portion, value, comment) {
     const size = 500;
+    const commentOffset = comment ? 30 : 0;
     canvas.width = size;
-    canvas.height = size + 120;
+    canvas.height = size + 120 + commentOffset;
 
     // 背景
     const grad = ctx.createLinearGradient(0, 0, size, size);
@@ -610,28 +629,39 @@ function renderCircle(ctx, canvas, taste, portion, value) {
     ctx.stroke();
 
     // 底部
+    const bottomY = size + 120 + commentOffset;
     ctx.fillStyle = 'rgba(255,255,255,0.95)';
-    ctx.fillRect(0, size, size, 120);
+    ctx.fillRect(0, size, size, 120 + commentOffset);
 
     ctx.fillStyle = '#1a1a2e'; ctx.font = 'bold 16px "Segoe UI", sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('🍜 舌尖闽大 · 测评', size / 2, size + 25);
+    ctx.fillText('舌尖闽大 · 测评', size / 2, size + 25);
+
+    // 评论文字
+    if (comment) {
+        ctx.fillStyle = '#ff6b35';
+        ctx.font = '14px "Segoe UI", sans-serif';
+        ctx.fillText(`"${comment}"`, size / 2, size + 48);
+    }
 
     const avg = ((taste + portion + value) / 3).toFixed(1);
+    const ratingY = size + 65 + (comment ? 25 : 0);
     ctx.font = 'bold 28px "Segoe UI", sans-serif';
     ctx.fillStyle = '#ff6b35';
-    ctx.fillText(`${avg}分`, size / 2, size + 65);
+    ctx.fillText(`${avg}分`, size / 2, ratingY);
 
+    const detailY = size + 90 + (comment ? 25 : 0);
     ctx.font = '12px "Segoe UI", sans-serif';
     ctx.fillStyle = '#6c757d';
-    ctx.fillText(`口味${taste} | 分量${portion} | 性价比${value}`, size / 2, size + 90);
+    ctx.fillText(`口味${taste} | 分量${portion} | 性价比${value}`, size / 2, detailY);
 }
 
-function renderCard(ctx, canvas, taste, portion, value) {
+function renderCard(ctx, canvas, taste, portion, value, comment) {
     const maxW = 480, pad = 20, bottom = 140;
+    const commentOffset = comment ? 30 : 0;
     const scale = Math.min(1, maxW / stickerImage.width);
     const w = stickerImage.width * scale, h = stickerImage.height * scale;
     canvas.width = w + pad * 2;
-    canvas.height = h + pad + bottom;
+    canvas.height = h + pad + bottom + commentOffset;
 
     // 渐变背景
     const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
@@ -650,16 +680,24 @@ function renderCard(ctx, canvas, taste, portion, value) {
 
     // 标题
     ctx.fillStyle = '#fff'; ctx.font = 'bold 18px "Segoe UI", sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('🍜 舌尖闽大 · 测评', canvas.width / 2, h + pad + 30);
+    ctx.fillText('舌尖闽大 · 测评', canvas.width / 2, h + pad + 30);
+
+    // 评论文字
+    if (comment) {
+        ctx.fillStyle = '#ff6b35';
+        ctx.font = '14px "Segoe UI", sans-serif';
+        ctx.fillText(`"${comment}"`, canvas.width / 2, h + pad + 50);
+    }
 
     // 综合评分
     const avg = ((taste + portion + value) / 3).toFixed(1);
+    const ratingY = h + pad + 70 + (comment ? 20 : 0);
     ctx.font = 'bold 32px "Segoe UI", sans-serif';
     ctx.fillStyle = '#ff6b35';
-    ctx.fillText(`${avg}`, canvas.width / 2, h + pad + 70);
+    ctx.fillText(`${avg}`, canvas.width / 2, ratingY);
     ctx.font = '12px "Segoe UI", sans-serif';
     ctx.fillStyle = 'rgba(255,255,255,0.6)';
-    ctx.fillText('综合评分', canvas.width / 2, h + pad + 88);
+    ctx.fillText('综合评分', canvas.width / 2, ratingY + 18);
 
     // 三项评分小条
     const ratings = [
@@ -667,14 +705,14 @@ function renderCard(ctx, canvas, taste, portion, value) {
         { label: '分量', val: portion, color: '#2ec4b6' },
         { label: '性价比', val: value, color: '#ffc107' }
     ];
+    const barY = h + pad + 105 + (comment ? 20 : 0);
     const barW = 100, barH = 8, gap = (canvas.width - barW * 3) / 4;
     ratings.forEach((r, i) => {
         const x = gap + i * (barW + gap);
-        const y = h + pad + 105;
-        ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.fillRect(x, y, barW, barH);
-        ctx.fillStyle = r.color; ctx.fillRect(x, y, barW * (r.val / 5), barH);
+        ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.fillRect(x, barY, barW, barH);
+        ctx.fillStyle = r.color; ctx.fillRect(x, barY, barW * (r.val / 5), barH);
         ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.font = '10px "Segoe UI", sans-serif'; ctx.textAlign = 'center';
-        ctx.fillText(`${r.label} ${r.val}`, x + barW / 2, y + barH + 14);
+        ctx.fillText(`${r.label} ${r.val}`, x + barW / 2, barY + barH + 14);
     });
 }
 
@@ -730,13 +768,13 @@ function deleteSticker(id) {
 // ===== 随机抽签 =====
 function drawRandomFood() {
     const container = document.getElementById('random-result');
-    container.innerHTML = '<div class="food-card" style="max-width:400px;margin:0 auto;pointer-events:none"><div class="food-image" style="font-size:4rem">🎲</div></div>';
+    container.innerHTML = '<div class="food-card" style="max-width:400px;margin:0 auto;pointer-events:none"><div class="food-image-placeholder" style="font-size:4rem">🎲</div></div>';
 
     let count = 0;
     const interval = setInterval(() => {
         const r = foodData[Math.floor(Math.random() * foodData.length)];
         container.innerHTML = `<div class="food-card" style="max-width:400px;margin:0 auto;pointer-events:none;opacity:0.7">
-            ${r.image ? `<img src="${r.image}" class="food-image" alt="${r.name}">` : `<div class="food-image">${r.emoji}</div>`}
+            ${r.image ? `<img src="${r.image}" class="food-image" alt="${r.name}">` : `<div class="food-image-placeholder">${r.emoji}</div>`}
             <div class="food-content"><div class="food-name">${r.name}</div></div></div>`;
         count++;
         if (count > 10) {
@@ -744,7 +782,7 @@ function drawRandomFood() {
             const random = foodData[Math.floor(Math.random() * foodData.length)];
             container.innerHTML = `
                 <div class="food-card" style="max-width:400px;margin:0 auto" onclick="openDetail(${random.id})">
-                    ${random.image ? `<img src="${random.image}" class="food-image" alt="${random.name}">` : `<div class="food-image">${random.emoji}</div>`}
+                    ${random.image ? `<img src="${random.image}" class="food-image" alt="${random.name}">` : `<div class="food-image-placeholder">${random.emoji}</div>`}
                     <div class="food-content">
                         <div class="food-name">${random.name}</div>
                         <div class="food-rating">
@@ -828,6 +866,148 @@ function shareMbti(type, title) {
     }
 }
 
+// ===== 美食搭子匹配器 =====
+function matchBuddy() {
+    const selected = Array.from(document.querySelectorAll('input[name="preference"]:checked')).map(cb => cb.value);
+    if (selected.length === 0) {
+        showToast('请至少选择一个口味偏好！');
+        return;
+    }
+
+    // 保存用户偏好
+    Storage.set('mjufav_buddy_prefs', selected);
+
+    // 模拟匹配数据
+    const mockBuddies = [
+        { name: '辣妹子', avatar: '🌶️', prefs: ['吃辣', '爱吃米饭', '低价实惠'], matchRate: 90 },
+        { name: '面食控', avatar: '🍜', prefs: ['爱吃面食', '不吃香菜', '追求品质'], matchRate: 85 },
+        { name: '甜食党', avatar: '🍰', prefs: ['爱吃甜食', '不吃辣', '素食'], matchRate: 80 },
+        { name: '实惠达人', avatar: '💰', prefs: ['低价实惠', '爱吃面食', '不吃葱'], matchRate: 75 },
+        { name: '品质生活', avatar: '✨', prefs: ['追求品质', '爱吃甜食', '不吃辣'], matchRate: 70 }
+    ];
+
+    // 计算匹配度
+    const matchedBuddies = mockBuddies
+        .map(buddy => {
+            const common = buddy.prefs.filter(p => selected.includes(p)).length;
+            const matchRate = Math.round((common / selected.length) * 100);
+            return { ...buddy, matchRate };
+        })
+        .filter(b => b.matchRate >= 50)
+        .sort((a, b) => b.matchRate - a.matchRate)
+        .slice(0, 5);
+
+    const resultDiv = document.getElementById('buddy-result');
+    const listDiv = document.getElementById('buddy-match-list');
+
+    if (matchedBuddies.length === 0) {
+        listDiv.innerHTML = '<p class="empty-hint">暂无匹配到的搭子，试试调整口味偏好？</p>';
+    } else {
+        listDiv.innerHTML = matchedBuddies.map(buddy => `
+            <div class="buddy-card">
+                <div class="buddy-avatar">${buddy.avatar}</div>
+                <div class="buddy-info">
+                    <div class="buddy-name">${buddy.name}</div>
+                    <div class="buddy-tags-small">
+                        ${buddy.prefs.map(p => `<span class="buddy-tag-chip">${p}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="buddy-match-rate">${buddy.matchRate}%</div>
+            </div>
+        `).join('');
+    }
+
+    resultDiv.classList.remove('hidden');
+}
+
+function generateInviteText() {
+    const selected = Storage.get('mjufav_buddy_prefs') || [];
+    const username = currentUser || '干饭人';
+
+    const texts = [
+        `【舌尖上的闽大 · 饭搭子邀约】\n\n${username} 正在寻找饭搭子！\n我的口味偏好：${selected.join('、')}\n\n有没有志同道合的小伙伴？一起约饭去！🎉\n\n查看更多：舌尖上的闽大`,
+        `【约饭邀请】\n\n嘿！我在「舌尖上的闽大」上看到你也是${selected[0]}爱好者~\n我是${username}，要不要一起组队探店？🍽️\n\n感兴趣的话私信我呀～`,
+        `${username}想找个饭搭子！\n偏好：${selected.join('、')}\n\n一起吃遍闽大美食吧！🔥`
+    ];
+
+    const text = texts[Math.floor(Math.random() * texts.length)];
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('邀约文案已复制！'));
+    } else {
+        showToast(text);
+    }
+}
+
+// ===== 避雷吐槽墙 =====
+function submitBadReview() {
+    const shop = document.getElementById('badreview-shop').value.trim();
+    const content = document.getElementById('badreview-content').value.trim();
+    const tags = Array.from(document.querySelectorAll('input[name="badtag"]:checked')).map(cb => cb.value);
+
+    if (!shop) { showToast('请输入店铺名称'); return; }
+    if (!content) { showToast('请输入吐槽内容'); return; }
+
+    const reviews = Storage.get('mjufav_badreviews') || [];
+    reviews.unshift({
+        id: Date.now(),
+        shop,
+        content,
+        tags,
+        likes: 0,
+        date: new Date().toLocaleDateString()
+    });
+    Storage.set('mjufav_badreviews', reviews);
+
+    // 清空表单
+    document.getElementById('badreview-shop').value = '';
+    document.getElementById('badreview-content').value = '';
+    document.querySelectorAll('input[name="badtag"]').forEach(cb => cb.checked = false);
+
+    renderBadReviews();
+    showToast('吐槽发布成功！');
+}
+
+function renderBadReviews() {
+    const reviews = Storage.get('mjufav_badreviews') || [];
+    const container = document.getElementById('badreview-items');
+
+    if (reviews.length === 0) {
+        container.innerHTML = '<p class="empty-hint">暂无避雷吐槽，快来发布第一条吧！</p>';
+        return;
+    }
+
+    // 按点赞排序
+    reviews.sort((a, b) => b.likes - a.likes);
+
+    container.innerHTML = reviews.map(review => `
+        <div class="badreview-card">
+            <div class="badreview-header">
+                <span class="badreview-shop-name">⚠️ ${review.shop}</span>
+                <span class="badreview-date">${review.date}</span>
+            </div>
+            <div class="badreview-content">${review.content}</div>
+            <div class="badreview-footer">
+                <div class="badreview-tags-small">
+                    ${review.tags.map(t => `<span class="badreview-tag-chip">${t}</span>`).join('')}
+                </div>
+                <button class="badreview-like-btn" onclick="likeBadReview(${review.id})">
+                    👍 <span>${review.likes}</span>
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function likeBadReview(id) {
+    const reviews = Storage.get('mjufav_badreviews') || [];
+    const review = reviews.find(r => r.id === id);
+    if (review) {
+        review.likes++;
+        Storage.set('mjufav_badreviews', reviews);
+        renderBadReviews();
+    }
+}
+
 // ===== Toast 提示 =====
 function showToast(message) {
     const toast = document.getElementById('toast');
@@ -836,3 +1016,125 @@ function showToast(message) {
     clearTimeout(toast._timer);
     toast._timer = setTimeout(() => toast.classList.add('hidden'), 2500);
 }
+
+// ===== 一周食谱计划 =====
+let currentMealSlot = null; // 当前选择的槽位
+
+function renderMealPlan() {
+    const plan = Storage.get('mjufav_mealplan') || {};
+    const days = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+    const meals = ['breakfast', 'lunch', 'dinner'];
+
+    days.forEach(day => {
+        const row = document.querySelector(`.mealplan-row[data-day="${day}"]`);
+        if (!row) return;
+        meals.forEach(meal => {
+            const slot = row.querySelector(`.meal-slot[data-meal="${meal}"]`);
+            const key = `${day}_${meal}`;
+            const foodId = plan[key];
+            if (foodId) {
+                const food = foodData.find(f => f.id === foodId);
+                if (food) {
+                    slot.innerHTML = `<span class="meal-name">${food.emoji} ${food.name}</span>`;
+                    slot.classList.add('has-food');
+                } else {
+                    slot.innerHTML = '<span class="meal-placeholder">点击选择</span>';
+                    slot.classList.remove('has-food');
+                }
+            } else {
+                slot.innerHTML = '<span class="meal-placeholder">点击选择</span>';
+                slot.classList.remove('has-food');
+            }
+        });
+    });
+}
+
+function selectMeal(slotEl, day, meal) {
+    currentMealSlot = { day, meal, element: slotEl };
+    const favorites = Storage.get('mjufav_spa');
+    const favFoods = foodData.filter(f => favorites.includes(f.id));
+
+    if (favFoods.length === 0) {
+        showToast('请先收藏一些美食再来安排食谱吧！');
+        return;
+    }
+
+    document.getElementById('meal-select-title').textContent = `${day} ${getMealName(meal)}`;
+    const grid = document.getElementById('meal-select-grid');
+
+    grid.innerHTML = favFoods.map(food => `
+        <div class="meal-select-item" onclick="confirmMealSelect(${food.id})">
+            <div class="meal-select-emoji">${food.emoji || '🍽️'}</div>
+            <div class="meal-select-name">${food.name}</div>
+            <div class="meal-select-rating">${'★'.repeat(Math.floor(food.rating))}</div>
+        </div>
+    `).join('');
+
+    document.getElementById('meal-select-modal').classList.remove('hidden');
+}
+
+function getMealName(meal) {
+    const names = { breakfast: '早餐', lunch: '午餐', dinner: '晚餐' };
+    return names[meal] || meal;
+}
+
+function confirmMealSelect(foodId) {
+    if (!currentMealSlot) return;
+    const { day, meal } = currentMealSlot;
+    const key = `${day}_${meal}`;
+
+    let plan = Storage.get('mjufav_mealplan') || {};
+    plan[key] = foodId;
+    Storage.set('mjufav_mealplan', plan);
+
+    closeMealSelectModal();
+    renderMealPlan();
+    showToast('已添加到食谱计划！');
+}
+
+function closeMealSelectModal() {
+    document.getElementById('meal-select-modal').classList.add('hidden');
+    currentMealSlot = null;
+}
+
+function clearMealPlan() {
+    if (!confirm('确定要清空一周食谱计划吗？')) return;
+    Storage.set('mjufav_mealplan', {});
+    renderMealPlan();
+    showToast('食谱计划已清空');
+}
+
+function saveMealPlan() {
+    const plan = Storage.get('mjufav_mealplan') || {};
+    const keys = Object.keys(plan);
+    if (keys.length === 0) {
+        showToast('请先安排一些食谱！');
+        return;
+    }
+
+    // 生成分享文本
+    const days = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+    const meals = ['breakfast', 'lunch', 'dinner'];
+    let text = '【舌尖上的闽大 · 一周食谱计划】\n';
+
+    days.forEach(day => {
+        text += `\n${day}:\n`;
+        meals.forEach(meal => {
+            const foodId = plan[`${day}_${meal}`];
+            if (foodId) {
+                const food = foodData.find(f => f.id === foodId);
+                if (food) text += `  ${getMealName(meal)}: ${food.emoji} ${food.name}\n`;
+            }
+        });
+    });
+
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('食谱计划已复制到剪贴板！'));
+    } else {
+        showToast(text);
+    }
+}
+
+document.getElementById('meal-select-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('meal-select-modal')) closeMealSelectModal();
+});

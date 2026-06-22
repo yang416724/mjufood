@@ -40,10 +40,12 @@
                 <a href="#" class="nav-link active" data-page="home">首页</a>
                 <a href="#" class="nav-link" data-page="cafeteria">食堂测评</a>
                 <a href="#" class="nav-link" data-page="offcampus">校外小吃</a>
-                <a href="#" class="nav-link" data-page="sticker">AI测评抠图</a>
-                <a href="#" class="nav-link" data-page="favorites">我的收藏</a>
-                <a href="#" class="nav-link" data-page="random">今天吃什么</a>
-                <a href="#" class="nav-link" data-page="mbti">趣味测评</a>
+                <a href="#" class="nav-link" data-page="sticker">AI测评</a>
+                <a href="#" class="nav-link" data-page="buddy">找搭子</a>
+                <a href="#" class="nav-link" data-page="badreview">避雷墙</a>
+                <a href="#" class="nav-link" data-page="favorites">收藏</a>
+                <a href="#" class="nav-link" data-page="mealplan">食谱</a>
+                <a href="#" class="nav-link" data-page="mbti">MBTI</a>
             </div>
             <div class="nav-user">
                 <span id="current-user">干饭人</span>
@@ -73,6 +75,7 @@
                     <button class="filter-tab" data-canteen="1">第一食堂</button>
                     <button class="filter-tab" data-canteen="2">第二食堂</button>
                     <button class="filter-tab" data-canteen="3">第三食堂</button>
+                    <button class="filter-tab" data-canteen="4">第四食堂</button>
                 </div>
                 <div class="food-grid" id="cafeteria-food-grid"></div>
             </section>
@@ -137,6 +140,11 @@
                             <label>性价比评分: <span id="value-value" class="slider-val">3.0</span></label>
                             <input type="range" id="value-slider" min="0" max="5" step="0.5" value="3">
                         </div>
+                        <!-- 评论输入 -->
+                        <div class="slider-group">
+                            <label>评论文字: <span class="slider-hint">(选填，最多20字)</span></label>
+                            <input type="text" id="sticker-comment" class="sticker-comment-input" placeholder="写点评价吧..." maxlength="20">
+                        </div>
                         <button class="generate-btn" id="generate-btn" onclick="generateSticker()">
                             <span class="btn-icon">🤖</span> AI智能抠图生成
                         </button>
@@ -180,6 +188,198 @@
                 <div class="random-container">
                     <button class="random-btn" onclick="drawRandomFood()">🎲 随机抽签</button>
                     <div id="random-result" class="random-result"></div>
+                </div>
+            </section>
+
+            <!-- 一周食谱计划 -->
+            <section id="page-mealplan" class="page">
+                <div class="page-header">
+                    <h2>📅 一周食谱计划</h2>
+                    <p>从收藏中选择美食，安排你的一周饮食</p>
+                </div>
+                <div class="mealplan-container">
+                    <div class="mealplan-header">
+                        <div class="mealplan-weekdays">
+                            <div class="weekday-label"></div>
+                            <div class="weekday-label">早餐</div>
+                            <div class="weekday-label">午餐</div>
+                            <div class="weekday-label">晚餐</div>
+                        </div>
+                    </div>
+                    <div class="mealplan-grid" id="mealplan-grid">
+                        <!-- 周一 -->
+                        <div class="mealplan-row" data-day="周一">
+                            <div class="weekday-name">周一</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周一', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周一', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周一', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周二 -->
+                        <div class="mealplan-row" data-day="周二">
+                            <div class="weekday-name">周二</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周二', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周二', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周二', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周三 -->
+                        <div class="mealplan-row" data-day="周三">
+                            <div class="weekday-name">周三</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周三', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周三', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周三', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周四 -->
+                        <div class="mealplan-row" data-day="周四">
+                            <div class="weekday-name">周四</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周四', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周四', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周四', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周五 -->
+                        <div class="mealplan-row" data-day="周五">
+                            <div class="weekday-name">周五</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周五', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周五', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周五', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周六 -->
+                        <div class="mealplan-row" data-day="周六">
+                            <div class="weekday-name">周六</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周六', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周六', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周六', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周日 -->
+                        <div class="mealplan-row" data-day="周日">
+                            <div class="weekday-name">周日</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周日', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周日', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周日', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mealplan-actions">
+                        <button class="mealplan-btn" onclick="clearMealPlan()">🗑️ 清空计划</button>
+                        <button class="mealplan-btn accent" onclick="saveMealPlan()">💾 保存计划</button>
+                    </div>
+                </div>
+                <!-- 美食选择弹窗 -->
+                <div id="meal-select-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <button class="modal-close" onclick="closeMealSelectModal()">&times;</button>
+                        <div class="modal-body">
+                            <h3 id="meal-select-title">选择美食</h3>
+                            <p class="meal-select-hint">从你的收藏中选择：</p>
+                            <div class="meal-select-grid" id="meal-select-grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 美食搭子匹配器 -->
+            <section id="page-buddy" class="page">
+                <div class="page-header">
+                    <h2>👫 美食搭子</h2>
+                    <p>找到口味相投的饭搭子，一起探索美食！</p>
+                </div>
+                <div class="buddy-container">
+                    <!-- 口味偏好设置 -->
+                    <div class="buddy-profile">
+                        <h3>设置你的口味偏好</h3>
+                        <div class="buddy-tags">
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="吃辣"> 🌶️ 吃辣</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃辣"> 🚫 不吃辣</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃面食"> 🍜 爱吃面食</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃米饭"> 🍚 爱吃米饭</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃甜食"> 🍰 爱吃甜食</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃葱"> 🚫 不吃葱</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃香菜"> 🚫 不吃香菜</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="素食"> 🥬 素食</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="低价实惠"> 💰 低价实惠</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="追求品质"> ✨ 追求品质</label>
+                        </div>
+                        <button class="buddy-match-btn" onclick="matchBuddy()">🔍 匹配饭搭子</button>
+                    </div>
+                    <!-- 匹配结果 -->
+                    <div id="buddy-result" class="buddy-result hidden">
+                        <h3>🎉 匹配到的饭搭子</h3>
+                        <div id="buddy-match-list" class="buddy-match-list"></div>
+                        <div class="buddy-invite">
+                            <button class="buddy-invite-btn" onclick="generateInviteText()">📋 生成邀约文案</button>
+                            <p class="buddy-invite-hint">复制文案发送给好友，一起约饭吧！</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 避雷吐槽墙 -->
+            <section id="page-badreview" class="page">
+                <div class="page-header">
+                    <h2>⚠️ 避雷吐槽墙</h2>
+                    <p>分享踩雷经历，让同学们少走弯路</p>
+                </div>
+                <div class="badreview-container">
+                    <!-- 发布吐槽 -->
+                    <div class="badreview-form">
+                        <h3>发布避雷吐槽</h3>
+                        <input type="text" id="badreview-shop" class="badreview-input" placeholder="店铺名称" maxlength="30">
+                        <textarea id="badreview-content" class="badreview-textarea" placeholder="说说这次踩雷的经历..." maxlength="200"></textarea>
+                        <div class="badreview-tags">
+                            <span class="badreview-tag-label">避雷原因：</span>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="分量少"> 分量少</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="味道差"> 味道差</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="价格贵"> 价格贵</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="不新鲜"> 不新鲜</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="服务差"> 服务差</label>
+                        </div>
+                        <button class="badreview-submit" onclick="submitBadReview()">发布吐槽</button>
+                    </div>
+                    <!-- 吐槽列表 -->
+                    <div class="badreview-list">
+                        <h3>🔥 避雷热榜</h3>
+                        <div id="badreview-items" class="badreview-items"></div>
+                    </div>
                 </div>
             </section>
 
