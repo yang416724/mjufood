@@ -177,7 +177,7 @@ function renderFoodCard(food) {
     const tagClass = food.rating >= 4.5 ? 'excellent' : food.rating >= 3 ? 'good' : 'bad';
     const imageHtml = food.image
         ? `<img src="${food.image}" alt="${food.name}" class="food-image" loading="lazy">`
-        : `<div class="food-image">${food.emoji}</div>`;
+        : `<div class="food-image-placeholder">${food.emoji}</div>`;
     return `
         <div class="food-card" onclick="openDetail(${food.id})">
             ${imageHtml}
@@ -730,13 +730,13 @@ function deleteSticker(id) {
 // ===== 随机抽签 =====
 function drawRandomFood() {
     const container = document.getElementById('random-result');
-    container.innerHTML = '<div class="food-card" style="max-width:400px;margin:0 auto;pointer-events:none"><div class="food-image" style="font-size:4rem">🎲</div></div>';
+    container.innerHTML = '<div class="food-card" style="max-width:400px;margin:0 auto;pointer-events:none"><div class="food-image-placeholder" style="font-size:4rem">🎲</div></div>';
 
     let count = 0;
     const interval = setInterval(() => {
         const r = foodData[Math.floor(Math.random() * foodData.length)];
         container.innerHTML = `<div class="food-card" style="max-width:400px;margin:0 auto;pointer-events:none;opacity:0.7">
-            ${r.image ? `<img src="${r.image}" class="food-image" alt="${r.name}">` : `<div class="food-image">${r.emoji}</div>`}
+            ${r.image ? `<img src="${r.image}" class="food-image" alt="${r.name}">` : `<div class="food-image-placeholder">${r.emoji}</div>`}
             <div class="food-content"><div class="food-name">${r.name}</div></div></div>`;
         count++;
         if (count > 10) {
@@ -744,7 +744,7 @@ function drawRandomFood() {
             const random = foodData[Math.floor(Math.random() * foodData.length)];
             container.innerHTML = `
                 <div class="food-card" style="max-width:400px;margin:0 auto" onclick="openDetail(${random.id})">
-                    ${random.image ? `<img src="${random.image}" class="food-image" alt="${random.name}">` : `<div class="food-image">${random.emoji}</div>`}
+                    ${random.image ? `<img src="${random.image}" class="food-image" alt="${random.name}">` : `<div class="food-image-placeholder">${random.emoji}</div>`}
                     <div class="food-content">
                         <div class="food-name">${random.name}</div>
                         <div class="food-rating">
