@@ -40,11 +40,12 @@
                 <a href="#" class="nav-link active" data-page="home">首页</a>
                 <a href="#" class="nav-link" data-page="cafeteria">食堂测评</a>
                 <a href="#" class="nav-link" data-page="offcampus">校外小吃</a>
-                <a href="#" class="nav-link" data-page="sticker">AI测评抠图</a>
-                <a href="#" class="nav-link" data-page="favorites">我的收藏</a>
-                <a href="#" class="nav-link" data-page="random">今天吃什么</a>
-                <a href="#" class="nav-link" data-page="mealplan">一周食谱</a>
-                <a href="#" class="nav-link" data-page="mbti">趣味测评</a>
+                <a href="#" class="nav-link" data-page="sticker">AI测评</a>
+                <a href="#" class="nav-link" data-page="buddy">找搭子</a>
+                <a href="#" class="nav-link" data-page="badreview">避雷墙</a>
+                <a href="#" class="nav-link" data-page="favorites">收藏</a>
+                <a href="#" class="nav-link" data-page="mealplan">食谱</a>
+                <a href="#" class="nav-link" data-page="mbti">MBTI</a>
             </div>
             <div class="nav-user">
                 <span id="current-user">干饭人</span>
@@ -312,6 +313,72 @@
                             <p class="meal-select-hint">从你的收藏中选择：</p>
                             <div class="meal-select-grid" id="meal-select-grid"></div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 美食搭子匹配器 -->
+            <section id="page-buddy" class="page">
+                <div class="page-header">
+                    <h2>👫 美食搭子</h2>
+                    <p>找到口味相投的饭搭子，一起探索美食！</p>
+                </div>
+                <div class="buddy-container">
+                    <!-- 口味偏好设置 -->
+                    <div class="buddy-profile">
+                        <h3>设置你的口味偏好</h3>
+                        <div class="buddy-tags">
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="吃辣"> 🌶️ 吃辣</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃辣"> 🚫 不吃辣</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃面食"> 🍜 爱吃面食</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃米饭"> 🍚 爱吃米饭</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃甜食"> 🍰 爱吃甜食</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃葱"> 🚫 不吃葱</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃香菜"> 🚫 不吃香菜</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="素食"> 🥬 素食</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="低价实惠"> 💰 低价实惠</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="追求品质"> ✨ 追求品质</label>
+                        </div>
+                        <button class="buddy-match-btn" onclick="matchBuddy()">🔍 匹配饭搭子</button>
+                    </div>
+                    <!-- 匹配结果 -->
+                    <div id="buddy-result" class="buddy-result hidden">
+                        <h3>🎉 匹配到的饭搭子</h3>
+                        <div id="buddy-match-list" class="buddy-match-list"></div>
+                        <div class="buddy-invite">
+                            <button class="buddy-invite-btn" onclick="generateInviteText()">📋 生成邀约文案</button>
+                            <p class="buddy-invite-hint">复制文案发送给好友，一起约饭吧！</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 避雷吐槽墙 -->
+            <section id="page-badreview" class="page">
+                <div class="page-header">
+                    <h2>⚠️ 避雷吐槽墙</h2>
+                    <p>分享踩雷经历，让同学们少走弯路</p>
+                </div>
+                <div class="badreview-container">
+                    <!-- 发布吐槽 -->
+                    <div class="badreview-form">
+                        <h3>发布避雷吐槽</h3>
+                        <input type="text" id="badreview-shop" class="badreview-input" placeholder="店铺名称" maxlength="30">
+                        <textarea id="badreview-content" class="badreview-textarea" placeholder="说说这次踩雷的经历..." maxlength="200"></textarea>
+                        <div class="badreview-tags">
+                            <span class="badreview-tag-label">避雷原因：</span>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="分量少"> 分量少</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="味道差"> 味道差</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="价格贵"> 价格贵</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="不新鲜"> 不新鲜</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="服务差"> 服务差</label>
+                        </div>
+                        <button class="badreview-submit" onclick="submitBadReview()">发布吐槽</button>
+                    </div>
+                    <!-- 吐槽列表 -->
+                    <div class="badreview-list">
+                        <h3>🔥 避雷热榜</h3>
+                        <div id="badreview-items" class="badreview-items"></div>
                     </div>
                 </div>
             </section>

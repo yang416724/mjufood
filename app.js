@@ -137,6 +137,7 @@ function switchPage(page) {
         case 'offcampus': renderOffCampus('all'); break;
         case 'favorites': renderFavorites(); break;
         case 'mealplan': renderMealPlan(); break;
+        case 'badreview': renderBadReviews(); break;
     }
 }
 
@@ -862,6 +863,148 @@ function shareMbti(type, title) {
         navigator.clipboard.writeText(text).then(() => showToast('分享文案已复制到剪贴板！'));
     } else {
         showToast(text);
+    }
+}
+
+// ===== 美食搭子匹配器 =====
+function matchBuddy() {
+    const selected = Array.from(document.querySelectorAll('input[name="preference"]:checked')).map(cb => cb.value);
+    if (selected.length === 0) {
+        showToast('请至少选择一个口味偏好！');
+        return;
+    }
+
+    // 保存用户偏好
+    Storage.set('mjufav_buddy_prefs', selected);
+
+    // 模拟匹配数据
+    const mockBuddies = [
+        { name: '辣妹子', avatar: '🌶️', prefs: ['吃辣', '爱吃米饭', '低价实惠'], matchRate: 90 },
+        { name: '面食控', avatar: '🍜', prefs: ['爱吃面食', '不吃香菜', '追求品质'], matchRate: 85 },
+        { name: '甜食党', avatar: '🍰', prefs: ['爱吃甜食', '不吃辣', '素食'], matchRate: 80 },
+        { name: '实惠达人', avatar: '💰', prefs: ['低价实惠', '爱吃面食', '不吃葱'], matchRate: 75 },
+        { name: '品质生活', avatar: '✨', prefs: ['追求品质', '爱吃甜食', '不吃辣'], matchRate: 70 }
+    ];
+
+    // 计算匹配度
+    const matchedBuddies = mockBuddies
+        .map(buddy => {
+            const common = buddy.prefs.filter(p => selected.includes(p)).length;
+            const matchRate = Math.round((common / selected.length) * 100);
+            return { ...buddy, matchRate };
+        })
+        .filter(b => b.matchRate >= 50)
+        .sort((a, b) => b.matchRate - a.matchRate)
+        .slice(0, 5);
+
+    const resultDiv = document.getElementById('buddy-result');
+    const listDiv = document.getElementById('buddy-match-list');
+
+    if (matchedBuddies.length === 0) {
+        listDiv.innerHTML = '<p class="empty-hint">暂无匹配到的搭子，试试调整口味偏好？</p>';
+    } else {
+        listDiv.innerHTML = matchedBuddies.map(buddy => `
+            <div class="buddy-card">
+                <div class="buddy-avatar">${buddy.avatar}</div>
+                <div class="buddy-info">
+                    <div class="buddy-name">${buddy.name}</div>
+                    <div class="buddy-tags-small">
+                        ${buddy.prefs.map(p => `<span class="buddy-tag-chip">${p}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="buddy-match-rate">${buddy.matchRate}%</div>
+            </div>
+        `).join('');
+    }
+
+    resultDiv.classList.remove('hidden');
+}
+
+function generateInviteText() {
+    const selected = Storage.get('mjufav_buddy_prefs') || [];
+    const username = currentUser || '干饭人';
+
+    const texts = [
+        `【舌尖上的闽大 · 饭搭子邀约】\n\n${username} 正在寻找饭搭子！\n我的口味偏好：${selected.join('、')}\n\n有没有志同道合的小伙伴？一起约饭去！🎉\n\n查看更多：舌尖上的闽大`,
+        `【约饭邀请】\n\n嘿！我在「舌尖上的闽大」上看到你也是${selected[0]}爱好者~\n我是${username}，要不要一起组队探店？🍽️\n\n感兴趣的话私信我呀～`,
+        `${username}想找个饭搭子！\n偏好：${selected.join('、')}\n\n一起吃遍闽大美食吧！🔥`
+    ];
+
+    const text = texts[Math.floor(Math.random() * texts.length)];
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('邀约文案已复制！'));
+    } else {
+        showToast(text);
+    }
+}
+
+// ===== 避雷吐槽墙 =====
+function submitBadReview() {
+    const shop = document.getElementById('badreview-shop').value.trim();
+    const content = document.getElementById('badreview-content').value.trim();
+    const tags = Array.from(document.querySelectorAll('input[name="badtag"]:checked')).map(cb => cb.value);
+
+    if (!shop) { showToast('请输入店铺名称'); return; }
+    if (!content) { showToast('请输入吐槽内容'); return; }
+
+    const reviews = Storage.get('mjufav_badreviews') || [];
+    reviews.unshift({
+        id: Date.now(),
+        shop,
+        content,
+        tags,
+        likes: 0,
+        date: new Date().toLocaleDateString()
+    });
+    Storage.set('mjufav_badreviews', reviews);
+
+    // 清空表单
+    document.getElementById('badreview-shop').value = '';
+    document.getElementById('badreview-content').value = '';
+    document.querySelectorAll('input[name="badtag"]').forEach(cb => cb.checked = false);
+
+    renderBadReviews();
+    showToast('吐槽发布成功！');
+}
+
+function renderBadReviews() {
+    const reviews = Storage.get('mjufav_badreviews') || [];
+    const container = document.getElementById('badreview-items');
+
+    if (reviews.length === 0) {
+        container.innerHTML = '<p class="empty-hint">暂无避雷吐槽，快来发布第一条吧！</p>';
+        return;
+    }
+
+    // 按点赞排序
+    reviews.sort((a, b) => b.likes - a.likes);
+
+    container.innerHTML = reviews.map(review => `
+        <div class="badreview-card">
+            <div class="badreview-header">
+                <span class="badreview-shop-name">⚠️ ${review.shop}</span>
+                <span class="badreview-date">${review.date}</span>
+            </div>
+            <div class="badreview-content">${review.content}</div>
+            <div class="badreview-footer">
+                <div class="badreview-tags-small">
+                    ${review.tags.map(t => `<span class="badreview-tag-chip">${t}</span>`).join('')}
+                </div>
+                <button class="badreview-like-btn" onclick="likeBadReview(${review.id})">
+                    👍 <span>${review.likes}</span>
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function likeBadReview(id) {
+    const reviews = Storage.get('mjufav_badreviews') || [];
+    const review = reviews.find(r => r.id === id);
+    if (review) {
+        review.likes++;
+        Storage.set('mjufav_badreviews', reviews);
+        renderBadReviews();
     }
 }
 
