@@ -6,26 +6,26 @@ const Storage = {
 
 // ===== 内置美食数据（仅保留有图片的） =====
 const foodData = [
-    { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/9e9167f4-6d9b-4b12-b0f9-9a15e3125939_53792f7d-0560-4f78-bc1c-e6cd069536ce_一堂拌面扁肉.jpg' },
-    { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', emoji: '🥘', tag: '推荐', image: 'images/cff45d94-3f4b-4701-9a29-1fb12d453a4d_ebb733a5-1f5f-4286-804a-c824e8a6f374_一堂肴伯黑鸭煲.jpg' },
-    { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', emoji: '🍝', tag: '推荐', image: 'images/5ba9d661-9a3c-49af-99d6-fce9cef7ab9d_17a2bffb-fdd4-4db4-a927-e788bafa21cf_一堂意面.jpg' },
-    { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', emoji: '🍖', tag: '推荐', image: 'images/269865fc-ab56-4e60-9bc8-328c1f5bf576_041ccc9f-56b7-47ff-ac38-b2b27f860612_二堂干蒸菜.jpg' },
-    { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', emoji: '🧋', tag: '推荐', image: 'images/fc3ab460-7a72-4ca8-b26f-3bea6f22efd5_3b658268-5ff6-4609-b0ba-1459bb84fed0_二堂古茗.jpg' },
-    { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/4f0919de-66d8-445b-8e26-0635342be3a4_8b609358-965a-4c83-af70-e89d0b6a5b97_二堂老丈人牛肉面.jpg' },
-    { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', emoji: '🍲', tag: '推荐', image: 'images/50565149-5c3e-4e00-b41e-903d8c5cfbb7_df45bb0d-5f27-4161-943f-67aee68a6e79_二堂麻辣烫.jpg' },
-    { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', emoji: '🍱', tag: '推荐', image: 'images/0847455b-d8bf-4625-9b7a-82a9d07c0125_e4a6713d-f404-46b9-8d7a-e4b08a150201_二堂米婆婆.jpg' },
-    { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', emoji: '🍚', tag: '推荐', image: 'images/e3907b1e-5f84-4343-bfbf-723ef91efbf3_69ab9681-d50a-459f-93fd-9d9b759df34d_二堂石锅拌饭.jpg' },
-    { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', emoji: '🍓', tag: '推荐', image: 'images/d12adb80-a1a8-4e48-843f-b5c13200220e_663d3184-b538-4b98-bc66-35670c15564c_二堂水果捞.jpg' },
-    { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/d34aff2c-99fa-4992-92b4-d3bf5dbd5d72_7bbe0e04-e164-48b3-b8b9-a1765b95f4fe_二堂五谷渔粉.jpg' },
-    { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/55033f90-dce4-4a1b-8603-986c18d7e7c8_cfd5ad27-d9ba-44d5-8ddc-48959d8c04a2_二堂云南鸡汤米线.jpg' },
-    { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', emoji: '🍳', tag: '推荐', image: 'images/a0d5a1b9-c288-4245-800a-643940b81b66_8cdde32b-ce36-4c0b-b7b2-6e9d2b077594_三堂烤盘饭.jpg' },
-    { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', emoji: '🥘', tag: '推荐', image: 'images/9d08f799-25e5-4e2f-8d61-8dff5373de33_0b33ae1a-3d6e-4319-aac4-44ea68ae11e8_三堂麻辣香锅.jpg' },
-    { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', emoji: '🍱', tag: '推荐', image: 'images/9023dc97-1fc8-40ca-b354-adadcd40fced_8e3bfbab-25fb-4dd3-aa3e-213a57f10230_三堂汤先生.jpg' },
-    { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', canteen: null, type: 'offcampus', emoji: '🍜', tag: '推荐', image: 'images/8399f793-9202-46f5-95f8-e08769636b78_0524aff2-a4a0-43cc-bd7d-eee9096562da_北门肥姨妈螺蛳粉.jpg' },
-    { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', canteen: null, type: 'offcampus', emoji: '🍧', tag: '推荐', image: 'images/6e775426-85bd-4c58-beca-dae12bc56cbf_ababea71-ae57-48f6-92f6-b34486fab972_北门贵州冰浆2.jpg' },
-    { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', canteen: null, type: 'offcampus', emoji: '🍲', tag: '推荐', image: 'images/70db5130-6bb5-4557-b7b8-e1ebbcb20307_c0c3d3d5-7b62-4878-82fc-5b5585b20996_北门花甲粉.jpg' },
-    { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', canteen: null, type: 'offcampus', emoji: '🍗', tag: '推荐', image: 'images/eb790cb1-8731-44f9-98bd-74422ce2a002_9ad194b4-ad28-44bd-a1a2-ba88ab3a2dfc_北门铜锅鸡1.jpg' },
-    { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, type: 'offcampus', emoji: '🌶️', tag: '推荐', image: 'images/fb1b493f-df44-4148-a527-cfd33f388263_fd37e48e-c994-4b40-8812-224953b61a5a_北门云贵川小吃.jpg' }
+    { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/一堂拌面扁肉.jpg' },
+    { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', emoji: '🥘', tag: '推荐', image: 'images/一堂肴伯黑鸭煲.jpg' },
+    { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', emoji: '🍝', tag: '推荐', image: 'images/一堂意面.jpg' },
+    { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', emoji: '🍖', tag: '推荐', image: 'images/二堂干蒸菜.jpg' },
+    { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', emoji: '🧋', tag: '推荐', image: 'images/二堂古茗.jpg' },
+    { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/二堂老丈人牛肉面.jpg' },
+    { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', emoji: '🍲', tag: '推荐', image: 'images/二堂麻辣烫.jpg' },
+    { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', emoji: '🍱', tag: '推荐', image: 'images/二堂米婆婆.jpg' },
+    { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', emoji: '🍚', tag: '推荐', image: 'images/二堂石锅拌饭.jpg' },
+    { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', emoji: '🍓', tag: '推荐', image: 'images/二堂水果捞.jpg' },
+    { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/二堂五谷渔粉.jpg' },
+    { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/二堂云南鸡汤米线.jpg' },
+    { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', emoji: '🍳', tag: '推荐', image: 'images/三堂烤盘饭.jpg' },
+    { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', emoji: '🥘', tag: '推荐', image: 'images/三堂麻辣香锅.jpg' },
+    { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', emoji: '🍱', tag: '推荐', image: 'images/三堂汤先生.jpg' },
+    { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', canteen: null, type: 'offcampus', emoji: '🍜', tag: '推荐', image: 'images/北门肥姨妈螺蛳粉.jpg' },
+    { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', canteen: null, type: 'offcampus', emoji: '🍧', tag: '推荐', image: 'images/北门贵州冰浆2.jpg' },
+    { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', canteen: null, type: 'offcampus', emoji: '🍲', tag: '推荐', image: 'images/北门花甲粉.jpg' },
+    { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', canteen: null, type: 'offcampus', emoji: '🍗', tag: '推荐', image: 'images/北门铜锅鸡1.jpg' },
+    { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, type: 'offcampus', emoji: '🌶️', tag: '推荐', image: 'images/北门云贵川小吃.jpg' }
 ];
 
 // ===== 美食MBTI人格库 =====
