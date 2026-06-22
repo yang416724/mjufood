@@ -38,11 +38,12 @@
             </div>
             <div class="nav-links">
                 <a href="#" class="nav-link active" data-page="home">首页</a>
-                <a href="#" class="nav-link" data-page="cafeteria">四大食堂</a>
-                <a href="#" class="nav-link" data-page="offcampus">校外小吃街</a>
-                <a href="#" class="nav-link" data-page="sticker">测评抠图</a>
+                <a href="#" class="nav-link" data-page="cafeteria">食堂测评</a>
+                <a href="#" class="nav-link" data-page="offcampus">校外小吃</a>
+                <a href="#" class="nav-link" data-page="sticker">AI测评抠图</a>
                 <a href="#" class="nav-link" data-page="favorites">我的收藏</a>
                 <a href="#" class="nav-link" data-page="random">今天吃什么</a>
+                <a href="#" class="nav-link" data-page="mbti">趣味测评</a>
             </div>
             <div class="nav-user">
                 <span id="current-user">干饭人</span>
@@ -61,10 +62,10 @@
                 <div class="food-grid" id="home-food-grid"></div>
             </section>
 
-            <!-- 四大食堂 -->
+            <!-- 食堂测评 -->
             <section id="page-cafeteria" class="page">
                 <div class="page-header">
-                    <h2>🏢 四大食堂测评</h2>
+                    <h2>🏫 食堂测评</h2>
                     <p>分堂测评，精准避坑</p>
                 </div>
                 <div class="filter-tabs">
@@ -72,7 +73,6 @@
                     <button class="filter-tab" data-canteen="1">第一食堂</button>
                     <button class="filter-tab" data-canteen="2">第二食堂</button>
                     <button class="filter-tab" data-canteen="3">第三食堂</button>
-                    <button class="filter-tab" data-canteen="4">第四食堂</button>
                 </div>
                 <div class="food-grid" id="cafeteria-food-grid"></div>
             </section>
@@ -80,7 +80,7 @@
             <!-- 校外小吃街 -->
             <section id="page-offcampus" class="page">
                 <div class="page-header">
-                    <h2>🍢 校外小吃街</h2>
+                    <h2>🍢 校外小吃</h2>
                     <p>周边美食，一网打尽</p>
                 </div>
                 <div class="sort-options">
@@ -90,33 +90,68 @@
                 <div class="food-grid" id="offcampus-food-grid"></div>
             </section>
 
-            <!-- 测评抠图 -->
+            <!-- AI测评抠图 -->
             <section id="page-sticker" class="page">
                 <div class="page-header">
-                    <h2>🎨 测评抠图</h2>
-                    <p>上传美食图片，生成个性测评贴纸</p>
+                    <h2>🎨 AI测评抠图</h2>
+                    <p>上传美食图片，AI智能抠图生成测评贴纸</p>
                 </div>
                 <div class="sticker-container">
-                    <div class="upload-section">
+                    <!-- 拖拽上传区 -->
+                    <div class="dropzone" id="sticker-dropzone">
                         <input type="file" id="sticker-file" accept="image/*" class="file-input">
-                        <label for="sticker-file" class="file-label">📷 选择美食图片</label>
-                        <div id="sticker-preview" class="sticker-preview"></div>
+                        <div class="dropzone-content">
+                            <div class="dropzone-icon">📷</div>
+                            <p class="dropzone-text">拖拽图片到这里，或点击上传</p>
+                            <p class="dropzone-hint">支持 JPG、PNG 格式</p>
+                        </div>
                     </div>
-                    <div class="sliders-section">
+                    <!-- 预览区 -->
+                    <div id="sticker-preview" class="sticker-preview"></div>
+                    <!-- 风格选择 -->
+                    <div class="style-selector" id="style-selector">
+                        <h4>选择贴纸风格</h4>
+                        <div class="style-options">
+                            <div class="style-option active" data-style="polaroid">
+                                <div class="style-preview polaroid-preview">拍立得</div>
+                            </div>
+                            <div class="style-option" data-style="circle">
+                                <div class="style-preview circle-preview">圆形</div>
+                            </div>
+                            <div class="style-option" data-style="card">
+                                <div class="style-preview card-preview">卡片</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评分滑块 -->
+                    <div class="sliders-section" id="sliders-section">
                         <div class="slider-group">
-                            <label>口味评分: <span id="taste-value">3.0</span></label>
+                            <label>口味评分: <span id="taste-value" class="slider-val">3.0</span></label>
                             <input type="range" id="taste-slider" min="0" max="5" step="0.5" value="3">
                         </div>
                         <div class="slider-group">
-                            <label>分量评分: <span id="portion-value">3.0</span></label>
+                            <label>分量评分: <span id="portion-value" class="slider-val">3.0</span></label>
                             <input type="range" id="portion-slider" min="0" max="5" step="0.5" value="3">
                         </div>
                         <div class="slider-group">
-                            <label>性价比评分: <span id="value-value">3.0</span></label>
+                            <label>性价比评分: <span id="value-value" class="slider-val">3.0</span></label>
                             <input type="range" id="value-slider" min="0" max="5" step="0.5" value="3">
                         </div>
-                        <button class="generate-btn" onclick="generateSticker()">生成测评贴纸</button>
+                        <button class="generate-btn" id="generate-btn" onclick="generateSticker()">
+                            <span class="btn-icon">🤖</span> AI智能抠图生成
+                        </button>
                     </div>
+                    <!-- AI处理动画 -->
+                    <div id="ai-processing" class="ai-processing hidden">
+                        <div class="ai-spinner"></div>
+                        <p class="ai-text">🤖 AI正在智能抠图中...</p>
+                        <div class="ai-steps">
+                            <div class="ai-step" id="ai-step-1">识别美食区域</div>
+                            <div class="ai-step" id="ai-step-2">智能抠图处理</div>
+                            <div class="ai-step" id="ai-step-3">生成测评贴纸</div>
+                        </div>
+                    </div>
+                    <!-- 结果区 -->
                     <canvas id="sticker-canvas" class="sticker-canvas"></canvas>
                     <div id="sticker-result" class="sticker-result"></div>
                 </div>
@@ -126,14 +161,14 @@
             <section id="page-favorites" class="page">
                 <div class="page-header">
                     <h2>❤️ 我的收藏</h2>
-                    <p>你心仪的美食清单</p>
+                    <p>你心仪的美食和测评贴纸</p>
                 </div>
-                <div class="food-grid" id="favorites-food-grid">
-                    <div class="empty-state">
-                        <p>还没有收藏任何美食哦~</p>
-                        <p>快去首页发现美食吧！</p>
-                    </div>
+                <div class="fav-tabs">
+                    <button class="fav-tab active" data-tab="foods">收藏的美食</button>
+                    <button class="fav-tab" data-tab="stickers">我的测评贴纸</button>
                 </div>
+                <div class="food-grid" id="favorites-food-grid"></div>
+                <div class="sticker-gallery hidden" id="favorites-sticker-grid"></div>
             </section>
 
             <!-- 今天吃什么 -->
@@ -145,6 +180,23 @@
                 <div class="random-container">
                     <button class="random-btn" onclick="drawRandomFood()">🎲 随机抽签</button>
                     <div id="random-result" class="random-result"></div>
+                </div>
+            </section>
+
+            <!-- 趣味测评 MBTI -->
+            <section id="page-mbti" class="page">
+                <div class="page-header">
+                    <h2>🧬 趣味测评</h2>
+                    <p>根据你的收藏，测出你的美食MBTI人格</p>
+                </div>
+                <div class="mbti-container">
+                    <div class="mbti-intro">
+                        <div class="mbti-hero">🍽️</div>
+                        <h3>你的美食人格是什么？</h3>
+                        <p>基于你的收藏偏好，AI将分析你的美食口味、就餐习惯、探索精神，为你生成专属的美食MBTI人格报告！</p>
+                        <button class="mbti-start-btn" onclick="startMbtiTest()">🧬 开始测评</button>
+                    </div>
+                    <div id="mbti-result" class="mbti-result hidden"></div>
                 </div>
             </section>
         </main>
@@ -160,23 +212,47 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">&times;</button>
             <div class="modal-body">
+                <!-- 美食大图 -->
+                <div class="detail-hero" id="detail-hero"></div>
                 <div class="detail-info">
                     <h3 id="detail-name"></h3>
                     <div class="detail-rating" id="detail-rating"></div>
                     <p class="detail-review" id="detail-review"></p>
                     <p class="detail-reviewer">评价人: <span id="detail-reviewer"></span></p>
-                    <button class="favorite-btn" id="detail-favorite" onclick="toggleFavoriteFromModal()">❤️ 收藏</button>
+                    <div class="detail-actions">
+                        <button class="favorite-btn" id="detail-favorite" onclick="toggleFavoriteFromModal()">❤️ 收藏</button>
+                        <button class="share-btn" onclick="shareFood()">📤 分享</button>
+                    </div>
                 </div>
+                <!-- 拖拽上传区 -->
                 <div class="upload-section">
                     <h4>📷 上传实拍图片</h4>
-                    <input type="file" id="detail-file" accept="image/jpeg,image/png" class="file-input">
-                    <label for="detail-file" class="file-label">选择图片</label>
+                    <div class="dropzone dropzone-sm" id="detail-dropzone">
+                        <input type="file" id="detail-file" accept="image/jpeg,image/png" class="file-input" multiple>
+                        <div class="dropzone-content">
+                            <div class="dropzone-icon">📸</div>
+                            <p class="dropzone-text">拖拽或点击上传图片</p>
+                            <p class="dropzone-hint">支持多张上传，JPG/PNG格式</p>
+                        </div>
+                    </div>
+                    <div id="upload-preview-list" class="upload-preview-list"></div>
                     <p class="upload-warning">⚠️ 请勿上传模糊/不雅/违规图片，违者封号处理！</p>
                 </div>
+                <!-- 图片墙 -->
                 <div class="image-wall">
-                    <h4>📸 图片墙（按点赞排序）</h4>
+                    <h4>📸 图片墙（按点赞排序）<span class="image-count" id="image-count"></span></h4>
                     <div id="image-wall-list" class="image-wall-list"></div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图片预览弹窗 -->
+    <div id="image-preview-modal" class="modal hidden">
+        <div class="modal-content modal-large">
+            <button class="modal-close" onclick="closeImagePreview()">&times;</button>
+            <div class="image-preview-body">
+                <img id="preview-image" src="" alt="预览大图">
             </div>
         </div>
     </div>
