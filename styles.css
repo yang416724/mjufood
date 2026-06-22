@@ -662,6 +662,27 @@ body {
     font-weight: 700;
 }
 
+.slider-hint {
+    font-size: 0.75rem;
+    color: var(--gray);
+    font-weight: normal;
+}
+
+.sticker-comment-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    transition: var(--transition);
+    outline: none;
+}
+
+.sticker-comment-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(255,107,53,0.1);
+}
+
 .slider-group input[type="range"] {
     width: 100%;
     height: 8px;
@@ -1028,4 +1049,174 @@ body {
     .mbti-traits { grid-template-columns: 1fr; }
 
     .sticker-gallery { grid-template-columns: 1fr; }
+
+    .mealplan-grid { font-size: 0.85rem; }
+    .meal-slot { min-height: 50px; padding: 0.25rem; }
+}
+
+/* ===== 一周食谱计划 ===== */
+.mealplan-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.mealplan-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 1rem;
+}
+
+.mealplan-weekdays {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 1fr;
+    gap: 0.5rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.weekday-label {
+    padding: 0.5rem;
+}
+
+.mealplan-grid {
+    padding: 0.5rem;
+}
+
+.mealplan-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    align-items: stretch;
+}
+
+.weekday-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--dark);
+    background: var(--light);
+    border-radius: var(--radius-sm);
+}
+
+.meal-slot {
+    background: var(--light);
+    border: 2px dashed #dee2e6;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    min-height: 60px;
+    padding: 0.5rem;
+}
+
+.meal-slot:hover {
+    border-color: var(--primary);
+    background: rgba(255,107,53,0.05);
+}
+
+.meal-slot.has-food {
+    border-style: solid;
+    border-color: var(--accent);
+    background: rgba(46,196,182,0.08);
+}
+
+.meal-placeholder {
+    color: var(--gray-light);
+    font-size: 0.8rem;
+}
+
+.meal-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--dark);
+    text-align: center;
+    word-break: break-word;
+}
+
+.mealplan-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.mealplan-btn {
+    padding: 0.75rem 2rem;
+    border: 2px solid var(--gray-light);
+    background: transparent;
+    color: var(--gray);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.mealplan-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.mealplan-btn.accent {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.mealplan-btn.accent:hover {
+    background: var(--primary-dark);
+}
+
+/* 美食选择弹窗 */
+.meal-select-hint {
+    color: var(--gray);
+    margin-bottom: 1rem;
+}
+
+.meal-select-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.meal-select-item {
+    background: var(--light);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.meal-select-item:hover {
+    background: rgba(255,107,53,0.1);
+    transform: translateY(-2px);
+}
+
+.meal-select-emoji {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.meal-select-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+}
+
+.meal-select-rating {
+    color: var(--warning);
+    font-size: 0.75rem;
 }

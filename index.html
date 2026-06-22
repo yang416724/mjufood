@@ -43,6 +43,7 @@
                 <a href="#" class="nav-link" data-page="sticker">AI测评抠图</a>
                 <a href="#" class="nav-link" data-page="favorites">我的收藏</a>
                 <a href="#" class="nav-link" data-page="random">今天吃什么</a>
+                <a href="#" class="nav-link" data-page="mealplan">一周食谱</a>
                 <a href="#" class="nav-link" data-page="mbti">趣味测评</a>
             </div>
             <div class="nav-user">
@@ -73,6 +74,7 @@
                     <button class="filter-tab" data-canteen="1">第一食堂</button>
                     <button class="filter-tab" data-canteen="2">第二食堂</button>
                     <button class="filter-tab" data-canteen="3">第三食堂</button>
+                    <button class="filter-tab" data-canteen="4">第四食堂</button>
                 </div>
                 <div class="food-grid" id="cafeteria-food-grid"></div>
             </section>
@@ -137,6 +139,11 @@
                             <label>性价比评分: <span id="value-value" class="slider-val">3.0</span></label>
                             <input type="range" id="value-slider" min="0" max="5" step="0.5" value="3">
                         </div>
+                        <!-- 评论输入 -->
+                        <div class="slider-group">
+                            <label>评论文字: <span class="slider-hint">(选填，最多20字)</span></label>
+                            <input type="text" id="sticker-comment" class="sticker-comment-input" placeholder="写点评价吧..." maxlength="20">
+                        </div>
                         <button class="generate-btn" id="generate-btn" onclick="generateSticker()">
                             <span class="btn-icon">🤖</span> AI智能抠图生成
                         </button>
@@ -180,6 +187,132 @@
                 <div class="random-container">
                     <button class="random-btn" onclick="drawRandomFood()">🎲 随机抽签</button>
                     <div id="random-result" class="random-result"></div>
+                </div>
+            </section>
+
+            <!-- 一周食谱计划 -->
+            <section id="page-mealplan" class="page">
+                <div class="page-header">
+                    <h2>📅 一周食谱计划</h2>
+                    <p>从收藏中选择美食，安排你的一周饮食</p>
+                </div>
+                <div class="mealplan-container">
+                    <div class="mealplan-header">
+                        <div class="mealplan-weekdays">
+                            <div class="weekday-label"></div>
+                            <div class="weekday-label">早餐</div>
+                            <div class="weekday-label">午餐</div>
+                            <div class="weekday-label">晚餐</div>
+                        </div>
+                    </div>
+                    <div class="mealplan-grid" id="mealplan-grid">
+                        <!-- 周一 -->
+                        <div class="mealplan-row" data-day="周一">
+                            <div class="weekday-name">周一</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周一', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周一', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周一', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周二 -->
+                        <div class="mealplan-row" data-day="周二">
+                            <div class="weekday-name">周二</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周二', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周二', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周二', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周三 -->
+                        <div class="mealplan-row" data-day="周三">
+                            <div class="weekday-name">周三</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周三', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周三', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周三', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周四 -->
+                        <div class="mealplan-row" data-day="周四">
+                            <div class="weekday-name">周四</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周四', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周四', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周四', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周五 -->
+                        <div class="mealplan-row" data-day="周五">
+                            <div class="weekday-name">周五</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周五', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周五', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周五', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周六 -->
+                        <div class="mealplan-row" data-day="周六">
+                            <div class="weekday-name">周六</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周六', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周六', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周六', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                        <!-- 周日 -->
+                        <div class="mealplan-row" data-day="周日">
+                            <div class="weekday-name">周日</div>
+                            <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '周日', 'breakfast')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '周日', 'lunch')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                            <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '周日', 'dinner')">
+                                <span class="meal-placeholder">点击选择</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mealplan-actions">
+                        <button class="mealplan-btn" onclick="clearMealPlan()">🗑️ 清空计划</button>
+                        <button class="mealplan-btn accent" onclick="saveMealPlan()">💾 保存计划</button>
+                    </div>
+                </div>
+                <!-- 美食选择弹窗 -->
+                <div id="meal-select-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <button class="modal-close" onclick="closeMealSelectModal()">&times;</button>
+                        <div class="modal-body">
+                            <h3 id="meal-select-title">选择美食</h3>
+                            <p class="meal-select-hint">从你的收藏中选择：</p>
+                            <div class="meal-select-grid" id="meal-select-grid"></div>
+                        </div>
+                    </div>
                 </div>
             </section>
 

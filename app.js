@@ -25,7 +25,13 @@ const foodData = [
     { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', canteen: null, type: 'offcampus', emoji: '🍧', tag: '推荐', image: 'images/北门贵州冰浆2.jpg' },
     { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', canteen: null, type: 'offcampus', emoji: '🍲', tag: '推荐', image: 'images/北门花甲粉.jpg' },
     { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', canteen: null, type: 'offcampus', emoji: '🍗', tag: '推荐', image: 'images/北门铜锅鸡1.jpg' },
-    { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, type: 'offcampus', emoji: '🌶️', tag: '推荐', image: 'images/北门云贵川小吃.jpg' }
+    { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, type: 'offcampus', emoji: '🌶️', tag: '推荐', image: 'images/北门云贵川小吃.jpg' },
+    // 第四食堂数据（待同学们提交真实测评）
+    { id: 21, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
+    { id: 22, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
+    { id: 23, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
+    { id: 24, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
+    { id: 25, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null }
 ];
 
 // ===== 美食MBTI人格库 =====
@@ -130,6 +136,7 @@ function switchPage(page) {
         case 'cafeteria': renderCafeteria('all'); break;
         case 'offcampus': renderOffCampus('all'); break;
         case 'favorites': renderFavorites(); break;
+        case 'mealplan': renderMealPlan(); break;
     }
 }
 
@@ -492,6 +499,7 @@ function generateSticker() {
     const taste = parseFloat(document.getElementById('taste-slider').value);
     const portion = parseFloat(document.getElementById('portion-slider').value);
     const value = parseFloat(document.getElementById('value-slider').value);
+    const comment = document.getElementById('sticker-comment').value.trim();
 
     // 显示AI处理动画
     document.getElementById('ai-processing').classList.remove('hidden');
@@ -507,23 +515,23 @@ function generateSticker() {
         document.getElementById('ai-step-3').className = 'ai-step done';
         document.getElementById('ai-processing').classList.add('hidden');
         document.getElementById('generate-btn').disabled = false;
-        renderSticker(taste, portion, value);
+        renderSticker(taste, portion, value, comment);
     }, 2600);
 }
 
-function renderSticker(taste, portion, value) {
+function renderSticker(taste, portion, value, comment) {
     const canvas = document.getElementById('sticker-canvas');
     const ctx = canvas.getContext('2d');
 
-    if (stickerStyle === 'polaroid') renderPolaroid(ctx, canvas, taste, portion, value);
-    else if (stickerStyle === 'circle') renderCircle(ctx, canvas, taste, portion, value);
-    else renderCard(ctx, canvas, taste, portion, value);
+    if (stickerStyle === 'polaroid') renderPolaroid(ctx, canvas, taste, portion, value, comment);
+    else if (stickerStyle === 'circle') renderCircle(ctx, canvas, taste, portion, value, comment);
+    else renderCard(ctx, canvas, taste, portion, value, comment);
 
     const dataUrl = canvas.toDataURL('image/png');
 
     // 保存到收藏
     const stickers = Storage.get('mjufav_stickers');
-    stickers.push({ id: Date.now(), src: dataUrl, date: new Date().toLocaleDateString(), taste, portion, value });
+    stickers.push({ id: Date.now(), src: dataUrl, date: new Date().toLocaleDateString(), taste, portion, value, comment });
     Storage.set('mjufav_stickers', stickers);
 
     const result = document.getElementById('sticker-result');
@@ -537,12 +545,13 @@ function renderSticker(taste, portion, value) {
     showToast('测评贴纸生成成功！');
 }
 
-function renderPolaroid(ctx, canvas, taste, portion, value) {
+function renderPolaroid(ctx, canvas, taste, portion, value, comment) {
     const maxW = 500, pad = 40, bottom = 160;
+    const commentOffset = comment ? 30 : 0;
     const scale = Math.min(1, maxW / stickerImage.width);
     const w = stickerImage.width * scale, h = stickerImage.height * scale;
     canvas.width = w + pad * 2;
-    canvas.height = h + pad + bottom;
+    canvas.height = h + pad + bottom + commentOffset;
 
     // 白色背景
     ctx.fillStyle = '#fff';
@@ -560,16 +569,24 @@ function renderPolaroid(ctx, canvas, taste, portion, value) {
     ctx.fillStyle = '#1a1a2e';
     ctx.font = 'bold 18px "Segoe UI", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('🍜 舌尖闽大 · 测评', canvas.width / 2, h + pad + 30);
+    ctx.fillText('舌尖闽大 · 测评', canvas.width / 2, h + pad + 30);
+
+    // 评论文字
+    if (comment) {
+        ctx.fillStyle = '#ff6b35';
+        ctx.font = '14px "Segoe UI", sans-serif';
+        ctx.fillText(`"${comment}"`, canvas.width / 2, h + pad + 50);
+    }
 
     const ratings = [
         { label: '口味', val: taste, color: '#ff6b35' },
         { label: '分量', val: portion, color: '#2ec4b6' },
         { label: '性价比', val: value, color: '#ffc107' }
     ];
+    const barStartY = h + pad + 50 + (comment ? 35 : 15);
     const barW = 180, barH = 14, startX = (canvas.width - barW) / 2;
     ratings.forEach((r, i) => {
-        const y = h + pad + 50 + i * 35;
+        const y = barStartY + i * 30;
         ctx.fillStyle = '#1a1a2e'; ctx.font = '13px "Segoe UI", sans-serif'; ctx.textAlign = 'right';
         ctx.fillText(r.label, startX - 8, y + 11);
         ctx.fillStyle = '#e9ecef'; ctx.fillRect(startX, y, barW, barH);
@@ -579,10 +596,11 @@ function renderPolaroid(ctx, canvas, taste, portion, value) {
     });
 }
 
-function renderCircle(ctx, canvas, taste, portion, value) {
+function renderCircle(ctx, canvas, taste, portion, value, comment) {
     const size = 500;
+    const commentOffset = comment ? 30 : 0;
     canvas.width = size;
-    canvas.height = size + 120;
+    canvas.height = size + 120 + commentOffset;
 
     // 背景
     const grad = ctx.createLinearGradient(0, 0, size, size);
@@ -610,28 +628,39 @@ function renderCircle(ctx, canvas, taste, portion, value) {
     ctx.stroke();
 
     // 底部
+    const bottomY = size + 120 + commentOffset;
     ctx.fillStyle = 'rgba(255,255,255,0.95)';
-    ctx.fillRect(0, size, size, 120);
+    ctx.fillRect(0, size, size, 120 + commentOffset);
 
     ctx.fillStyle = '#1a1a2e'; ctx.font = 'bold 16px "Segoe UI", sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('🍜 舌尖闽大 · 测评', size / 2, size + 25);
+    ctx.fillText('舌尖闽大 · 测评', size / 2, size + 25);
+
+    // 评论文字
+    if (comment) {
+        ctx.fillStyle = '#ff6b35';
+        ctx.font = '14px "Segoe UI", sans-serif';
+        ctx.fillText(`"${comment}"`, size / 2, size + 48);
+    }
 
     const avg = ((taste + portion + value) / 3).toFixed(1);
+    const ratingY = size + 65 + (comment ? 25 : 0);
     ctx.font = 'bold 28px "Segoe UI", sans-serif';
     ctx.fillStyle = '#ff6b35';
-    ctx.fillText(`${avg}分`, size / 2, size + 65);
+    ctx.fillText(`${avg}分`, size / 2, ratingY);
 
+    const detailY = size + 90 + (comment ? 25 : 0);
     ctx.font = '12px "Segoe UI", sans-serif';
     ctx.fillStyle = '#6c757d';
-    ctx.fillText(`口味${taste} | 分量${portion} | 性价比${value}`, size / 2, size + 90);
+    ctx.fillText(`口味${taste} | 分量${portion} | 性价比${value}`, size / 2, detailY);
 }
 
-function renderCard(ctx, canvas, taste, portion, value) {
+function renderCard(ctx, canvas, taste, portion, value, comment) {
     const maxW = 480, pad = 20, bottom = 140;
+    const commentOffset = comment ? 30 : 0;
     const scale = Math.min(1, maxW / stickerImage.width);
     const w = stickerImage.width * scale, h = stickerImage.height * scale;
     canvas.width = w + pad * 2;
-    canvas.height = h + pad + bottom;
+    canvas.height = h + pad + bottom + commentOffset;
 
     // 渐变背景
     const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
@@ -650,16 +679,24 @@ function renderCard(ctx, canvas, taste, portion, value) {
 
     // 标题
     ctx.fillStyle = '#fff'; ctx.font = 'bold 18px "Segoe UI", sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('🍜 舌尖闽大 · 测评', canvas.width / 2, h + pad + 30);
+    ctx.fillText('舌尖闽大 · 测评', canvas.width / 2, h + pad + 30);
+
+    // 评论文字
+    if (comment) {
+        ctx.fillStyle = '#ff6b35';
+        ctx.font = '14px "Segoe UI", sans-serif';
+        ctx.fillText(`"${comment}"`, canvas.width / 2, h + pad + 50);
+    }
 
     // 综合评分
     const avg = ((taste + portion + value) / 3).toFixed(1);
+    const ratingY = h + pad + 70 + (comment ? 20 : 0);
     ctx.font = 'bold 32px "Segoe UI", sans-serif';
     ctx.fillStyle = '#ff6b35';
-    ctx.fillText(`${avg}`, canvas.width / 2, h + pad + 70);
+    ctx.fillText(`${avg}`, canvas.width / 2, ratingY);
     ctx.font = '12px "Segoe UI", sans-serif';
     ctx.fillStyle = 'rgba(255,255,255,0.6)';
-    ctx.fillText('综合评分', canvas.width / 2, h + pad + 88);
+    ctx.fillText('综合评分', canvas.width / 2, ratingY + 18);
 
     // 三项评分小条
     const ratings = [
@@ -667,14 +704,14 @@ function renderCard(ctx, canvas, taste, portion, value) {
         { label: '分量', val: portion, color: '#2ec4b6' },
         { label: '性价比', val: value, color: '#ffc107' }
     ];
+    const barY = h + pad + 105 + (comment ? 20 : 0);
     const barW = 100, barH = 8, gap = (canvas.width - barW * 3) / 4;
     ratings.forEach((r, i) => {
         const x = gap + i * (barW + gap);
-        const y = h + pad + 105;
-        ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.fillRect(x, y, barW, barH);
-        ctx.fillStyle = r.color; ctx.fillRect(x, y, barW * (r.val / 5), barH);
+        ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.fillRect(x, barY, barW, barH);
+        ctx.fillStyle = r.color; ctx.fillRect(x, barY, barW * (r.val / 5), barH);
         ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.font = '10px "Segoe UI", sans-serif'; ctx.textAlign = 'center';
-        ctx.fillText(`${r.label} ${r.val}`, x + barW / 2, y + barH + 14);
+        ctx.fillText(`${r.label} ${r.val}`, x + barW / 2, barY + barH + 14);
     });
 }
 
@@ -836,3 +873,125 @@ function showToast(message) {
     clearTimeout(toast._timer);
     toast._timer = setTimeout(() => toast.classList.add('hidden'), 2500);
 }
+
+// ===== 一周食谱计划 =====
+let currentMealSlot = null; // 当前选择的槽位
+
+function renderMealPlan() {
+    const plan = Storage.get('mjufav_mealplan') || {};
+    const days = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+    const meals = ['breakfast', 'lunch', 'dinner'];
+
+    days.forEach(day => {
+        const row = document.querySelector(`.mealplan-row[data-day="${day}"]`);
+        if (!row) return;
+        meals.forEach(meal => {
+            const slot = row.querySelector(`.meal-slot[data-meal="${meal}"]`);
+            const key = `${day}_${meal}`;
+            const foodId = plan[key];
+            if (foodId) {
+                const food = foodData.find(f => f.id === foodId);
+                if (food) {
+                    slot.innerHTML = `<span class="meal-name">${food.emoji} ${food.name}</span>`;
+                    slot.classList.add('has-food');
+                } else {
+                    slot.innerHTML = '<span class="meal-placeholder">点击选择</span>';
+                    slot.classList.remove('has-food');
+                }
+            } else {
+                slot.innerHTML = '<span class="meal-placeholder">点击选择</span>';
+                slot.classList.remove('has-food');
+            }
+        });
+    });
+}
+
+function selectMeal(slotEl, day, meal) {
+    currentMealSlot = { day, meal, element: slotEl };
+    const favorites = Storage.get('mjufav_spa');
+    const favFoods = foodData.filter(f => favorites.includes(f.id));
+
+    if (favFoods.length === 0) {
+        showToast('请先收藏一些美食再来安排食谱吧！');
+        return;
+    }
+
+    document.getElementById('meal-select-title').textContent = `${day} ${getMealName(meal)}`;
+    const grid = document.getElementById('meal-select-grid');
+
+    grid.innerHTML = favFoods.map(food => `
+        <div class="meal-select-item" onclick="confirmMealSelect(${food.id})">
+            <div class="meal-select-emoji">${food.emoji || '🍽️'}</div>
+            <div class="meal-select-name">${food.name}</div>
+            <div class="meal-select-rating">${'★'.repeat(Math.floor(food.rating))}</div>
+        </div>
+    `).join('');
+
+    document.getElementById('meal-select-modal').classList.remove('hidden');
+}
+
+function getMealName(meal) {
+    const names = { breakfast: '早餐', lunch: '午餐', dinner: '晚餐' };
+    return names[meal] || meal;
+}
+
+function confirmMealSelect(foodId) {
+    if (!currentMealSlot) return;
+    const { day, meal } = currentMealSlot;
+    const key = `${day}_${meal}`;
+
+    let plan = Storage.get('mjufav_mealplan') || {};
+    plan[key] = foodId;
+    Storage.set('mjufav_mealplan', plan);
+
+    closeMealSelectModal();
+    renderMealPlan();
+    showToast('已添加到食谱计划！');
+}
+
+function closeMealSelectModal() {
+    document.getElementById('meal-select-modal').classList.add('hidden');
+    currentMealSlot = null;
+}
+
+function clearMealPlan() {
+    if (!confirm('确定要清空一周食谱计划吗？')) return;
+    Storage.set('mjufav_mealplan', {});
+    renderMealPlan();
+    showToast('食谱计划已清空');
+}
+
+function saveMealPlan() {
+    const plan = Storage.get('mjufav_mealplan') || {};
+    const keys = Object.keys(plan);
+    if (keys.length === 0) {
+        showToast('请先安排一些食谱！');
+        return;
+    }
+
+    // 生成分享文本
+    const days = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+    const meals = ['breakfast', 'lunch', 'dinner'];
+    let text = '【舌尖上的闽大 · 一周食谱计划】\n';
+
+    days.forEach(day => {
+        text += `\n${day}:\n`;
+        meals.forEach(meal => {
+            const foodId = plan[`${day}_${meal}`];
+            if (foodId) {
+                const food = foodData.find(f => f.id === foodId);
+                if (food) text += `  ${getMealName(meal)}: ${food.emoji} ${food.name}\n`;
+            }
+        });
+    });
+
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('食谱计划已复制到剪贴板！'));
+    } else {
+        showToast(text);
+    }
+}
+
+document.getElementById('meal-select-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('meal-select-modal')) closeMealSelectModal();
+});
