@@ -63,35 +63,35 @@
             </div>
                 <!-- 功能亮点展示 -->
                 <div class="feature-grid" id="feature-grid">
-                    <div class="feature-card" onclick="switchPage('mealplan')">
+                    <div class="feature-card" data-page="mealplan">
                         <div class="feature-icon">P</div>
                         <h3>一周食谱计划</h3>
                         <p>从收藏中选择美食，安排你的一周饮食</p>
                         <span class="feature-tag">NEW</span>
                     </div>
-                    <div class="feature-card" onclick="switchPage('buddy')">
+                    <div class="feature-card" data-page="buddy">
                         <div class="feature-icon">B</div>
                         <h3>美食搭子匹配</h3>
                         <p>填写口味偏好，找到志同道合的饭搭子</p>
                         <span class="feature-tag">HOT</span>
                     </div>
-                    <div class="feature-card" onclick="switchPage('badreview')">
+                    <div class="feature-card" data-page="badreview">
                         <div class="feature-icon">W</div>
                         <h3>避雷吐槽墙</h3>
                         <p>分享踩雷经历，让同学们少走弯路</p>
                         <span class="feature-tag">HOT</span>
                     </div>
-                    <div class="feature-card" onclick="switchPage('sticker')">
+                    <div class="feature-card" data-page="sticker">
                         <div class="feature-icon">A</div>
                         <h3>AI测评抠图</h3>
                         <p>上传美食图片，AI智能抠图生成测评贴纸</p>
                     </div>
-                    <div class="feature-card" onclick="switchPage('mbti')">
+                    <div class="feature-card" data-page="mbti">
                         <div class="feature-icon">M</div>
                         <h3>趣味MBTI测评</h3>
                         <p>根据你的收藏，测出你的美食人格</p>
                     </div>
-                    <div class="feature-card" onclick="switchPage('cafeteria')">
+                    <div class="feature-card" data-page="cafeteria">
                         <div class="feature-icon">F</div>
                         <h3>食堂美食测评</h3>
                         <p>查看各个食堂的美食评分和真实评价</p>
@@ -101,7 +101,7 @@
                 <div class="home-section">
                     <div class="home-section-header">
                         <h3>热门美食</h3>
-                        <a href="#" onclick="event.preventDefault(); switchPage('cafeteria');">查看更多</a>
+                        <a href="#" class="view-more-link" data-page="cafeteria">查看更多</a>
                     </div>
                     <div class="food-grid" id="home-food-grid"></div>
                 </div>

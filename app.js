@@ -63,8 +63,33 @@ document.addEventListener('DOMContentLoaded', () => {
     initDropzones();
     initStyleSelector();
     initFavTabs();
+    initFeatureCards();
     checkLoginStatus();
 });
+
+// ===== 功能卡片点击 =====
+function initFeatureCards() {
+    // 功能卡片点击
+    document.querySelectorAll('.feature-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const page = card.dataset.page;
+            if (page) {
+                switchPage(page);
+            }
+        });
+    });
+
+    // 查看更多链接点击
+    document.querySelectorAll('.view-more-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = link.dataset.page;
+            if (page) {
+                switchPage(page);
+            }
+        });
+    });
+}
 
 // ===== 登录页面交互 =====
 function initLoginPage() {
