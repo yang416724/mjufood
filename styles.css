@@ -1151,3 +1151,46 @@ body {
     .buddy-tags { gap: 0.4rem; }
     .buddy-tag { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
 }
+/* ===== 新增：首页特色功能卡片 ===== */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.feature-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+}
+
+.feature-card .feature-icon {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--dark);
+}
+
+.feature-card p {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin: 0;
+}
