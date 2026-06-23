@@ -217,7 +217,12 @@ function renderFoodGrid(containerId, foods) {
 
 // ===== 首页 =====
 function renderHome() {
-    renderFoodGrid('home-food-grid', [...foodData].sort((a, b) => b.rating - a.rating));
+    // 只显示有图片且非待解锁的热门美食，最多显示6个
+    const topFoods = foodData
+        .filter(f => f.image && f.rating > 0)
+        .sort((a, b) => b.rating - a.rating)
+        .slice(0, 6);
+    renderFoodGrid('home-food-grid', topFoods);
 }
 
 // ===== 食堂 =====

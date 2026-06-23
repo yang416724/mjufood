@@ -236,6 +236,118 @@ body {
     border-color: var(--primary);
 }
 
+/* ===== 功能亮点卡片 ===== */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.feature-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.feature-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.feature-card p {
+    color: var(--gray);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.feature-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.feature-tag:first-of-type + * { background: var(--primary); color: white; }
+.feature-tag:nth-of-type(2) { background: var(--danger); color: white; }
+.feature-tag:nth-of-type(3) { background: var(--accent); color: white; }
+.feature-tag:nth-of-type(4) { background: var(--warning); color: var(--dark); }
+
+/* 重新设置 feature-tag 样式 */
+.feature-tag {
+    background: var(--primary);
+    color: white;
+}
+
+.feature-card:nth-child(2) .feature-tag { background: var(--danger); }
+.feature-card:nth-child(3) .feature-tag { background: var(--danger); }
+
+/* ===== 首页区块 ===== */
+.home-section {
+    margin-top: 2rem;
+}
+
+.home-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.home-section-header h3 {
+    font-size: 1.25rem;
+    color: var(--dark);
+}
+
+.home-section-header a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.home-section-header a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
 /* ===== 美食卡片 ===== */
 .food-grid {
     display: grid;
