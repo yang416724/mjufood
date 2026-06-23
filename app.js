@@ -6,44 +6,44 @@ const Storage = {
 
 // ===== 内置美食数据（仅保留有图片的） =====
 const foodData = [
-    { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/一堂拌面扁肉.jpg' },
-    { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', emoji: '🥘', tag: '推荐', image: 'images/一堂肴伯黑鸭煲.jpg' },
-    { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', emoji: '🍝', tag: '推荐', image: 'images/一堂意面.jpg' },
-    { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', emoji: '🍖', tag: '推荐', image: 'images/二堂干蒸菜.jpg' },
-    { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', emoji: '🧋', tag: '推荐', image: 'images/二堂古茗.jpg' },
-    { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/二堂老丈人牛肉面.jpg' },
-    { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', emoji: '🍲', tag: '推荐', image: 'images/二堂麻辣烫.jpg' },
-    { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', emoji: '🍱', tag: '推荐', image: 'images/二堂米婆婆.jpg' },
-    { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', emoji: '🍚', tag: '推荐', image: 'images/二堂石锅拌饭.jpg' },
-    { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', emoji: '🍓', tag: '推荐', image: 'images/二堂水果捞.jpg' },
-    { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/二堂五谷渔粉.jpg' },
-    { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', emoji: '🍜', tag: '推荐', image: 'images/二堂云南鸡汤米线.jpg' },
-    { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', emoji: '🍳', tag: '推荐', image: 'images/三堂烤盘饭.jpg' },
-    { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', emoji: '🥘', tag: '推荐', image: 'images/三堂麻辣香锅.jpg' },
-    { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', emoji: '🍱', tag: '推荐', image: 'images/三堂汤先生.jpg' },
-    { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', canteen: null, type: 'offcampus', emoji: '🍜', tag: '推荐', image: 'images/北门肥姨妈螺蛳粉.jpg' },
-    { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', canteen: null, type: 'offcampus', emoji: '🍧', tag: '推荐', image: 'images/北门贵州冰浆2.jpg' },
-    { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', canteen: null, type: 'offcampus', emoji: '🍲', tag: '推荐', image: 'images/北门花甲粉.jpg' },
-    { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', canteen: null, type: 'offcampus', emoji: '🍗', tag: '推荐', image: 'images/北门铜锅鸡1.jpg' },
-    { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, type: 'offcampus', emoji: '🌶️', tag: '推荐', image: 'images/北门云贵川小吃.jpg' },
+    { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/一堂拌面扁肉.jpg' },
+    { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/一堂肴伯黑鸭煲.jpg' },
+    { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/一堂意面.jpg' },
+    { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂干蒸菜.jpg' },
+    { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂古茗.jpg' },
+    { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂老丈人牛肉面.jpg' },
+    { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂麻辣烫.jpg' },
+    { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂米婆婆.jpg' },
+    { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂石锅拌饭.jpg' },
+    { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂水果捞.jpg' },
+    { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂五谷渔粉.jpg' },
+    { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂云南鸡汤米线.jpg' },
+    { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/三堂烤盘饭.jpg' },
+    { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/三堂麻辣香锅.jpg' },
+    { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/三堂汤先生.jpg' },
+    { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/北门肥姨妈螺蛳粉.jpg' },
+    { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/北门贵州冰浆2.jpg' },
+    { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/北门花甲粉.jpg' },
+    { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/北门铜锅鸡1.jpg' },
+    { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/北门云贵川小吃.jpg' },
     // 第四食堂数据（待同学们提交真实测评）
-    { id: 21, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
-    { id: 22, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
-    { id: 23, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
-    { id: 24, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null },
-    { id: 25, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: '🍽️', tag: '待解锁', image: null }
+    { id: 21, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: 'F', tag: '待解锁', image: null },
+    { id: 22, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: 'F', tag: '待解锁', image: null },
+    { id: 23, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: 'F', tag: '待解锁', image: null },
+    { id: 24, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: 'F', tag: '待解锁', image: null },
+    { id: 25, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: 'F', tag: '待解锁', image: null }
 ];
 
 // ===== 美食MBTI人格库 =====
 const foodMBTI = {
-    'EFNP': { title: '美食探险家', emoji: '🗺️', desc: '你是天生的美食探险家！不拘泥于固定食堂，总是勇于尝试校外新店。你的收藏遍布各个食堂和北门小吃街，口味多元，对新鲜事物充满好奇。你是朋友圈里的"美食活地图"，总能发现别人不知道的好店。', traits: { '探索指数': '95%', '口味广度': '88%', '辣度耐受': '82%', '甜食偏好': '65%' }, recommend: '推荐你试试北门还没去过的新店，说不定能发现下一个宝藏美食！' },
-    'ISFP': { title: '精致品鉴师', emoji: '👩‍🍳', desc: '你是校园美食界的品鉴大师！你对食物有着极高的标准，收藏的每道菜都是精心挑选的精品。你注重用餐体验的每个细节，从摆盘到味道，从分量到性价比，你都有独到的见解。', traits: { '品味指数': '92%', '挑剔程度': '78%', '拍照频率': '95%', '分享欲': '70%' }, recommend: '你的品味已经很高了，不妨试试用测评抠图功能，把你的美食体验做成精美贴纸分享给朋友！' },
-    'ENTJ': { title: '干饭指挥官', emoji: '👔', desc: '你是干饭界的指挥官！你总是能快速做出就餐决策，从不纠结吃什么。你的收藏集中在几个高分食堂，目标明确，效率至上。你可能是宿舍里"今天吃什么"的最终决策者。', traits: { '决策速度': '98%', '忠诚度': '85%', '效率指数': '90%', '带饭概率': '75%' }, recommend: '作为指挥官，你可以用"今天吃什么"功能帮室友做决定，一锤定音！' },
-    'INFP': { title: '文艺美食家', emoji: '🎨', desc: '你是充满文艺气息的美食家！你不仅关注味道，更注重美食背后的故事和情感。你可能会为一碗面写下长篇测评，也会因为一份甜品而感动。你的收藏里藏着对生活的热爱。', traits: { '文艺指数': '95%', '情感丰富': '90%', '测评长度': '88%', '拍照美学': '92%' }, recommend: '你的文字很有感染力，试试在详情页留下更多走心的评价吧！' },
-    'ESTP': { title: '街头美食猎人', emoji: '🦁', desc: '你是校园周边的美食猎人！比起食堂，你更热衷于探索北门小吃街的每个角落。烤冷面、螺蛳粉、花甲粉...你总是能找到最接地气的美味。你是夜宵文化的忠实拥趸。', traits: { '街头指数': '96%', '夜宵频率': '90%', '辣度耐受': '88%', '冒险精神': '85%' }, recommend: '北门还有更多隐藏美食等你发现！试试随机抽签功能，探索未知美味！' },
-    'ISTJ': { title: '食堂忠实粉丝', emoji: '📚', desc: '你是食堂的忠实粉丝！你喜欢熟悉的味道，有固定的就餐习惯和偏爱的窗口。你的收藏集中在特定食堂，对喜欢的菜品有着深厚的感情。稳定和可靠是你的美食信条。', traits: { '忠诚度': '98%', '习惯稳定': '95%', '探索欲': '30%', '排队耐心': '85%' }, recommend: '偶尔也可以尝试一下其他食堂，说不定会有意外惊喜哦！' },
-    'ENFP': { title: '社交美食家', emoji: '🎉', desc: '你是社交型美食家！吃饭对你来说不仅是填饱肚子，更是社交活动。你喜欢和朋友一起探索新店，热衷于分享美食体验。你的收藏丰富多样，因为你总是听取朋友的推荐。', traits: { '社交指数': '95%', '从众指数': '80%', '分享欲': '92%', 'AA制概率': '70%' }, recommend: '你可以把美食测评结果分享给更多朋友，组织一次美食探店团！' },
-    'INTJ': { title: '数据美食家', emoji: '📊', desc: '你是用数据说话的美食家！你会仔细研究每道菜的评分和评价，做出最优的就餐选择。你的收藏策略性很强，只保留真正值得的美食。你是校园版的"米其林评审员"。', traits: { '分析能力': '98%', '评分敏感': '95%', '性价比控': '88%', '理性决策': '92%' }, recommend: '你的分析能力很强，不妨在图片墙上多点赞高质量图片，帮助其他同学做出更好的选择！' }
+    'EFNP': { title: '美食探险家', emoji: 'E', desc: '你是天生的美食探险家！不拘泥于固定食堂，总是勇于尝试校外新店。你的收藏遍布各个食堂和北门小吃街，口味多元，对新鲜事物充满好奇。你是朋友圈里的"美食活地图"，总能发现别人不知道的好店。', traits: { '探索指数': '95%', '口味广度': '88%', '辣度耐受': '82%', '甜食偏好': '65%' }, recommend: '推荐你试试北门还没去过的新店，说不定能发现下一个宝藏美食！' },
+    'ISFP': { title: '精致品鉴师', emoji: 'I', desc: '你是校园美食界的品鉴大师！你对食物有着极高的标准，收藏的每道菜都是精心挑选的精品。你注重用餐体验的每个细节，从摆盘到味道，从分量到性价比，你都有独到的见解。', traits: { '品味指数': '92%', '挑剔程度': '78%', '拍照频率': '95%', '分享欲': '70%' }, recommend: '你的品味已经很高了，不妨试试用测评抠图功能，把你的美食体验做成精美贴纸分享给朋友！' },
+    'ENTJ': { title: '干饭指挥官', emoji: 'E', desc: '你是干饭界的指挥官！你总是能快速做出就餐决策，从不纠结吃什么。你的收藏集中在几个高分食堂，目标明确，效率至上。你可能是宿舍里"今天吃什么"的最终决策者。', traits: { '决策速度': '98%', '忠诚度': '85%', '效率指数': '90%', '带饭概率': '75%' }, recommend: '作为指挥官，你可以用"今天吃什么"功能帮室友做决定，一锤定音！' },
+    'INFP': { title: '文艺美食家', emoji: 'I', desc: '你是充满文艺气息的美食家！你不仅关注味道，更注重美食背后的故事和情感。你可能会为一碗面写下长篇测评，也会因为一份甜品而感动。你的收藏里藏着对生活的热爱。', traits: { '文艺指数': '95%', '情感丰富': '90%', '测评长度': '88%', '拍照美学': '92%' }, recommend: '你的文字很有感染力，试试在详情页留下更多走心的评价吧！' },
+    'ESTP': { title: '街头美食猎人', emoji: 'E', desc: '你是校园周边的美食猎人！比起食堂，你更热衷于探索北门小吃街的每个角落。烤冷面、螺蛳粉、花甲粉...你总是能找到最接地气的美味。你是夜宵文化的忠实拥趸。', traits: { '街头指数': '96%', '夜宵频率': '90%', '辣度耐受': '88%', '冒险精神': '85%' }, recommend: '北门还有更多隐藏美食等你发现！试试随机抽签功能，探索未知美味！' },
+    'ISTJ': { title: '食堂忠实粉丝', emoji: 'I', desc: '你是食堂的忠实粉丝！你喜欢熟悉的味道，有固定的就餐习惯和偏爱的窗口。你的收藏集中在特定食堂，对喜欢的菜品有着深厚的感情。稳定和可靠是你的美食信条。', traits: { '忠诚度': '98%', '习惯稳定': '95%', '探索欲': '30%', '排队耐心': '85%' }, recommend: '偶尔也可以尝试一下其他食堂，说不定会有意外惊喜哦！' },
+    'ENFP': { title: '社交美食家', emoji: 'E', desc: '你是社交型美食家！吃饭对你来说不仅是填饱肚子，更是社交活动。你喜欢和朋友一起探索新店，热衷于分享美食体验。你的收藏丰富多样，因为你总是听取朋友的推荐。', traits: { '社交指数': '95%', '从众指数': '80%', '分享欲': '92%', 'AA制概率': '70%' }, recommend: '你可以把美食测评结果分享给更多朋友，组织一次美食探店团！' },
+    'INTJ': { title: '数据美食家', emoji: 'I', desc: '你是用数据说话的美食家！你会仔细研究每道菜的评分和评价，做出最优的就餐选择。你的收藏策略性很强，只保留真正值得的美食。你是校园版的"米其林评审员"。', traits: { '分析能力': '98%', '评分敏感': '95%', '性价比控': '88%', '理性决策': '92%' }, recommend: '你的分析能力很强，不妨在图片墙上多点赞高质量图片，帮助其他同学做出更好的选择！' }
 };
 
 // ===== 全局状态 =====
@@ -199,7 +199,7 @@ function renderFoodCard(food) {
                 <div class="food-footer">
                     <span class="food-reviewer">${food.reviewer}</span>
                     <button class="favorite-btn-card ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${food.id}, this)" title="${isFav ? '取消收藏' : '收藏'}">
-                        ${isFav ? '❤️' : '🤍'}
+                        ${isFav ? '★' : '☆'}
                     </button>
                 </div>
             </div>
@@ -209,7 +209,7 @@ function renderFoodCard(food) {
 function renderFoodGrid(containerId, foods) {
     const container = document.getElementById(containerId);
     if (foods.length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">🍽️</div><p>暂无美食数据</p></div>';
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">F</div><p>暂无美食数据</p></div>';
         return;
     }
     container.innerHTML = foods.map(renderFoodCard).join('');
@@ -239,7 +239,7 @@ function renderFavorites() {
     const favorites = Storage.get('mjufav_spa');
     const favFoods = foodData.filter(f => favorites.includes(f.id));
     if (favFoods.length === 0) {
-        document.getElementById('favorites-food-grid').innerHTML = '<div class="empty-state"><div class="empty-icon">💔</div><p>还没有收藏任何美食哦~</p><p>快去首页发现美食吧！</p></div>';
+        document.getElementById('favorites-food-grid').innerHTML = '<div class="empty-state"><div class="empty-icon">F</div><p>还没有收藏任何美食哦~</p><p>快去首页发现美食吧！</p></div>';
     } else {
         renderFoodGrid('favorites-food-grid', favFoods);
     }
@@ -272,7 +272,7 @@ function updateModalFavoriteState() {
     const btn = document.getElementById('detail-favorite');
     const isFav = favorites.includes(currentFoodId);
     btn.classList.toggle('active', isFav);
-    btn.textContent = isFav ? '❤️ 已收藏' : '❤️ 收藏';
+    btn.textContent = isFav ? '★ 已收藏' : '★ 收藏';
 }
 
 function refreshCurrentPage() {
@@ -412,8 +412,8 @@ function renderImageWall(foodId) {
             <div class="image-item-info">
                 <div class="image-item-author">${img.author}</div>
                 <div class="image-item-actions">
-                    <button class="like-btn" onclick="event.stopPropagation(); likeImage(${img.id})">👍 <span class="like-count">${img.likes}</span></button>
-                    <button class="report-btn" onclick="event.stopPropagation(); reportImage(${img.id})">🚩</button>
+                    <button class="like-btn" onclick="event.stopPropagation(); likeImage(${img.id})">+ <span class="like-count">${img.likes}</span></button>
+                    <button class="report-btn" onclick="event.stopPropagation(); reportImage(${img.id})">!</button>
                 </div>
             </div>
         </div>`).join('');
@@ -539,10 +539,10 @@ function renderSticker(taste, portion, value, comment) {
     result.innerHTML = `
         <img src="${dataUrl}" alt="测评贴纸">
         <div class="sticker-result-actions">
-            <button class="sticker-result-btn" onclick="downloadSticker()">💾 保存图片</button>
-            <button class="sticker-result-btn accent" onclick="switchPage('favorites'); document.querySelector('[data-tab=stickers]').click();">❤️ 查看收藏</button>
+            <button class="sticker-result-btn" onclick="downloadSticker()">保存图片</button>
+            <button class="sticker-result-btn accent" onclick="switchPage('favorites'); document.querySelector('[data-tab=stickers]').click();">查看收藏</button>
         </div>
-        <p>👆 贴纸已自动保存到收藏页</p>`;
+        <p>贴纸已自动保存到收藏页</p>`;
     showToast('测评贴纸生成成功！');
 }
 
@@ -744,7 +744,7 @@ function renderStickerGallery() {
     const stickers = Storage.get('mjufav_stickers');
     const container = document.getElementById('favorites-sticker-grid');
     if (stickers.length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">🎨</div><p>还没有生成测评贴纸</p><p>去"AI测评抠图"生成你的第一张贴纸吧！</p></div>';
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">S</div><p>还没有生成测评贴纸</p><p>去"AI测评抠图"生成你的第一张贴纸吧！</p></div>';
         return;
     }
     container.innerHTML = stickers.slice().reverse().map(s => `
@@ -752,7 +752,7 @@ function renderStickerGallery() {
             <img src="${s.src}" alt="测评贴纸">
             <div class="sticker-meta">
                 <span>${s.date} | 口味${s.taste} 分量${s.portion} 性价比${s.value}</span>
-                <button class="sticker-delete-btn" onclick="deleteSticker(${s.id})" title="删除">🗑️</button>
+                <button class="sticker-delete-btn" onclick="deleteSticker(${s.id})" title="删除">x</button>
             </div>
         </div>`).join('');
 }
@@ -768,7 +768,7 @@ function deleteSticker(id) {
 // ===== 随机抽签 =====
 function drawRandomFood() {
     const container = document.getElementById('random-result');
-    container.innerHTML = '<div class="food-card" style="max-width:400px;margin:0 auto;pointer-events:none"><div class="food-image-placeholder" style="font-size:4rem">🎲</div></div>';
+    container.innerHTML = '<div class="food-card" style="max-width:400px;margin:0 auto;pointer-events:none"><div class="food-image-placeholder" style="font-size:4rem">R</div></div>';
 
     let count = 0;
     const interval = setInterval(() => {
@@ -837,7 +837,7 @@ function startMbtiTest() {
     resultDiv.innerHTML = `
         <div class="mbti-result-header">
             <div class="mbti-type">${type}</div>
-            <div class="mbti-title">${mbti.emoji} ${mbti.title}</div>
+            <div class="mbti-title">${mbti.title}</div>
         </div>
         <div class="mbti-result-body">
             <p class="mbti-desc">${mbti.desc}</p>
@@ -845,11 +845,11 @@ function startMbtiTest() {
                 ${Object.entries(mbti.traits).map(([k, v]) => `<div class="mbti-trait"><div class="mbti-trait-label">${k}</div><div class="mbti-trait-value">${v}</div></div>`).join('')}
             </div>
             <div class="mbti-recommend">
-                <h4>💡 AI推荐</h4>
+                <h4>AI推荐</h4>
                 <p>${mbti.recommend}</p>
             </div>
             <div class="mbti-share">
-                <button class="mbti-share-btn" onclick="shareMbti('${type}', '${mbti.title}')">📤 分享我的美食人格</button>
+                <button class="mbti-share-btn" onclick="shareMbti('${type}', '${mbti.title}')">分享我的美食人格</button>
             </div>
         </div>`;
 
@@ -879,11 +879,11 @@ function matchBuddy() {
 
     // 模拟匹配数据
     const mockBuddies = [
-        { name: '辣妹子', avatar: '🌶️', prefs: ['吃辣', '爱吃米饭', '低价实惠'], matchRate: 90 },
-        { name: '面食控', avatar: '🍜', prefs: ['爱吃面食', '不吃香菜', '追求品质'], matchRate: 85 },
-        { name: '甜食党', avatar: '🍰', prefs: ['爱吃甜食', '不吃辣', '素食'], matchRate: 80 },
-        { name: '实惠达人', avatar: '💰', prefs: ['低价实惠', '爱吃面食', '不吃葱'], matchRate: 75 },
-        { name: '品质生活', avatar: '✨', prefs: ['追求品质', '爱吃甜食', '不吃辣'], matchRate: 70 }
+        { name: '辣妹子', avatar: 'L', prefs: ['吃辣', '爱吃米饭', '低价实惠'], matchRate: 90 },
+        { name: '面食控', avatar: 'M', prefs: ['爱吃面食', '不吃香菜', '追求品质'], matchRate: 85 },
+        { name: '甜食党', avatar: 'S', prefs: ['爱吃甜食', '不吃辣', '素食'], matchRate: 80 },
+        { name: '实惠达人', avatar: 'V', prefs: ['低价实惠', '爱吃面食', '不吃葱'], matchRate: 75 },
+        { name: '品质生活', avatar: 'Q', prefs: ['追求品质', '爱吃甜食', '不吃辣'], matchRate: 70 }
     ];
 
     // 计算匹配度
@@ -925,9 +925,9 @@ function generateInviteText() {
     const username = currentUser || '干饭人';
 
     const texts = [
-        `【舌尖上的闽大 · 饭搭子邀约】\n\n${username} 正在寻找饭搭子！\n我的口味偏好：${selected.join('、')}\n\n有没有志同道合的小伙伴？一起约饭去！🎉\n\n查看更多：舌尖上的闽大`,
-        `【约饭邀请】\n\n嘿！我在「舌尖上的闽大」上看到你也是${selected[0]}爱好者~\n我是${username}，要不要一起组队探店？🍽️\n\n感兴趣的话私信我呀～`,
-        `${username}想找个饭搭子！\n偏好：${selected.join('、')}\n\n一起吃遍闽大美食吧！🔥`
+        `【舌尖上的闽大 · 饭搭子邀约】\n\n${username} 正在寻找饭搭子！\n我的口味偏好：${selected.join('、')}\n\n有没有志同道合的小伙伴？一起约饭去！\n\n查看更多：舌尖上的闽大`,
+        `【约饭邀请】\n\n嘿！我在「舌尖上的闽大」上看到你也是${selected[0]}爱好者~\n我是${username}，要不要一起组队探店？\n\n感兴趣的话私信我呀～`,
+        `${username}想找个饭搭子！\n偏好：${selected.join('、')}\n\n一起吃遍闽大美食吧！`
     ];
 
     const text = texts[Math.floor(Math.random() * texts.length)];
@@ -982,7 +982,7 @@ function renderBadReviews() {
     container.innerHTML = reviews.map(review => `
         <div class="badreview-card">
             <div class="badreview-header">
-                <span class="badreview-shop-name">⚠️ ${review.shop}</span>
+                <span class="badreview-shop-name">${review.shop}</span>
                 <span class="badreview-date">${review.date}</span>
             </div>
             <div class="badreview-content">${review.content}</div>
@@ -991,7 +991,7 @@ function renderBadReviews() {
                     ${review.tags.map(t => `<span class="badreview-tag-chip">${t}</span>`).join('')}
                 </div>
                 <button class="badreview-like-btn" onclick="likeBadReview(${review.id})">
-                    👍 <span>${review.likes}</span>
+                    + <span>${review.likes}</span>
                 </button>
             </div>
         </div>
@@ -1035,7 +1035,7 @@ function renderMealPlan() {
             if (foodId) {
                 const food = foodData.find(f => f.id === foodId);
                 if (food) {
-                    slot.innerHTML = `<span class="meal-name">${food.emoji} ${food.name}</span>`;
+                    slot.innerHTML = `<span class="meal-name">${food.name}</span>`;
                     slot.classList.add('has-food');
                 } else {
                     slot.innerHTML = '<span class="meal-placeholder">点击选择</span>';
@@ -1064,7 +1064,7 @@ function selectMeal(slotEl, day, meal) {
 
     grid.innerHTML = favFoods.map(food => `
         <div class="meal-select-item" onclick="confirmMealSelect(${food.id})">
-            <div class="meal-select-emoji">${food.emoji || '🍽️'}</div>
+            <div class="meal-select-emoji">${food.emoji || 'F'}</div>
             <div class="meal-select-name">${food.name}</div>
             <div class="meal-select-rating">${'★'.repeat(Math.floor(food.rating))}</div>
         </div>
