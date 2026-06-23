@@ -55,16 +55,46 @@
 
         <!-- 页面内容 -->
         <main class="main-content">
-            <!-- 首页 -->
+            <!-- ===== 首页 ===== -->
             <section id="page-home" class="page active">
                 <div class="page-header">
                     <h2>🔥 热门测评</h2>
                     <p>发现闽大最受欢迎的美食</p>
                 </div>
+
+                <!-- 新增：特色功能卡片入口 -->
+                <div class="feature-grid">
+                    <div class="feature-card" onclick="document.querySelector('.nav-link[data-page=\'sticker\']')?.click()">
+                        <div class="feature-icon">🎨</div>
+                        <h3>AI 测评抠图</h3>
+                        <p>上传图片，智能生成专属贴纸</p>
+                    </div>
+                    <div class="feature-card" onclick="document.querySelector('.nav-link[data-page=\'buddy\']')?.click()">
+                        <div class="feature-icon">👫</div>
+                        <h3>美食搭子</h3>
+                        <p>匹配口味相投的饭搭子</p>
+                    </div>
+                    <div class="feature-card" onclick="document.querySelector('.nav-link[data-page=\'badreview\']')?.click()">
+                        <div class="feature-icon">⚠️</div>
+                        <h3>避雷吐槽墙</h3>
+                        <p>分享踩雷经历，少走弯路</p>
+                    </div>
+                    <div class="feature-card" onclick="document.querySelector('.nav-link[data-page=\'mealplan\']')?.click()">
+                        <div class="feature-icon">📅</div>
+                        <h3>一周食谱计划</h3>
+                        <p>安排你的每日美食</p>
+                    </div>
+                    <div class="feature-card" onclick="document.querySelector('.nav-link[data-page=\'mbti\']')?.click()">
+                        <div class="feature-icon">🧬</div>
+                        <h3>趣味 MBTI</h3>
+                        <p>测出你的美食人格</p>
+                    </div>
+                </div>
+
                 <div class="food-grid" id="home-food-grid"></div>
             </section>
 
-            <!-- 食堂测评 -->
+            <!-- ===== 食堂测评 ===== -->
             <section id="page-cafeteria" class="page">
                 <div class="page-header">
                     <h2>🏫 食堂测评</h2>
@@ -80,7 +110,7 @@
                 <div class="food-grid" id="cafeteria-food-grid"></div>
             </section>
 
-            <!-- 校外小吃街 -->
+            <!-- ===== 校外小吃 ===== -->
             <section id="page-offcampus" class="page">
                 <div class="page-header">
                     <h2>🍢 校外小吃</h2>
@@ -93,14 +123,13 @@
                 <div class="food-grid" id="offcampus-food-grid"></div>
             </section>
 
-            <!-- AI测评抠图 -->
+            <!-- ===== AI 抠图 ===== -->
             <section id="page-sticker" class="page">
                 <div class="page-header">
                     <h2>🎨 AI测评抠图</h2>
                     <p>上传美食图片，AI智能抠图生成测评贴纸</p>
                 </div>
                 <div class="sticker-container">
-                    <!-- 拖拽上传区 -->
                     <div class="dropzone" id="sticker-dropzone">
                         <input type="file" id="sticker-file" accept="image/*" class="file-input">
                         <div class="dropzone-content">
@@ -109,9 +138,7 @@
                             <p class="dropzone-hint">支持 JPG、PNG 格式</p>
                         </div>
                     </div>
-                    <!-- 预览区 -->
                     <div id="sticker-preview" class="sticker-preview"></div>
-                    <!-- 风格选择 -->
                     <div class="style-selector" id="style-selector">
                         <h4>选择贴纸风格</h4>
                         <div class="style-options">
@@ -126,7 +153,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 评分滑块 -->
                     <div class="sliders-section" id="sliders-section">
                         <div class="slider-group">
                             <label>口味评分: <span id="taste-value" class="slider-val">3.0</span></label>
@@ -140,7 +166,6 @@
                             <label>性价比评分: <span id="value-value" class="slider-val">3.0</span></label>
                             <input type="range" id="value-slider" min="0" max="5" step="0.5" value="3">
                         </div>
-                        <!-- 评论输入 -->
                         <div class="slider-group">
                             <label>评论文字: <span class="slider-hint">(选填，最多20字)</span></label>
                             <input type="text" id="sticker-comment" class="sticker-comment-input" placeholder="写点评价吧..." maxlength="20">
@@ -149,7 +174,6 @@
                             <span class="btn-icon">🤖</span> AI智能抠图生成
                         </button>
                     </div>
-                    <!-- AI处理动画 -->
                     <div id="ai-processing" class="ai-processing hidden">
                         <div class="ai-spinner"></div>
                         <p class="ai-text">🤖 AI正在智能抠图中...</p>
@@ -159,13 +183,12 @@
                             <div class="ai-step" id="ai-step-3">生成测评贴纸</div>
                         </div>
                     </div>
-                    <!-- 结果区 -->
                     <canvas id="sticker-canvas" class="sticker-canvas"></canvas>
                     <div id="sticker-result" class="sticker-result"></div>
                 </div>
             </section>
 
-            <!-- 我的收藏 -->
+            <!-- ===== 收藏 ===== -->
             <section id="page-favorites" class="page">
                 <div class="page-header">
                     <h2>❤️ 我的收藏</h2>
@@ -179,7 +202,7 @@
                 <div class="sticker-gallery hidden" id="favorites-sticker-grid"></div>
             </section>
 
-            <!-- 今天吃什么 -->
+            <!-- ===== 今天吃什么（独立页面，首页未展示） ===== -->
             <section id="page-random" class="page">
                 <div class="page-header">
                     <h2>🎲 今天吃什么</h2>
@@ -191,7 +214,7 @@
                 </div>
             </section>
 
-            <!-- 一周食谱计划 -->
+            <!-- ===== 一周食谱计划 ===== -->
             <section id="page-mealplan" class="page">
                 <div class="page-header">
                     <h2>📅 一周食谱计划</h2>
@@ -317,14 +340,13 @@
                 </div>
             </section>
 
-            <!-- 美食搭子匹配器 -->
+            <!-- ===== 美食搭子 ===== -->
             <section id="page-buddy" class="page">
                 <div class="page-header">
                     <h2>👫 美食搭子</h2>
                     <p>找到口味相投的饭搭子，一起探索美食！</p>
                 </div>
                 <div class="buddy-container">
-                    <!-- 口味偏好设置 -->
                     <div class="buddy-profile">
                         <h3>设置你的口味偏好</h3>
                         <div class="buddy-tags">
@@ -341,7 +363,6 @@
                         </div>
                         <button class="buddy-match-btn" onclick="matchBuddy()">🔍 匹配饭搭子</button>
                     </div>
-                    <!-- 匹配结果 -->
                     <div id="buddy-result" class="buddy-result hidden">
                         <h3>🎉 匹配到的饭搭子</h3>
                         <div id="buddy-match-list" class="buddy-match-list"></div>
@@ -353,14 +374,13 @@
                 </div>
             </section>
 
-            <!-- 避雷吐槽墙 -->
+            <!-- ===== 避雷墙 ===== -->
             <section id="page-badreview" class="page">
                 <div class="page-header">
                     <h2>⚠️ 避雷吐槽墙</h2>
                     <p>分享踩雷经历，让同学们少走弯路</p>
                 </div>
                 <div class="badreview-container">
-                    <!-- 发布吐槽 -->
                     <div class="badreview-form">
                         <h3>发布避雷吐槽</h3>
                         <input type="text" id="badreview-shop" class="badreview-input" placeholder="店铺名称" maxlength="30">
@@ -375,7 +395,6 @@
                         </div>
                         <button class="badreview-submit" onclick="submitBadReview()">发布吐槽</button>
                     </div>
-                    <!-- 吐槽列表 -->
                     <div class="badreview-list">
                         <h3>🔥 避雷热榜</h3>
                         <div id="badreview-items" class="badreview-items"></div>
@@ -383,7 +402,7 @@
                 </div>
             </section>
 
-            <!-- 趣味测评 MBTI -->
+            <!-- ===== MBTI ===== -->
             <section id="page-mbti" class="page">
                 <div class="page-header">
                     <h2>🧬 趣味测评</h2>
@@ -401,7 +420,6 @@
             </section>
         </main>
 
-        <!-- 底部版权 -->
         <footer class="footer">
             <p>© 闽江大学蛋仔派队 · 舌尖上的闽大</p>
         </footer>
@@ -412,7 +430,6 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">&times;</button>
             <div class="modal-body">
-                <!-- 美食大图 -->
                 <div class="detail-hero" id="detail-hero"></div>
                 <div class="detail-info">
                     <h3 id="detail-name"></h3>
@@ -424,7 +441,6 @@
                         <button class="share-btn" onclick="shareFood()">📤 分享</button>
                     </div>
                 </div>
-                <!-- 拖拽上传区 -->
                 <div class="upload-section">
                     <h4>📷 上传实拍图片</h4>
                     <div class="dropzone dropzone-sm" id="detail-dropzone">
@@ -438,7 +454,6 @@
                     <div id="upload-preview-list" class="upload-preview-list"></div>
                     <p class="upload-warning">⚠️ 请勿上传模糊/不雅/违规图片，违者封号处理！</p>
                 </div>
-                <!-- 图片墙 -->
                 <div class="image-wall">
                     <h4>📸 图片墙（按点赞排序）<span class="image-count" id="image-count"></span></h4>
                     <div id="image-wall-list" class="image-wall-list"></div>
@@ -457,7 +472,7 @@
         </div>
     </div>
 
-    <!-- Toast 提示 -->
+    <!-- Toast -->
     <div id="toast" class="toast hidden"></div>
 
     <script src="app.js"></script>
