@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一周食谱计划 - 舌尖上的闽大</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
+            <a href="index.html" class="nav-brand-text">舌尖上的闽大</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">首页</a>
+            <a href="cafeteria.html" class="nav-link">食堂测评</a>
+            <a href="buddy.html" class="nav-link">找搭子</a>
+            <a href="badreview.html" class="nav-link">避雷墙</a>
+        </div>
+        <div class="nav-user">
+            <span id="current-user">干饭人</span>
+            <button class="logout-btn" onclick="handleLogout()">退出</button>
+        </div>
+    </nav>
+
+    <!-- 页面内容 -->
+    <main class="main-content">
+        <!-- 一周食谱计划 -->
+        <section id="page-mealplan" class="page active">
+            <div class="page-header">
+                <h2>一周食谱计划</h2>
+                <p>从收藏中选择美食，安排你的一周饮食</p>
+            </div>
+            <div class="mealplan-container">
+                <div class="mealplan-week" id="mealplan-week">
+                    <div class="mealplan-day" data-day="周一">
+                        <h3>周一</h3>
+                        <div class="mealplan-slots">
+                            <div class="mealplan-slot" data-meal="breakfast" onclick="selectMeal(this, '周一', '早餐')">
+                                <span class="mealplan-meal-label">早餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="lunch" onclick="selectMeal(this, '周一', '午餐')">
+                                <span class="mealplan-meal-label">午餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="dinner" onclick="selectMeal(this, '周一', '晚餐')">
+                                <span class="mealplan-meal-label">晚餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mealplan-day" data-day="周二">
+                        <h3>周二</h3>
+                        <div class="mealplan-slots">
+                            <div class="mealplan-slot" data-meal="breakfast" onclick="selectMeal(this, '周二', '早餐')">
+                                <span class="mealplan-meal-label">早餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="lunch" onclick="selectMeal(this, '周二', '午餐')">
+                                <span class="mealplan-meal-label">午餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="dinner" onclick="selectMeal(this, '周二', '晚餐')">
+                                <span class="mealplan-meal-label">晚餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mealplan-day" data-day="周三">
+                        <h3>周三</h3>
+                        <div class="mealplan-slots">
+                            <div class="mealplan-slot" data-meal="breakfast" onclick="selectMeal(this, '周三', '早餐')">
+                                <span class="mealplan-meal-label">早餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="lunch" onclick="selectMeal(this, '周三', '午餐')">
+                                <span class="mealplan-meal-label">午餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="dinner" onclick="selectMeal(this, '周三', '晚餐')">
+                                <span class="mealplan-meal-label">晚餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mealplan-day" data-day="周四">
+                        <h3>周四</h3>
+                        <div class="mealplan-slots">
+                            <div class="mealplan-slot" data-meal="breakfast" onclick="selectMeal(this, '周四', '早餐')">
+                                <span class="mealplan-meal-label">早餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="lunch" onclick="selectMeal(this, '周四', '午餐')">
+                                <span class="mealplan-meal-label">午餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="dinner" onclick="selectMeal(this, '周四', '晚餐')">
+                                <span class="mealplan-meal-label">晚餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mealplan-day" data-day="周五">
+                        <h3>周五</h3>
+                        <div class="mealplan-slots">
+                            <div class="mealplan-slot" data-meal="breakfast" onclick="selectMeal(this, '周五', '早餐')">
+                                <span class="mealplan-meal-label">早餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="lunch" onclick="selectMeal(this, '周五', '午餐')">
+                                <span class="mealplan-meal-label">午餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="dinner" onclick="selectMeal(this, '周五', '晚餐')">
+                                <span class="mealplan-meal-label">晚餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mealplan-day" data-day="周六">
+                        <h3>周六</h3>
+                        <div class="mealplan-slots">
+                            <div class="mealplan-slot" data-meal="breakfast" onclick="selectMeal(this, '周六', '早餐')">
+                                <span class="mealplan-meal-label">早餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="lunch" onclick="selectMeal(this, '周六', '午餐')">
+                                <span class="mealplan-meal-label">午餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="dinner" onclick="selectMeal(this, '周六', '晚餐')">
+                                <span class="mealplan-meal-label">晚餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mealplan-day" data-day="周日">
+                        <h3>周日</h3>
+                        <div class="mealplan-slots">
+                            <div class="mealplan-slot" data-meal="breakfast" onclick="selectMeal(this, '周日', '早餐')">
+                                <span class="mealplan-meal-label">早餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="lunch" onclick="selectMeal(this, '周日', '午餐')">
+                                <span class="mealplan-meal-label">午餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                            <div class="mealplan-slot" data-meal="dinner" onclick="selectMeal(this, '周日', '晚餐')">
+                                <span class="mealplan-meal-label">晚餐</span>
+                                <span class="mealplan-meal-value">点击选择</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mealplan-actions">
+                    <button class="btn btn-secondary" onclick="clearMealPlan()">清空计划</button>
+                    <button class="btn btn-primary" onclick="saveMealPlan()">保存计划</button>
+                </div>
+                <!-- 收藏列表选择器 -->
+                <div class="favorites-selector" id="favorites-selector" style="display:none;">
+                    <h3>从收藏中选择：</h3>
+                    <div class="favorites-list" id="favorites-list"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 收藏数据 -->
+    <script>
+        // 简化的数据加载
+        const foodData = [
+            { id: 1, name: '一堂拌面扁肉', rating: 4.5, image: 'images/c1-noodle.jpg' },
+            { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, image: 'images/c1-duck.jpg' },
+            { id: 3, name: '一堂意面', rating: 4, image: 'images/c1-pasta.jpg' },
+            { id: 4, name: '二堂干蒸菜', rating: 4.5, image: 'images/c2-steamed.jpg' },
+            { id: 5, name: '二堂古茗奶茶', rating: 4.5, image: 'images/c2-milk-tea.jpg' },
+            { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, image: 'images/c2-beef-noodle.jpg' },
+            { id: 7, name: '二堂麻辣烫', rating: 4, image: 'images/c2-hotpot.jpg' },
+            { id: 8, name: '二堂米婆婆', rating: 4, image: 'images/c2-rice.jpg' },
+            { id: 9, name: '二堂石锅拌饭', rating: 4.5, image: 'images/c2-bibimbap.jpg' },
+            { id: 10, name: '二堂水果捞', rating: 4.5, image: 'images/c2-fruit.jpg' },
+            { id: 11, name: '二堂五谷渔粉', rating: 4.5, image: 'images/c2-fish-noodle.jpg' },
+            { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, image: 'images/c2-rice-noodle.jpg' },
+            { id: 13, name: '三堂烤盘饭', rating: 4.5, image: 'images/c3-bake.jpg' },
+            { id: 14, name: '三堂麻辣香锅', rating: 4.5, image: 'images/c3-spicy-pot.jpg' },
+            { id: 15, name: '三堂汤先生', rating: 4, image: 'images/c3-soup.jpg' },
+            { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, image: 'images/off-snail-noodle.jpg' },
+            { id: 17, name: '北门贵州冰浆', rating: 4.5, image: 'images/off-ice-drink.jpg' },
+            { id: 18, name: '北门花甲粉', rating: 4, image: 'images/off-clam-noodle.jpg' },
+            { id: 19, name: '北门铜锅鸡', rating: 4.5, image: 'images/off-pot-chicken.jpg' },
+            { id: 20, name: '北门云贵川小吃', rating: 4, image: 'images/off-snack.jpg' }
+        ];
+
+        let mealPlan = JSON.parse(localStorage.getItem('mealPlan')) || {};
+        let currentSlot = null;
+
+        // 渲染保存的计划
+        function renderMealPlan() {
+            Object.keys(mealPlan).forEach(key => {
+                const [day, meal] = key.split('-');
+                const slot = document.querySelector(`.mealplan-slot[data-meal="${meal}"][data-day="${day}"]`);
+                if (slot && mealPlan[key]) {
+                    slot.querySelector('.mealplan-meal-value').textContent = mealPlan[key].name;
+                    slot.classList.add('selected');
+                }
+            });
+        }
+
+        // 选择美食
+        function selectMeal(slot, day, meal) {
+            currentSlot = { day, meal, element: slot };
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const selector = document.getElementById('favorites-selector');
+            const list = document.getElementById('favorites-list');
+            
+            // 显示所有美食（如果收藏为空则显示全部）
+            const items = favorites.length > 0 ? favorites.map(id => foodData.find(f => f.id === id)).filter(Boolean) : foodData;
+            
+            list.innerHTML = items.map(food => `
+                <div class="favorites-item" onclick="confirmMeal(${food.id}, '${food.name}')">
+                    <img src="${food.image}" alt="${food.name}">
+                    <span>${food.name}</span>
+                </div>
+            `).join('');
+            
+            selector.style.display = 'block';
+            selector.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 确认选择
+        function confirmMeal(id, name) {
+            if (currentSlot) {
+                const key = `${currentSlot.day}-${currentSlot.meal}`;
+                mealPlan[key] = { id, name };
+                currentSlot.element.querySelector('.mealplan-meal-value').textContent = name;
+                currentSlot.element.classList.add('selected');
+                document.getElementById('favorites-selector').style.display = 'none';
+                saveMealPlan();
+            }
+        }
+
+        // 清空计划
+        function clearMealPlan() {
+            mealPlan = {};
+            document.querySelectorAll('.mealplan-slot').forEach(slot => {
+                slot.querySelector('.mealplan-meal-value').textContent = '点击选择';
+                slot.classList.remove('selected');
+            });
+            localStorage.removeItem('mealPlan');
+        }
+
+        // 保存计划
+        function saveMealPlan() {
+            localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
+            alert('计划已保存！');
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', renderMealPlan);
+    </script>
+</body>
+</html>
