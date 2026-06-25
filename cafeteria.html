@@ -7,201 +7,226 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 顶部导航栏 -->
-    <nav class="navbar">
-        <div class="nav-brand">
-            <a href="index.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
-            <a href="index.html" class="nav-brand-text">舌尖上的闽大</a>
-        </div>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">首页</a>
-            <a href="mealplan.html" class="nav-link">食谱</a>
-            <a href="buddy.html" class="nav-link">找搭子</a>
-            <a href="badreview.html" class="nav-link">避雷墙</a>
-        </div>
-        <div class="nav-user">
-            <span id="current-user">干饭人</span>
-            <button class="logout-btn" onclick="handleLogout()">退出</button>
-        </div>
-    </nav>
-
-    <!-- 页面内容 -->
-    <main class="main-content">
-        <!-- 食堂测评 -->
-        <section id="page-cafeteria" class="page active">
-            <div class="page-header">
-                <h2>食堂美食测评</h2>
-                <p>查看各个食堂的美食评分和真实评价</p>
+    <div class="app">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="index.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
+                <a href="index.html" class="nav-brand-text">舌尖上的闽大</a>
             </div>
-            
-            <!-- 食堂选择 -->
-            <div class="cafeteria-tabs">
-                <button class="cafeteria-tab active" data-canteen="1" onclick="switchCanteen('1')">第一食堂</button>
-                <button class="cafeteria-tab" data-canteen="2" onclick="switchCanteen('2')">第二食堂</button>
-                <button class="cafeteria-tab" data-canteen="3" onclick="switchCanteen('3')">第三食堂</button>
-                <button class="cafeteria-tab" data-canteen="4" onclick="switchCanteen('4')">第四食堂</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="cafeteria.html" class="nav-link active">食堂测评</a>
+                <a href="mealplan.html" class="nav-link">食谱</a>
+                <a href="buddy.html" class="nav-link">找搭子</a>
+                <a href="badreview.html" class="nav-link">避雷墙</a>
             </div>
+        </nav>
 
-            <!-- 美食列表 -->
-            <div class="food-grid" id="food-grid"></div>
-        </section>
-    </main>
+        <main class="main-content">
+            <section class="page active">
+                <div class="page-header">
+                    <h2>食堂美食测评</h2>
+                    <p>分堂测评，精准避坑</p>
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-canteen="all">全部</button>
+                    <button class="filter-tab" data-canteen="1">第一食堂</button>
+                    <button class="filter-tab" data-canteen="2">第二食堂</button>
+                    <button class="filter-tab" data-canteen="3">第三食堂</button>
+                    <button class="filter-tab" data-canteen="4">第四食堂</button>
+                </div>
+                <div class="food-grid" id="cafeteria-food-grid"></div>
+            </section>
+        </main>
 
-    <!-- 详情弹窗 -->
-    <div id="food-detail-modal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeFoodDetail()">&times;</button>
-            <div id="food-detail-content"></div>
-        </div>
+        <footer class="footer">
+            <p>© 闽江大学蛋仔派队 · 舌尖上的闽大</p>
+        </footer>
     </div>
 
-    <!-- 评价弹窗 -->
-    <div id="review-modal" class="modal">
+    <div id="detail-modal" class="modal hidden">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeReviewModal()">&times;</button>
-            <h3>发表评价</h3>
-            <input type="hidden" id="review-food-id">
-            <textarea id="review-text" placeholder="分享你的用餐体验..."></textarea>
-            <div class="review-rating">
-                <span>评分：</span>
-                <div class="stars" id="review-stars">
-                    <span class="star" data-rating="1">+</span>
-                    <span class="star" data-rating="2">+</span>
-                    <span class="star" data-rating="3">+</span>
-                    <span class="star" data-rating="4">+</span>
-                    <span class="star" data-rating="5">+</span>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-body">
+                <div class="detail-hero" id="detail-hero"></div>
+                <div class="detail-info">
+                    <h3 id="detail-name"></h3>
+                    <div class="detail-rating" id="detail-rating"></div>
+                    <p class="detail-review" id="detail-review"></p>
+                    <p class="detail-reviewer">评价人: <span id="detail-reviewer"></span></p>
+                    <div class="detail-actions">
+                        <button class="favorite-btn" id="detail-favorite" onclick="toggleFavoriteFromModal()">收藏</button>
+                        <button class="share-btn" onclick="shareFood()">分享</button>
+                    </div>
                 </div>
             </div>
-            <button class="btn btn-primary" onclick="submitReview()">发布评价</button>
         </div>
     </div>
+
+    <div id="toast" class="toast hidden"></div>
 
     <script>
-        // 美食数据
+        const Storage = {
+            get(key) { try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; } },
+            set(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+        };
+
         const foodData = [
-            { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', image: 'images/c1-noodle.jpg' },
-            { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', image: 'images/c1-duck.jpg' },
-            { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', image: 'images/c1-pasta.jpg' },
-            { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', image: 'images/c2-steamed.jpg' },
-            { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', image: 'images/c2-milk-tea.jpg' },
-            { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', image: 'images/c2-beef-noodle.jpg' },
-            { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', image: 'images/c2-hotpot.jpg' },
-            { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', image: 'images/c2-rice.jpg' },
-            { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', image: 'images/c2-bibimbap.jpg' },
-            { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', image: 'images/c2-fruit.jpg' },
-            { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', image: 'images/c2-fish-noodle.jpg' },
-            { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', image: 'images/c2-rice-noodle.jpg' },
-            { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', image: 'images/c3-bake.jpg' },
-            { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', image: 'images/c3-spicy-pot.jpg' },
-            { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', image: 'images/c3-soup.jpg' },
-            { id: 21, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', image: null },
-            { id: 22, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', image: null },
-            { id: 23, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', image: null }
+            { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', tag: '推荐', image: 'images/c1-noodle.jpg' },
+            { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', tag: '推荐', image: 'images/c1-duck.jpg' },
+            { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', tag: '推荐', image: 'images/c1-pasta.jpg' },
+            { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/c2-steamed.jpg' },
+            { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/c2-milk-tea.jpg' },
+            { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/c2-beef-noodle.jpg' },
+            { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/c2-hotpot.jpg' },
+            { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/c2-rice.jpg' },
+            { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/c2-bibimbap.jpg' },
+            { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/c2-fruit.jpg' },
+            { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/c2-fish-noodle.jpg' },
+            { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/c2-rice-noodle.jpg' },
+            { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', tag: '推荐', image: 'images/c3-bake.jpg' },
+            { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', tag: '推荐', image: 'images/c3-spicy-pot.jpg' },
+            { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', tag: '推荐', image: 'images/c3-soup.jpg' },
+            { id: 21, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', tag: '待解锁', image: null },
+            { id: 22, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', tag: '待解锁', image: null },
+            { id: 23, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', tag: '待解锁', image: null }
         ];
 
-        let currentCanteen = '1';
-        let selectedRating = 5;
+        let currentFoodId = null;
+        let currentCanteen = 'all';
 
-        // 切换食堂
-        function switchCanteen(canteen) {
-            currentCanteen = canteen;
-            document.querySelectorAll('.cafeteria-tab').forEach(tab => {
-                tab.classList.toggle('active', tab.dataset.canteen === canteen);
+        document.addEventListener('DOMContentLoaded', () => {
+            initFilters();
+            renderCafeteria('all');
+        });
+
+        function initFilters() {
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentCanteen = tab.dataset.canteen;
+                    renderCafeteria(tab.dataset.canteen);
+                });
             });
-            renderFoodGrid();
         }
 
-        // 渲染美食列表
-        function renderFoodGrid() {
-            const grid = document.getElementById('food-grid');
-            const foods = foodData.filter(f => f.canteen === currentCanteen);
-
-            grid.innerHTML = foods.map(food => `
-                <div class="food-card" onclick="showFoodDetail(${food.id})">
-                    ${food.image ? `<img src="${food.image}" alt="${food.name}" class="food-image">` : `<div class="food-image-placeholder">${food.emoji}</div>`}
-                    <div class="food-info">
-                        <h3>${food.name}</h3>
-                        <div class="food-rating">${food.rating > 0 ? 'F'.repeat(Math.floor(food.rating)) : '待解锁'}</div>
-                        <p class="food-review">${food.review}</p>
+        function renderFoodCard(food) {
+            const favorites = Storage.get('mjufav_spa');
+            const isFav = favorites.includes(food.id);
+            const tagClass = food.rating >= 4.5 ? 'excellent' : food.rating >= 3 ? 'good' : 'bad';
+            const imageHtml = food.image
+                ? `<img src="${food.image}" alt="${food.name}" class="food-image" loading="lazy">`
+                : `<div class="food-image-placeholder">F</div>`;
+            return `
+                <div class="food-card" onclick="openDetail(${food.id})">
+                    ${imageHtml}
+                    <div class="food-content">
+                        <div class="food-name">${food.name}</div>
+                        <div class="food-rating">
+                            <span class="stars">${food.rating > 0 ? '★'.repeat(Math.floor(food.rating)) + '☆'.repeat(5 - Math.floor(food.rating)) : '☆☆☆☆☆'}</span>
+                            <span class="rating-tag ${tagClass}">${food.tag}${food.rating > 0 ? ' · ' + food.rating + '星' : ''}</span>
+                        </div>
+                        <div class="food-review">${food.review}</div>
+                        <div class="food-footer">
+                            <span class="food-reviewer">${food.reviewer}</span>
+                            <button class="favorite-btn-card ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${food.id}, this)" title="${isFav ? '取消收藏' : '收藏'}">
+                                ${isFav ? '★' : '☆'}
+                            </button>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                </div>`;
         }
 
-        // 显示详情
-        function showFoodDetail(id) {
-            const food = foodData.find(f => f.id === id);
-            if (!food || food.rating === 0) return;
-
-            document.getElementById('food-detail-content').innerHTML = `
-                ${food.image ? `<img src="${food.image}" alt="${food.name}" class="detail-hero">` : ''}
-                <div class="detail-content">
-                    <h2>${food.name}</h2>
-                    <div class="detail-rating">评分：${'F'.repeat(Math.floor(food.rating))}</div>
-                    <p class="detail-review">${food.review}</p>
-                    <p class="detail-reviewer">评测者：${food.reviewer}</p>
-                    <div class="detail-actions">
-                        <button class="btn btn-secondary" onclick="toggleFavorite(${food.id})">
-                            ${isFavorite(food.id) ? 'F' : 'F'}
-                        </button>
-                        <button class="btn btn-primary" onclick="openReviewModal(${food.id})">评价</button>
-                    </div>
-                </div>
-            `;
-            document.getElementById('food-detail-modal').classList.add('active');
-        }
-
-        // 关闭详情
-        function closeFoodDetail() {
-            document.getElementById('food-detail-modal').classList.remove('active');
-        }
-
-        // 收藏功能
-        function isFavorite(id) {
-            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-            return favorites.includes(id);
-        }
-
-        function toggleFavorite(id) {
-            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-            if (favorites.includes(id)) {
-                favorites = favorites.filter(f => f !== id);
-            } else {
-                favorites.push(id);
-            }
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-            closeFoodDetail();
-        }
-
-        // 打开评价弹窗
-        function openReviewModal(id) {
-            document.getElementById('review-food-id').value = id;
-            document.getElementById('review-modal').classList.add('active');
-        }
-
-        // 关闭评价弹窗
-        function closeReviewModal() {
-            document.getElementById('review-modal').classList.remove('active');
-        }
-
-        // 提交评价
-        function submitReview() {
-            const foodId = parseInt(document.getElementById('review-food-id').value);
-            const reviewText = document.getElementById('review-text').value.trim();
-
-            if (!reviewText) {
-                alert('请输入评价内容！');
+        function renderCafeteria(canteen) {
+            let filtered = foodData.filter(f => f.type === 'cafeteria');
+            if (canteen !== 'all') filtered = filtered.filter(f => f.canteen === canteen);
+            const container = document.getElementById('cafeteria-food-grid');
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-icon">F</div><p>暂无美食数据</p></div>';
                 return;
             }
-
-            alert('评价发布成功！');
-            closeReviewModal();
-            closeFoodDetail();
-            document.getElementById('review-text').value = '';
+            container.innerHTML = filtered.map(renderFoodCard).join('');
         }
 
-        // 初始化
-        document.addEventListener('DOMContentLoaded', renderFoodGrid);
+        function toggleFavorite(foodId, btnEl) {
+            let favorites = Storage.get('mjufav_spa');
+            const index = favorites.indexOf(foodId);
+            if (index > -1) {
+                favorites.splice(index, 1);
+                showToast('已取消收藏');
+            } else {
+                favorites.push(foodId);
+                showToast('收藏成功！');
+            }
+            Storage.set('mjufav_spa', favorites);
+            if (btnEl) { btnEl.classList.add('heart-pop'); setTimeout(() => btnEl.classList.remove('heart-pop'), 300); }
+            renderCafeteria(currentCanteen);
+        }
+
+        function toggleFavoriteFromModal() {
+            if (currentFoodId) {
+                toggleFavorite(currentFoodId);
+                updateModalFavoriteState();
+            }
+        }
+
+        function updateModalFavoriteState() {
+            const favorites = Storage.get('mjufav_spa');
+            const btn = document.getElementById('detail-favorite');
+            const isFav = favorites.includes(currentFoodId);
+            btn.classList.toggle('active', isFav);
+            btn.textContent = isFav ? '★ 已收藏' : '★ 收藏';
+        }
+
+        function openDetail(foodId) {
+            const food = foodData.find(f => f.id === foodId);
+            if (!food) return;
+            currentFoodId = foodId;
+
+            document.getElementById('detail-hero').innerHTML = food.image
+                ? `<img src="${food.image}" alt="${food.name}">`
+                : '';
+
+            document.getElementById('detail-name').textContent = food.name;
+            const tagClass = food.rating >= 4.5 ? 'excellent' : food.rating >= 3 ? 'good' : 'bad';
+            document.getElementById('detail-rating').innerHTML = `
+                <span class="stars" style="font-size:1.2rem">${food.rating > 0 ? '★'.repeat(Math.floor(food.rating)) + '☆'.repeat(5 - Math.floor(food.rating)) : '☆☆☆☆☆'}</span>
+                <span class="rating-tag ${tagClass}">${food.tag}${food.rating > 0 ? ' · ' + food.rating + '星' : ''}</span>`;
+            document.getElementById('detail-review').textContent = food.review;
+            document.getElementById('detail-reviewer').textContent = food.reviewer;
+
+            updateModalFavoriteState();
+            document.getElementById('detail-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+            currentFoodId = null;
+        }
+
+        document.getElementById('detail-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('detail-modal')) closeModal();
+        });
+
+        function shareFood() {
+            const food = foodData.find(f => f.id === currentFoodId);
+            if (!food) return;
+            const text = `【舌尖上的闽大】${food.name} ${'★'.repeat(Math.floor(food.rating))} - "${food.review}"`;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => showToast('分享文案已复制到剪贴板！'));
+            } else {
+                showToast(text);
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.remove('hidden');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.add('hidden'), 2500);
+        }
     </script>
 </body>
 </html>

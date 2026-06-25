@@ -7,135 +7,142 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 顶部导航栏 -->
-    <nav class="navbar">
-        <div class="nav-brand">
-            <a href="index.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
-            <a href="index.html" class="nav-brand-text">舌尖上的闽大</a>
-        </div>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">首页</a>
-            <a href="cafeteria.html" class="nav-link">食堂测评</a>
-            <a href="mealplan.html" class="nav-link">食谱</a>
-            <a href="buddy.html" class="nav-link">找搭子</a>
-        </div>
-        <div class="nav-user">
-            <span id="current-user">干饭人</span>
-            <button class="logout-btn" onclick="handleLogout()">退出</button>
-        </div>
-    </nav>
+    <div class="app">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="index.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
+                <a href="index.html" class="nav-brand-text">舌尖上的闽大</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="cafeteria.html" class="nav-link">食堂测评</a>
+                <a href="mealplan.html" class="nav-link">食谱</a>
+                <a href="buddy.html" class="nav-link">找搭子</a>
+                <a href="badreview.html" class="nav-link active">避雷墙</a>
+            </div>
+        </nav>
 
-    <!-- 页面内容 -->
-    <main class="main-content">
-        <!-- 避雷吐槽墙 -->
-        <section id="page-badreview" class="page active">
-            <div class="page-header">
-                <h2>避雷吐槽墙</h2>
-                <p>分享踩雷经历，让同学们少走弯路</p>
-            </div>
-            <div class="badreview-container">
-                <!-- 发布吐槽 -->
-                <div class="badreview-form">
-                    <h3>发布避雷吐槽</h3>
-                    <input type="text" id="badreview-shop" placeholder="店铺名称">
-                    <textarea id="badreview-content" placeholder="分享你的踩雷经历..."></textarea>
-                    <div class="badreview-tags">
-                        <label><input type="checkbox" name="badtag" value="分量少"> 分量少</label>
-                        <label><input type="checkbox" name="badtag" value="味道咸"> 味道咸</label>
-                        <label><input type="checkbox" name="badtag" value="价格贵"> 价格贵</label>
-                        <label><input type="checkbox" name="badtag" value="不新鲜"> 不新鲜</label>
-                        <label><input type="checkbox" name="badtag" value="服务差"> 服务差</label>
-                        <label><input type="checkbox" name="badtag" value="环境脏"> 环境脏</label>
-                    </div>
-                    <div class="badreview-rating">
-                        <span>踩雷指数：</span>
-                        <select id="badreview-score">
-                            <option value="1">1星</option>
-                            <option value="2">2星</option>
-                            <option value="3">3星</option>
-                            <option value="4">4星</option>
-                            <option value="5">5星</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-danger" onclick="submitBadReview()">发布吐槽</button>
+        <main class="main-content">
+            <section class="page active">
+                <div class="page-header">
+                    <h2>避雷吐槽墙</h2>
+                    <p>分享踩雷经历，让同学们少走弯路</p>
                 </div>
-                
-                <!-- 吐槽列表 -->
-                <div class="badreview-list">
-                    <h3>踩雷榜单</h3>
-                    <div id="badreview-items"></div>
+                <div class="badreview-container">
+                    <div class="badreview-form">
+                        <h3>发布避雷吐槽</h3>
+                        <input type="text" id="badreview-shop" class="badreview-input" placeholder="店铺名称" maxlength="30">
+                        <textarea id="badreview-content" class="badreview-textarea" placeholder="说说这次踩雷的经历..." maxlength="200"></textarea>
+                        <div class="badreview-tags">
+                            <span class="badreview-tag-label">避雷原因：</span>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="分量少"> 分量少</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="味道差"> 味道差</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="价格贵"> 价格贵</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="不新鲜"> 不新鲜</label>
+                            <label class="badreview-tag"><input type="checkbox" name="badtag" value="服务差"> 服务差</label>
+                        </div>
+                        <button class="badreview-submit" onclick="submitBadReview()">发布吐槽</button>
+                    </div>
+                    <div class="badreview-list">
+                        <h3>避雷热榜</h3>
+                        <div id="badreview-items" class="badreview-items"></div>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 闽江大学蛋仔派队 · 舌尖上的闽大</p>
+        </footer>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
 
     <script>
-        // 获取吐槽数据
-        function getBadReviews() {
-            return JSON.parse(localStorage.getItem('badReviews')) || [];
-        }
+        const Storage = {
+            get(key) { try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; } },
+            set(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+        };
 
-        // 提交吐槽
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBadReviews();
+        });
+
         function submitBadReview() {
             const shop = document.getElementById('badreview-shop').value.trim();
             const content = document.getElementById('badreview-content').value.trim();
-            const score = parseInt(document.getElementById('badreview-score').value);
             const tags = Array.from(document.querySelectorAll('input[name="badtag"]:checked')).map(cb => cb.value);
 
-            if (!shop || !content) {
-                alert('请填写店铺名称和吐槽内容！');
-                return;
-            }
+            if (!shop) { showToast('请输入店铺名称'); return; }
+            if (!content) { showToast('请输入吐槽内容'); return; }
 
-            const review = {
+            const reviews = Storage.get('mjufav_badreviews') || [];
+            reviews.unshift({
                 id: Date.now(),
                 shop,
                 content,
-                score,
                 tags,
-                time: new Date().toLocaleString()
-            };
-
-            const reviews = getBadReviews();
-            reviews.unshift(review);
-            localStorage.setItem('badReviews', JSON.stringify(reviews));
+                likes: 0,
+                date: new Date().toLocaleDateString()
+            });
+            Storage.set('mjufav_badreviews', reviews);
 
             document.getElementById('badreview-shop').value = '';
             document.getElementById('badreview-content').value = '';
             document.querySelectorAll('input[name="badtag"]').forEach(cb => cb.checked = false);
 
             renderBadReviews();
-            alert('吐槽发布成功！');
+            showToast('吐槽发布成功！');
         }
 
-        // 渲染吐槽列表
         function renderBadReviews() {
-            const reviews = getBadReviews();
+            const reviews = Storage.get('mjufav_badreviews') || [];
             const container = document.getElementById('badreview-items');
 
             if (reviews.length === 0) {
-                container.innerHTML = '<p class="empty-state">暂无吐槽，暂无踩雷</p>';
+                container.innerHTML = '<p class="empty-hint">暂无避雷吐槽，快来发布第一条吧！</p>';
                 return;
             }
 
+            reviews.sort((a, b) => b.likes - a.likes);
+
             container.innerHTML = reviews.map(review => `
-                <div class="badreview-item">
+                <div class="badreview-card">
                     <div class="badreview-header">
-                        <h4>${review.shop}</h4>
-                        <span class="badreview-score">${'!'.repeat(review.score)}</span>
+                        <span class="badreview-shop-name">${review.shop}</span>
+                        <span class="badreview-date">${review.date}</span>
                     </div>
-                    <p class="badreview-content">${review.content}</p>
-                    <div class="badreview-tags">
-                        ${review.tags.map(t => `<span class="tag tag-danger">${t}</span>`).join('')}
-                    </div>
+                    <div class="badreview-content">${review.content}</div>
                     <div class="badreview-footer">
-                        <span class="badreview-time">${review.time}</span>
+                        <div class="badreview-tags-small">
+                            ${review.tags.map(t => `<span class="badreview-tag-chip">${t}</span>`).join('')}
+                        </div>
+                        <button class="badreview-like-btn" onclick="likeBadReview(${review.id})">
+                            + <span>${review.likes}</span>
+                        </button>
                     </div>
                 </div>
             `).join('');
         }
 
-        document.addEventListener('DOMContentLoaded', renderBadReviews);
+        function likeBadReview(id) {
+            const reviews = Storage.get('mjufav_badreviews') || [];
+            const review = reviews.find(r => r.id === id);
+            if (review) {
+                review.likes++;
+                Storage.set('mjufav_badreviews', reviews);
+                renderBadReviews();
+                showToast('点赞成功！');
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.remove('hidden');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.add('hidden'), 2500);
+        }
     </script>
 </body>
 </html>

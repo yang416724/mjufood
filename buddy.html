@@ -7,144 +7,145 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 顶部导航栏 -->
-    <nav class="navbar">
-        <div class="nav-brand">
-            <a href="index.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
-            <a href="index.html" class="nav-brand-text">舌尖上的闽大</a>
-        </div>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">首页</a>
-            <a href="cafeteria.html" class="nav-link">食堂测评</a>
-            <a href="mealplan.html" class="nav-link">食谱</a>
-            <a href="badreview.html" class="nav-link">避雷墙</a>
-        </div>
-        <div class="nav-user">
-            <span id="current-user">干饭人</span>
-            <button class="logout-btn" onclick="handleLogout()">退出</button>
-        </div>
-    </nav>
+    <div class="app">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="index.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
+                <a href="index.html" class="nav-brand-text">舌尖上的闽大</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="cafeteria.html" class="nav-link">食堂测评</a>
+                <a href="mealplan.html" class="nav-link">食谱</a>
+                <a href="buddy.html" class="nav-link active">找搭子</a>
+                <a href="badreview.html" class="nav-link">避雷墙</a>
+            </div>
+        </nav>
 
-    <!-- 页面内容 -->
-    <main class="main-content">
-        <!-- 美食搭子匹配器 -->
-        <section id="page-buddy" class="page active">
-            <div class="page-header">
-                <h2>美食搭子匹配</h2>
-                <p>填写口味偏好，找到志同道合的饭搭子</p>
-            </div>
-            <div class="buddy-container">
-                <!-- 口味偏好表单 -->
-                <div class="buddy-form">
-                    <h3>你的口味偏好</h3>
-                    <div class="buddy-tags">
-                        <label><input type="checkbox" name="preference" value="吃辣"> 吃辣</label>
-                        <label><input type="checkbox" name="preference" value="不吃辣"> 不吃辣</label>
-                        <label><input type="checkbox" name="preference" value="爱吃面"> 爱吃面</label>
-                        <label><input type="checkbox" name="preference" value="爱吃米"> 爱吃米</label>
-                        <label><input type="checkbox" name="preference" value="清淡"> 清淡</label>
-                        <label><input type="checkbox" name="preference" value="重口"> 重口</label>
-                        <label><input type="checkbox" name="preference" value="甜食"> 甜食</label>
-                        <label><input type="checkbox" name="preference" value="奶茶控"> 奶茶控</label>
-                        <label><input type="checkbox" name="preference" value="省钱"> 省钱</label>
-                        <label><input type="checkbox" name="preference" value="不限预算"> 不限预算</label>
-                    </div>
-                    <button class="btn btn-primary" onclick="matchBuddy()">开始匹配</button>
+        <main class="main-content">
+            <section class="page active">
+                <div class="page-header">
+                    <h2>美食搭子匹配</h2>
+                    <p>填写口味偏好，找到志同道合的饭搭子</p>
                 </div>
-                
-                <!-- 匹配结果 -->
-                <div class="buddy-result" id="buddy-result" style="display:none;">
-                    <h3>匹配到的饭搭子</h3>
-                    <div class="buddy-profile" id="buddy-profile"></div>
-                    <div class="buddy-invite">
-                        <button class="btn btn-primary" onclick="generateInviteText()">生成邀约文案</button>
-                        <textarea id="invite-text" placeholder="点击上方按钮生成邀约文案" readonly></textarea>
-                        <button class="btn btn-secondary" onclick="copyInviteText()">复制文案</button>
+                <div class="buddy-container">
+                    <div class="buddy-profile">
+                        <h3>设置你的口味偏好</h3>
+                        <div class="buddy-tags">
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="吃辣"> 吃辣</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃辣"> 不吃辣</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃面食"> 爱吃面食</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃米饭"> 爱吃米饭</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃甜食"> 爱吃甜食</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃葱"> 不吃葱</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃香菜"> 不吃香菜</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="素食"> 素食</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="低价实惠"> 低价实惠</label>
+                            <label class="buddy-tag"><input type="checkbox" name="preference" value="追求品质"> 追求品质</label>
+                        </div>
+                        <button class="buddy-match-btn" onclick="matchBuddy()">匹配饭搭子</button>
+                    </div>
+                    <div id="buddy-result" class="buddy-result hidden">
+                        <h3>匹配到的饭搭子</h3>
+                        <div id="buddy-match-list" class="buddy-match-list"></div>
+                        <div class="buddy-invite">
+                            <button class="buddy-invite-btn" onclick="generateInviteText()">生成邀约文案</button>
+                            <p class="buddy-invite-hint">复制文案发送给好友，一起约饭吧！</p>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- 搭子广场 -->
-                <div class="buddy-square">
-                    <h3>搭子广场</h3>
-                    <div class="buddy-list" id="buddy-list"></div>
-                </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 闽江大学蛋仔派队 · 舌尖上的闽大</p>
+        </footer>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
 
     <script>
-        // 模拟用户数据
-        const fakeBuddies = [
-            { name: '辣妹子', avatar: 'L', preferences: ['吃辣', '重口', '不限预算'], matchRate: 95 },
-            { name: '面食控', avatar: 'M', preferences: ['爱吃面', '清淡'], matchRate: 88 },
-            { name: '省钱达人', avatar: 'S', preferences: ['省钱', '爱吃米'], matchRate: 82 },
-            { name: '甜品师', avatar: 'Q', preferences: ['甜食', '奶茶控', '不限预算'], matchRate: 78 },
-            { name: '养生党', avatar: 'V', preferences: ['清淡', '不爱吃辣'], matchRate: 75 }
-        ];
+        const Storage = {
+            get(key) { try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; } },
+            set(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+        };
 
-        // 匹配搭子
         function matchBuddy() {
             const selected = Array.from(document.querySelectorAll('input[name="preference"]:checked')).map(cb => cb.value);
             if (selected.length === 0) {
-                alert('请至少选择一个口味偏好！');
+                showToast('请至少选择一个口味偏好！');
                 return;
             }
-            
-            // 计算匹配度
-            const matched = fakeBuddies.map(buddy => {
-                const matchCount = buddy.preferences.filter(p => selected.includes(p)).length;
-                return { ...buddy, matchRate: Math.min(99, 60 + matchCount * 15) };
-            }).sort((a, b) => b.matchRate - a.matchRate);
 
-            const bestMatch = matched[0];
-            
-            // 显示匹配结果
-            document.getElementById('buddy-result').style.display = 'block';
-            document.getElementById('buddy-profile').innerHTML = `
-                <div class="buddy-avatar">${bestMatch.avatar}</div>
-                <div class="buddy-info">
-                    <h4>${bestMatch.name}</h4>
-                    <p>匹配度：${bestMatch.matchRate}%</p>
-                    <div class="buddy-tags">
-                        ${bestMatch.preferences.map(p => `<span class="tag">${p}</span>`).join('')}
+            Storage.set('mjufav_buddy_prefs', selected);
+
+            const mockBuddies = [
+                { name: '辣妹子', avatar: 'L', prefs: ['吃辣', '爱吃米饭', '低价实惠'], matchRate: 90 },
+                { name: '面食控', avatar: 'M', prefs: ['爱吃面食', '不吃香菜', '追求品质'], matchRate: 85 },
+                { name: '甜食党', avatar: 'S', prefs: ['爱吃甜食', '不吃辣', '素食'], matchRate: 80 },
+                { name: '实惠达人', avatar: 'V', prefs: ['低价实惠', '爱吃面食', '不吃葱'], matchRate: 75 },
+                { name: '品质生活', avatar: 'Q', prefs: ['追求品质', '爱吃甜食', '不吃辣'], matchRate: 70 }
+            ];
+
+            const matchedBuddies = mockBuddies
+                .map(buddy => {
+                    const common = buddy.prefs.filter(p => selected.includes(p)).length;
+                    const matchRate = Math.round((common / selected.length) * 100);
+                    return { ...buddy, matchRate };
+                })
+                .filter(b => b.matchRate >= 50)
+                .sort((a, b) => b.matchRate - a.matchRate)
+                .slice(0, 5);
+
+            const resultDiv = document.getElementById('buddy-result');
+            const listDiv = document.getElementById('buddy-match-list');
+
+            if (matchedBuddies.length === 0) {
+                listDiv.innerHTML = '<p class="empty-hint">暂无匹配到的搭子，试试调整口味偏好？</p>';
+            } else {
+                listDiv.innerHTML = matchedBuddies.map(buddy => `
+                    <div class="buddy-card">
+                        <div class="buddy-avatar">${buddy.avatar}</div>
+                        <div class="buddy-info">
+                            <div class="buddy-name">${buddy.name}</div>
+                            <div class="buddy-tags-small">
+                                ${buddy.prefs.map(p => `<span class="buddy-tag-chip">${p}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="buddy-match-rate">${buddy.matchRate}%</div>
                     </div>
-                </div>
-            `;
-            
-            document.getElementById('buddy-result').scrollIntoView({ behavior: 'smooth' });
+                `).join('');
+            }
+
+            resultDiv.classList.remove('hidden');
+            showToast('匹配完成！');
         }
 
-        // 生成邀约文案
         function generateInviteText() {
-            const selected = Array.from(document.querySelectorAll('input[name="preference"]:checked')).map(cb => cb.value);
-            const buddy = document.querySelector('#buddy-profile h4').textContent;
-            document.getElementById('invite-text').value = 
-                `嘿！看到你的口味偏好是${selected.join('、')}，和我很合拍！要不要一起去探索校园美食呀？`;
+            const selected = Storage.get('mjufav_buddy_prefs') || [];
+            const username = '干饭人';
+
+            const texts = [
+                `【舌尖上的闽大 · 饭搭子邀约】\n\n${username} 正在寻找饭搭子！\n我的口味偏好：${selected.join('、')}\n\n有没有志同道合的小伙伴？一起约饭去！\n\n查看更多：舌尖上的闽大`,
+                `【约饭邀请】\n\n嘿！我在「舌尖上的闽大」上看到你也是${selected[0]}爱好者~\n我是${username}，要不要一起组队探店？\n\n感兴趣的话私信我呀～`,
+                `${username}想找个饭搭子！\n偏好：${selected.join('、')}\n\n一起吃遍闽大美食吧！`
+            ];
+
+            const text = texts[Math.floor(Math.random() * texts.length)];
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => showToast('邀约文案已复制！'));
+            } else {
+                showToast(text);
+            }
         }
 
-        // 复制文案
-        function copyInviteText() {
-            const text = document.getElementById('invite-text');
-            text.select();
-            document.execCommand('copy');
-            alert('文案已复制！');
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.remove('hidden');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.add('hidden'), 2500);
         }
-
-        // 渲染搭子广场
-        function renderBuddySquare() {
-            const list = document.getElementById('buddy-list');
-            list.innerHTML = fakeBuddies.map(buddy => `
-                <div class="buddy-card">
-                    <div class="buddy-avatar">${buddy.avatar}</div>
-                    <div class="buddy-info">
-                        <h4>${buddy.name}</h4>
-                        <p>匹配度：${buddy.matchRate}%</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        document.addEventListener('DOMContentLoaded', renderBuddySquare);
     </script>
 </body>
 </html>
