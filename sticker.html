@@ -206,7 +206,7 @@
         
         <div class="dropzone" id="dropzone">
             <input type="file" id="file-input" accept="image/*" class="file-input">
-            <div class="dropzone-icon">📸</div>
+            <div class="dropzone-icon">UP</div>
             <p class="dropzone-text">拖拽图片到这里，或点击上传</p>
             <p class="dropzone-hint">支持 JPG、PNG 格式</p>
         </div>
@@ -216,9 +216,9 @@
         <div class="style-selector" id="style-selector" style="display:none;">
             <h4>选择贴纸风格</h4>
             <div class="style-options">
-                <div class="style-option active" data-style="polaroid" onclick="selectStyle(this)">📷 拍立得</div>
-                <div class="style-option" data-style="circle" onclick="selectStyle(this)">⭕ 圆形</div>
-                <div class="style-option" data-style="card" onclick="selectStyle(this)">📱 卡片</div>
+                <div class="style-option active" data-style="polaroid" onclick="selectStyle(this)">拍立得</div>
+                <div class="style-option" data-style="circle" onclick="selectStyle(this)">圆形</div>
+                <div class="style-option" data-style="card" onclick="selectStyle(this)">卡片</div>
             </div>
         </div>
         
@@ -239,7 +239,7 @@
                 <label>评论文字: <span class="slider-hint">(选填，最多20字)</span></label>
                 <input type="text" id="comment" class="sticker-comment-input" placeholder="写点评价吧..." maxlength="20">
             </div>
-            <button class="generate-btn" onclick="generateSticker()">🎨 AI智能抠图生成</button>
+            <button class="generate-btn" onclick="generateSticker()">AI智能抠图生成</button>
         </div>
         
         <div id="processing" class="ai-processing" style="display:none;">

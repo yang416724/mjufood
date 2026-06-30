@@ -247,7 +247,7 @@
                 const isFav = favorites.includes(food.id);
                 return `
                     <div class="food-card">
-                        ${food.image ? `<img src="${food.image}" alt="${food.name}" class="food-image" loading="lazy">` : '<div class="food-image-placeholder">🍜</div>'}
+                        ${food.image ? `<img src="${food.image}" alt="${food.name}" class="food-image" loading="lazy">` : '<div class="food-image-placeholder">F</div>'}
                         <div class="food-content">
                             <div class="food-name">${food.name}</div>
                             <div class="food-rating">
@@ -257,7 +257,7 @@
                             <div class="food-review">${food.review}</div>
                             <div class="food-footer">
                                 <span class="food-reviewer">— ${food.reviewer}</span>
-                                <button class="fav-btn" onclick="toggleFav(${food.id}, event)">${isFav ? '❤️' : '🤍'}</button>
+                                <button class="fav-btn" onclick="toggleFav(${food.id}, event)">${isFav ? '★' : '☆'}</button>
                             </div>
                         </div>
                     </div>
