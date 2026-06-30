@@ -416,7 +416,6 @@ function getMbtiPageContent() {
     return `
         <div class="mbti-container">
             <div class="mbti-intro" id="modal-mbti-intro">
-                <div class="mbti-hero">F</div>
                 <h3>你的美食人格是什么？</h3>
                 <p>基于你的收藏偏好，AI将分析你的美食口味、就餐习惯、探索精神，为你生成专属的美食MBTI人格报告！</p>
                 <button class="mbti-start-btn" onclick="startMbtiTestFromModal()">开始测评</button>
@@ -1146,7 +1145,7 @@ function renderFoodCard(food) {
 function renderFoodGrid(containerId, foods) {
     const container = document.getElementById(containerId);
     if (foods.length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">F</div><p>暂无美食数据</p></div>';
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">?</div><p>暂无美食数据</p></div>';
         return;
     }
     container.innerHTML = foods.map(renderFoodCard).join('');
@@ -1181,7 +1180,7 @@ function renderFavorites() {
     const favorites = Storage.get('mjufav_spa');
     const favFoods = foodData.filter(f => favorites.includes(f.id));
     if (favFoods.length === 0) {
-        document.getElementById('favorites-food-grid').innerHTML = '<div class="empty-state"><div class="empty-icon">F</div><p>还没有收藏任何美食哦~</p><p>快去首页发现美食吧！</p></div>';
+        document.getElementById('favorites-food-grid').innerHTML = '<div class="empty-state"><div class="empty-icon">?</div><p>还没有收藏任何美食哦~</p><p>快去首页发现美食吧！</p></div>';
     } else {
         renderFoodGrid('favorites-food-grid', favFoods);
     }
@@ -1686,7 +1685,7 @@ function renderStickerGallery() {
     const stickers = Storage.get('mjufav_stickers');
     const container = document.getElementById('favorites-sticker-grid');
     if (stickers.length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">S</div><p>还没有生成测评贴纸</p><p>去"AI测评抠图"生成你的第一张贴纸吧！</p></div>';
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">?</div><p>还没有生成测评贴纸</p><p>去"AI测评抠图"生成你的第一张贴纸吧！</p></div>';
         return;
     }
     container.innerHTML = stickers.slice().reverse().map(s => `
