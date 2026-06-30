@@ -36,15 +36,15 @@
                 <img src="舌尖上的闽大.jpg" alt="Logo" class="nav-logo">
             </div>
             <div class="nav-links">
-                <a href="#" class="nav-link active" data-page="home">首页</a>
-                <a href="#" class="nav-link" data-page="cafeteria">食堂测评</a>
-                <a href="#" class="nav-link" data-page="offcampus">校外小吃</a>
-                <a href="#" class="nav-link" data-page="sticker">AI测评</a>
-                <a href="#" class="nav-link" data-page="buddy">找搭子</a>
-                <a href="#" class="nav-link" data-page="badreview">避雷墙</a>
-                <a href="#" class="nav-link" data-page="favorites">收藏</a>
-                <a href="#" class="nav-link" data-page="mealplan">食谱</a>
-                <a href="#" class="nav-link" data-page="mbti">MBTI</a>
+                <a href="javascript:void(0)" class="nav-link active" data-page="home" onclick="switchPage('home')">首页</a>
+                <a href="javascript:void(0)" class="nav-link" data-page="cafeteria" onclick="switchPage('cafeteria')">食堂测评</a>
+                <a href="javascript:void(0)" class="nav-link" data-page="offcampus" onclick="switchPage('offcampus')">校外小吃</a>
+                <a href="javascript:void(0)" class="nav-link" data-page="sticker" onclick="switchPage('sticker')">AI测评</a>
+                <a href="javascript:void(0)" class="nav-link" data-page="buddy" onclick="switchPage('buddy')">找搭子</a>
+                <a href="javascript:void(0)" class="nav-link" data-page="badreview" onclick="switchPage('badreview')">避雷墙</a>
+                <a href="javascript:void(0)" class="nav-link" data-page="favorites" onclick="switchPage('favorites')">收藏</a>
+                <a href="javascript:void(0)" class="nav-link" data-page="mealplan" onclick="switchPage('mealplan')">食谱</a>
+                <a href="javascript:void(0)" class="nav-link" data-page="mbti" onclick="switchPage('mbti')">MBTI</a>
             </div>
             <div class="nav-user">
                 <span id="current-user">干饭人</span>
@@ -57,46 +57,46 @@
             <!-- 首页 -->
             <section id="page-home" class="page active">
                 <div class="page-header">
-                <h2>舌尖上的闽大</h2>
-                <p>校园美食测评平台</p>
-            </div>
+                    <h2>舌尖上的闽大</h2>
+                    <p>校园美食测评平台</p>
+                </div>
                 <!-- 功能亮点展示 -->
                 <div class="feature-grid" id="feature-grid">
-                    <div class="feature-card" data-page="random" data-action="random">
+                    <div class="feature-card" data-page="random" data-action="random" onclick="switchPage('random'); setTimeout(drawRandomFood, 300);">
                         <div class="feature-icon"><img src="images/美食搭子匹配.jpg" alt=""></div>
                         <h3>今天吃什么</h3>
                         <p>选择困难症？让命运来决定！</p>
                         <span class="feature-tag">HOT</span>
                     </div>
-                    <div class="feature-card" data-page="mealplan">
+                    <div class="feature-card" data-page="mealplan" onclick="switchPage('mealplan')">
                         <div class="feature-icon"><img src="images/icon-mealplan.jpeg" alt=""></div>
                         <h3>一周食谱计划</h3>
                         <p>从收藏中选择美食，安排你的一周饮食</p>
                         <span class="feature-tag">NEW</span>
                     </div>
-                    <div class="feature-card" data-page="buddy">
+                    <div class="feature-card" data-page="buddy" onclick="switchPage('buddy')">
                         <div class="feature-icon"><img src="images/icon-buddy.jpeg" alt=""></div>
                         <h3>美食搭子匹配</h3>
                         <p>填写口味偏好，找到志同道合的饭搭子</p>
                         <span class="feature-tag">HOT</span>
                     </div>
-                    <div class="feature-card" data-page="badreview">
+                    <div class="feature-card" data-page="badreview" onclick="switchPage('badreview')">
                         <div class="feature-icon"><img src="images/icon-badreview.jpeg" alt=""></div>
                         <h3>避雷吐槽墙</h3>
                         <p>分享踩雷经历，让同学们少走弯路</p>
                         <span class="feature-tag">HOT</span>
                     </div>
-                    <div class="feature-card" data-page="sticker">
+                    <div class="feature-card" data-page="sticker" onclick="switchPage('sticker')">
                         <div class="feature-icon"><img src="images/icon-sticker.jpeg" alt=""></div>
                         <h3>AI测评抠图</h3>
                         <p>上传美食图片，AI智能抠图生成测评贴纸</p>
                     </div>
-                    <div class="feature-card" data-page="mbti">
+                    <div class="feature-card" data-page="mbti" onclick="switchPage('mbti')">
                         <div class="feature-icon"><img src="images/icon-mbti.jpeg" alt=""></div>
                         <h3>趣味MBTI测评</h3>
                         <p>根据你的收藏，测出你的美食人格</p>
                     </div>
-                    <div class="feature-card" data-page="cafeteria">
+                    <div class="feature-card" data-page="cafeteria" onclick="switchPage('cafeteria')">
                         <div class="feature-icon"><img src="images/食堂美食测评.jpg" alt=""></div>
                         <h3>食堂美食测评</h3>
                         <p>查看各个食堂的美食评分和真实评价</p>
@@ -106,7 +106,7 @@
                 <div class="home-section">
                     <div class="home-section-header">
                         <h3>热门美食</h3>
-                        <a href="#" class="view-more-link" data-page="cafeteria">查看更多</a>
+                        <a href="javascript:void(0)" class="view-more-link" data-page="cafeteria" onclick="switchPage('cafeteria')">查看更多</a>
                     </div>
                     <div class="food-grid" id="home-food-grid"></div>
                 </div>
@@ -115,9 +115,9 @@
             <!-- 食堂测评 -->
             <section id="page-cafeteria" class="page">
                 <div class="page-header">
-                <h2>食堂测评</h2>
-                <p>分堂测评，精准避坑</p>
-            </div>
+                    <h2>食堂测评</h2>
+                    <p>分堂测评，精准避坑</p>
+                </div>
                 <div class="filter-tabs">
                     <button class="filter-tab active" data-canteen="all">全部</button>
                     <button class="filter-tab" data-canteen="1">第一食堂</button>
@@ -131,9 +131,9 @@
             <!-- 校外小吃街 -->
             <section id="page-offcampus" class="page">
                 <div class="page-header">
-                <h2>校外小吃</h2>
-                <p>周边美食，一网打尽</p>
-            </div>
+                    <h2>校外小吃</h2>
+                    <p>周边美食，一网打尽</p>
+                </div>
                 <div class="sort-options">
                     <button class="sort-btn active" data-sort="all">全部</button>
                     <button class="sort-btn" data-sort="rating">评分最高</button>
@@ -144,9 +144,9 @@
             <!-- AI测评抠图 -->
             <section id="page-sticker" class="page">
                 <div class="page-header">
-                <h2>AI测评抠图</h2>
-                <p>上传美食图片，AI智能抠图生成测评贴纸</p>
-            </div>
+                    <h2>AI测评抠图</h2>
+                    <p>上传美食图片，AI智能抠图生成测评贴纸</p>
+                </div>
                 <div class="sticker-container">
                     <!-- 拖拽上传区 -->
                     <div class="dropzone" id="sticker-dropzone">
@@ -216,9 +216,9 @@
             <!-- 我的收藏 -->
             <section id="page-favorites" class="page">
                 <div class="page-header">
-                <h2>我的收藏</h2>
-                <p>你心仪的美食和测评贴纸</p>
-            </div>
+                    <h2>我的收藏</h2>
+                    <p>你心仪的美食和测评贴纸</p>
+                </div>
                 <div class="fav-tabs">
                     <button class="fav-tab active" data-tab="foods">收藏的美食</button>
                     <button class="fav-tab" data-tab="stickers">我的测评贴纸</button>
@@ -230,9 +230,9 @@
             <!-- 今天吃什么 -->
             <section id="page-random" class="page">
                 <div class="page-header">
-                <h2>今天吃什么</h2>
-                <p>选择困难症？让命运来决定！</p>
-            </div>
+                    <h2>今天吃什么</h2>
+                    <p>选择困难症？让命运来决定！</p>
+                </div>
                 <div class="random-container">
                     <button class="random-btn" onclick="drawRandomFood()">随机抽签</button>
                     <div id="random-result" class="random-result"></div>
@@ -242,9 +242,9 @@
             <!-- 一周食谱计划 -->
             <section id="page-mealplan" class="page">
                 <div class="page-header">
-                <h2>一周食谱计划</h2>
-                <p>从收藏中选择美食，安排你的一周饮食</p>
-            </div>
+                    <h2>一周食谱计划</h2>
+                    <p>从收藏中选择美食，安排你的一周饮食</p>
+                </div>
                 <div class="mealplan-container">
                     <div class="mealplan-header">
                         <div class="mealplan-weekdays">
@@ -368,9 +368,9 @@
             <!-- 美食搭子匹配器 -->
             <section id="page-buddy" class="page">
                 <div class="page-header">
-                <h2>美食搭子</h2>
-                <p>找到口味相投的饭搭子，一起探索美食！</p>
-            </div>
+                    <h2>美食搭子</h2>
+                    <p>找到口味相投的饭搭子，一起探索美食！</p>
+                </div>
                 <div class="buddy-container">
                     <!-- 口味偏好设置 -->
                     <div class="buddy-profile">
@@ -404,9 +404,9 @@
             <!-- 避雷吐槽墙 -->
             <section id="page-badreview" class="page">
                 <div class="page-header">
-                <h2>避雷吐槽墙</h2>
-                <p>分享踩雷经历，让同学们少走弯路</p>
-            </div>
+                    <h2>避雷吐槽墙</h2>
+                    <p>分享踩雷经历，让同学们少走弯路</p>
+                </div>
                 <div class="badreview-container">
                     <!-- 发布吐槽 -->
                     <div class="badreview-form">
@@ -434,9 +434,9 @@
             <!-- 趣味测评 MBTI -->
             <section id="page-mbti" class="page">
                 <div class="page-header">
-                <h2>趣味测评</h2>
-                <p>根据你的收藏，测出你的美食MBTI人格</p>
-            </div>
+                    <h2>趣味测评</h2>
+                    <p>根据你的收藏，测出你的美食MBTI人格</p>
+                </div>
                 <div class="mbti-container">
                     <div class="mbti-intro">
                         <div class="mbti-hero">F</div>

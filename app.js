@@ -69,111 +69,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== 功能卡片点击 =====
 function initFeatureCards() {
-    // 功能卡片点击 - 弹出页面
-    document.querySelectorAll('.feature-card').forEach(card => {
-        card.addEventListener('click', () => {
+    console.log('initFeatureCards: 开始绑定功能卡片事件');
+    
+    // 使用事件委托绑定功能卡片点击事件
+    const featureGrid = document.getElementById('feature-grid');
+    if (featureGrid) {
+        featureGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('.feature-card');
+            if (!card) return;
+            
+            e.preventDefault();
             const page = card.dataset.page;
             const action = card.dataset.action;
+            console.log('功能卡片被点击:', { page, action });
             
             if (action === 'random') {
-                // 随机功能直接执行
-                drawRandomFood();
                 switchPage('random');
+                setTimeout(drawRandomFood, 300);
             } else if (page) {
-                openFeaturePage(page);
+                switchPage(page);
             }
         });
-    });
+    }
 
-    // 查看更多链接点击
+    // 绑定"查看更多"链接
     document.querySelectorAll('.view-more-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const page = link.dataset.page;
-            if (page) {
-                openFeaturePage(page);
-            }
+            console.log('查看更多被点击:', page);
+            if (page) switchPage(page);
         });
     });
-}
-
-// ===== 打开功能页面弹窗 =====
-function openFeaturePage(page) {
-    const content = getFeaturePageContent(page);
-    showFeatureModal(page, content);
-}
-
-function getFeaturePageContent(page) {
-    switch(page) {
-        case 'mealplan':
-            return `
-                <h2>一周食谱计划</h2>
-                <p>从收藏中选择美食，安排你的一周饮食</p>
-                <button class="modal-enter-btn" onclick="switchPage('mealplan'); closeFeatureModal();">进入功能</button>
-            `;
-        case 'buddy':
-            return `
-                <h2>美食搭子匹配</h2>
-                <p>填写口味偏好，找到志同道合的饭搭子</p>
-                <button class="modal-enter-btn" onclick="switchPage('buddy'); closeFeatureModal();">进入功能</button>
-            `;
-        case 'badreview':
-            return `
-                <h2>避雷吐槽墙</h2>
-                <p>分享踩雷经历，让同学们少走弯路</p>
-                <button class="modal-enter-btn" onclick="switchPage('badreview'); closeFeatureModal();">进入功能</button>
-            `;
-        case 'sticker':
-            return `
-                <h2>AI测评抠图</h2>
-                <p>上传美食图片，AI智能抠图生成测评贴纸</p>
-                <button class="modal-enter-btn" onclick="switchPage('sticker'); closeFeatureModal();">进入功能</button>
-            `;
-        case 'mbti':
-            return `
-                <h2>趣味MBTI测评</h2>
-                <p>根据你的收藏，测出你的美食人格</p>
-                <button class="modal-enter-btn" onclick="switchPage('mbti'); closeFeatureModal();">进入功能</button>
-            `;
-        case 'cafeteria':
-            return `
-                <h2>食堂美食测评</h2>
-                <p>查看各个食堂的美食评分和真实评价</p>
-                <button class="modal-enter-btn" onclick="switchPage('cafeteria'); closeFeatureModal();">进入功能</button>
-            `;
-        case 'random':
-            return `
-                <h2>今天吃什么</h2>
-                <p>选择困难症？让命运来决定！</p>
-                <button class="modal-enter-btn" onclick="switchPage('random'); closeFeatureModal();">开始抽签</button>
-            `;
-        default:
-            return '<p>功能开发中...</p>';
-    }
-}
-
-function showFeatureModal(page, content) {
-    let modal = document.getElementById('feature-modal');
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'feature-modal';
-        modal.className = 'feature-modal';
-        document.body.appendChild(modal);
-    }
-    modal.innerHTML = `
-        <div class="feature-modal-content">
-            <button class="feature-modal-close" onclick="closeFeatureModal()">&times;</button>
-            <div class="feature-modal-body">${content}</div>
-        </div>
-    `;
-    modal.classList.add('active');
-}
-
-function closeFeatureModal() {
-    const modal = document.getElementById('feature-modal');
-    if (modal) {
-        modal.classList.remove('active');
-    }
+    console.log('initFeatureCards: 事件绑定完成');
 }
 
 // ===== 登录页面交互 =====
@@ -228,27 +156,85 @@ function checkLoginStatus() {
 
 // ===== 导航 =====
 function initNavigation() {
-    document.querySelectorAll('.nav-link').forEach(link => {
+    console.log('initNavigation: 开始绑定导航链接事件');
+    const navLinks = document.querySelectorAll('.nav-link');
+    console.log('找到导航链接数量:', navLinks.length);
+    
+    navLinks.forEach(link => {
+        console.log('绑定导航链接:', link.dataset.page, link.textContent);
         link.addEventListener('click', (e) => {
             e.preventDefault();
+            console.log('导航链接被点击:', link.dataset.page);
             switchPage(link.dataset.page);
         });
     });
+    console.log('initNavigation: 事件绑定完成');
 }
 
 function switchPage(page) {
-    currentPage = page;
-    document.querySelectorAll('.nav-link').forEach(link => link.classList.toggle('active', link.dataset.page === page));
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(`page-${page}`).classList.add('active');
-    switch(page) {
-        case 'home': renderHome(); break;
-        case 'cafeteria': renderCafeteria('all'); break;
-        case 'offcampus': renderOffCampus('all'); break;
-        case 'favorites': renderFavorites(); break;
-        case 'mealplan': renderMealPlan(); break;
-        case 'badreview': renderBadReviews(); break;
+    console.log('switchPage 被调用:', page);
+    
+    // 验证页面参数
+    if (!page) {
+        console.error('switchPage: page parameter is missing');
+        return;
     }
+    
+    currentPage = page;
+    
+    // 更新导航栏激活状态
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.page === page);
+    });
+    
+    // 切换页面显示
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const targetPage = document.getElementById(`page-${page}`);
+    
+    console.log('目标页面元素:', targetPage);
+    
+    if (!targetPage) {
+        console.error(`switchPage: page-${page} not found in DOM`);
+        return;
+    }
+    
+    targetPage.classList.add('active');
+    console.log('页面已切换到:', page);
+    
+    // 根据页面类型渲染内容
+    try {
+        switch(page) {
+            case 'home': 
+                renderHome(); 
+                break;
+            case 'cafeteria': 
+                renderCafeteria('all'); 
+                break;
+            case 'offcampus': 
+                renderOffCampus('all'); 
+                break;
+            case 'favorites': 
+                renderFavorites(); 
+                break;
+            case 'mealplan': 
+                renderMealPlan(); 
+                break;
+            case 'badreview': 
+                renderBadReviews(); 
+                break;
+            case 'sticker':
+            case 'buddy':
+            case 'mbti':
+            case 'random':
+                console.log('页面无需特殊渲染:', page);
+                break;
+        }
+    } catch (error) {
+        console.error('switchPage: error rendering page:', error);
+    }
+    
+    // 滚动到顶部
+    window.scrollTo(0, 0);
 }
 
 // ===== 筛选器 =====
