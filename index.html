@@ -56,6 +56,23 @@
         <main class="main-content">
             <!-- 首页 -->
             <section id="page-home" class="page active">
+                <!-- 轮播图 -->
+                <div class="carousel" id="carousel">
+                    <div class="carousel-slides">
+                        <div class="carousel-slide active">
+                            <img src="images/轮播1.jpg" alt="轮播图1">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/轮播2.jpg" alt="轮播图2">
+                        </div>
+                    </div>
+                    <div class="carousel-dots">
+                        <span class="carousel-dot active" onclick="goToSlide(0)"></span>
+                        <span class="carousel-dot" onclick="goToSlide(1)"></span>
+                    </div>
+                    <button class="carousel-btn prev" onclick="prevSlide()">&#10094;</button>
+                    <button class="carousel-btn next" onclick="nextSlide()">&#10095;</button>
+                </div>
                 <div class="page-header">
                     <h2>舌尖上的闽大</h2>
                     <p>校园美食测评平台</p>
@@ -451,6 +468,7 @@
 
         <!-- 底部版权 -->
         <footer class="footer">
+            <img src="images/footer.png" alt="页脚" class="footer-image">
             <p>© 闽江大学蛋仔派队 · 舌尖上的闽大</p>
         </footer>
     </div>

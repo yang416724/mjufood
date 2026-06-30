@@ -63,8 +63,60 @@ document.addEventListener('DOMContentLoaded', () => {
     initDropzones();
     initStyleSelector();
     initFavTabs();
+    initCarousel();
     checkLoginStatus();
 });
+
+// ===== 轮播图 =====
+let currentSlide = 0;
+let carouselInterval = null;
+
+function initCarousel() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    if (slides.length > 0) {
+        startCarousel();
+    }
+}
+
+function startCarousel() {
+    if (carouselInterval) clearInterval(carouselInterval);
+    carouselInterval = setInterval(() => {
+        nextSlide();
+    }, 4000);
+}
+
+function goToSlide(index) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    
+    if (slides.length === 0) return;
+    
+    currentSlide = index;
+    
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+    });
+    
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+    });
+    
+    startCarousel();
+}
+
+function nextSlide() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    if (slides.length === 0) return;
+    const next = (currentSlide + 1) % slides.length;
+    goToSlide(next);
+}
+
+function prevSlide() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    if (slides.length === 0) return;
+    const prev = (currentSlide - 1 + slides.length) % slides.length;
+    goToSlide(prev);
+}
 
 // ===== 打开功能页面（新窗口） =====
 function openFeaturePage(url) {
