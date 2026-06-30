@@ -197,26 +197,21 @@
     
     <script>
         const foodData = [
-            { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', tag: '推荐', image: 'images/一堂拌面扁肉.jpg' },
-            { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', tag: '推荐', image: 'images/一堂肴伯黑鸭煲.jpg' },
-            { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', tag: '推荐', image: 'images/一堂意面.jpg' },
-            { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', tag: '推荐', image: 'images/二堂干蒸菜.jpg' },
-            { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', tag: '推荐', image: 'images/二堂古茗.jpg' },
-            { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', tag: '推荐', image: 'images/二堂老丈人牛肉面.jpg' },
-            { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', tag: '推荐', image: 'images/二堂麻辣烫.jpg' },
-            { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', tag: '推荐', image: 'images/二堂米婆婆.jpg' },
-            { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', tag: '推荐', image: 'images/二堂石锅拌饭.jpg' },
-            { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', tag: '推荐', image: 'images/二堂水果捞.jpg' },
-            { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', tag: '推荐', image: 'images/二堂五谷渔粉.jpg' },
-            { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', tag: '推荐', image: 'images/二堂云南鸡汤米线.jpg' },
-            { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', tag: '推荐', image: 'images/三堂烤盘饭.jpg' },
-            { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', tag: '推荐', image: 'images/三堂麻辣香锅.jpg' },
-            { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', tag: '推荐', image: 'images/三堂汤先生.jpg' },
-            { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', canteen: null, tag: '推荐', image: 'images/北门肥姨妈螺蛳粉.jpg' },
-            { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞', reviewer: '甜食控', canteen: null, tag: '推荐', image: 'images/北门贵州冰浆2.jpg' },
-            { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', canteen: null, tag: '推荐', image: 'images/北门花甲粉.jpg' },
-            { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富', reviewer: '聚餐达人', canteen: null, tag: '推荐', image: 'images/北门铜锅鸡1.jpg' },
-            { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, tag: '推荐', image: 'images/北门云贵川小吃.jpg' }
+            { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', tag: '推荐', image: 'images/一堂拌面扁肉.jpg' },
+            { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', tag: '推荐', image: 'images/一堂肴伯黑鸭煲.jpg' },
+            { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', tag: '推荐', image: 'images/一堂意面.jpg' },
+            { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/二堂干蒸菜.jpg' },
+            { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/二堂古茗.jpg' },
+            { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/二堂老丈人牛肉面.jpg' },
+            { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/二堂麻辣烫.jpg' },
+            { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/二堂米婆婆.jpg' },
+            { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/二堂石锅拌饭.jpg' },
+            { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/二堂水果捞.jpg' },
+            { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/二堂五谷渔粉.jpg' },
+            { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', tag: '推荐', image: 'images/二堂云南鸡汤米线.jpg' },
+            { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', tag: '推荐', image: 'images/三堂烤盘饭.jpg' },
+            { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', tag: '推荐', image: 'images/三堂麻辣香锅.jpg' },
+            { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', tag: '推荐', image: 'images/三堂汤先生.jpg' }
         ];
 
         const Storage = {
