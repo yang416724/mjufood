@@ -66,6 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
     checkLoginStatus();
 });
 
+// ===== 打开功能页面（新窗口） =====
+function openFeaturePage(url) {
+    window.open(url, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+}
+
 // ===== 功能弹窗 =====
 let isModalMinimized = false;
 let isModalMaximized = false;

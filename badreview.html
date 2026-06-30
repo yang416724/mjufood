@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>避雷吐槽墙 - 舌尖上的闽大</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #ff6b35;
+            --danger: #dc3545;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .header h1 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        .badreview-form {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+        .badreview-input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .badreview-textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            min-height: 100px;
+            resize: vertical;
+            margin-bottom: 1rem;
+        }
+        .badreview-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .badreview-tag-label {
+            font-weight: 500;
+            color: var(--gray);
+        }
+        .badreview-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.375rem 0.75rem;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+        .badreview-tag.selected {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+        .badreview-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .badreview-list h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        .badreview-card {
+            background: var(--light);
+            padding: 1.25rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--danger);
+        }
+        .badreview-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        .badreview-shop-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        .badreview-date {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+        .badreview-content {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+        .badreview-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .badreview-tags-small {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .badreview-tag-chip {
+            padding: 0.25rem 0.5rem;
+            background: rgba(220,53,69,0.1);
+            color: var(--danger);
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+        .badreview-like-btn {
+            padding: 0.375rem 0.75rem;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            cursor: pointer;
+            color: var(--danger);
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 2rem;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>避雷吐槽墙</h1>
+            <p>分享踩雷经历，让同学们少走弯路</p>
+        </div>
+        
+        <div class="badreview-form">
+            <h3>发布避雷吐槽</h3>
+            <input type="text" id="badreview-shop" class="badreview-input" placeholder="店铺名称" maxlength="30">
+            <textarea id="badreview-content" class="badreview-textarea" placeholder="说说这次踩雷的经历..." maxlength="200"></textarea>
+            <div class="badreview-tags">
+                <span class="badreview-tag-label">避雷原因：</span>
+                <label class="badreview-tag" onclick="this.classList.toggle('selected')">
+                    <input type="checkbox" name="badtag" value="分量少" hidden> 分量少
+                </label>
+                <label class="badreview-tag" onclick="this.classList.toggle('selected')">
+                    <input type="checkbox" name="badtag" value="味道差" hidden> 味道差
+                </label>
+                <label class="badreview-tag" onclick="this.classList.toggle('selected')">
+                    <input type="checkbox" name="badtag" value="价格贵" hidden> 价格贵
+                </label>
+                <label class="badreview-tag" onclick="this.classList.toggle('selected')">
+                    <input type="checkbox" name="badtag" value="不新鲜" hidden> 不新鲜
+                </label>
+                <label class="badreview-tag" onclick="this.classList.toggle('selected')">
+                    <input type="checkbox" name="badtag" value="服务差" hidden> 服务差
+                </label>
+            </div>
+            <button class="badreview-submit" onclick="submitBadReview()">发布吐槽</button>
+        </div>
+        
+        <div class="badreview-list">
+            <h3>避雷热榜</h3>
+            <div id="badreview-items"></div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn">返回首页</a>
+        </div>
+    </div>
+    
+    <script>
+        const Storage = {
+            get(key) { try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; } },
+            set(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+        };
+
+        function init() {
+            renderBadReviews();
+        }
+
+        function submitBadReview() {
+            const shop = document.getElementById('badreview-shop').value.trim();
+            const content = document.getElementById('badreview-content').value.trim();
+            
+            if (!shop) { showToast('请输入店铺名称'); return; }
+            if (!content) { showToast('请输入吐槽内容'); return; }
+            
+            const reviews = Storage.get('mjufav_badreviews');
+            reviews.unshift({
+                id: Date.now(),
+                shop,
+                content,
+                tags: Array.from(document.querySelectorAll('.badreview-tag.selected'))
+                    .map(el => el.textContent.trim()),
+                likes: 0,
+                date: new Date().toLocaleDateString()
+            });
+            Storage.set('mjufav_badreviews', reviews);
+            
+            document.getElementById('badreview-shop').value = '';
+            document.getElementById('badreview-content').value = '';
+            document.querySelectorAll('.badreview-tag').forEach(el => el.classList.remove('selected'));
+            
+            renderBadReviews();
+            showToast('吐槽发布成功！');
+        }
+
+        function renderBadReviews() {
+            const reviews = Storage.get('mjufav_badreviews');
+            const container = document.getElementById('badreview-items');
+            
+            if (reviews.length === 0) {
+                container.innerHTML = '<p style="text-align:center;color:#6c757d;padding:2rem;">暂无避雷吐槽，快来发布第一条吧！</p>';
+                return;
+            }
+            
+            container.innerHTML = reviews.map(review => `
+                <div class="badreview-card">
+                    <div class="badreview-header">
+                        <span class="badreview-shop-name">${review.shop}</span>
+                        <span class="badreview-date">${review.date}</span>
+                    </div>
+                    <div class="badreview-content">${review.content}</div>
+                    <div class="badreview-footer">
+                        <div class="badreview-tags-small">
+                            ${review.tags.map(t => `<span class="badreview-tag-chip">${t}</span>`).join('')}
+                        </div>
+                        <button class="badreview-like-btn" onclick="likeReview(${review.id})">
+                            🤍 <span>${review.likes}</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function likeReview(id) {
+            const reviews = Storage.get('mjufav_badreviews');
+            const review = reviews.find(r => r.id === id);
+            if (review) {
+                review.likes++;
+                Storage.set('mjufav_badreviews', reviews);
+                renderBadReviews();
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+
+        init();
+    </script>
+</body>
+</html>

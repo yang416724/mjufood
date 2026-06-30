@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI测评抠图 - 舌尖上的闽大</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #ff6b35;
+            --accent: #2ec4b6;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .header h1 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        .dropzone {
+            border: 3px dashed #e9ecef;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+        }
+        .dropzone:hover {
+            border-color: var(--primary);
+            background: rgba(255,107,53,0.05);
+        }
+        .dropzone-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .dropzone-text {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        .dropzone-hint {
+            color: #adb5bd;
+            font-size: 0.875rem;
+        }
+        .file-input {
+            display: none;
+        }
+        .sticker-preview {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .sticker-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 12px;
+        }
+        .style-selector {
+            margin-bottom: 1.5rem;
+        }
+        .style-selector h4 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        .style-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .style-option {
+            padding: 1rem 2rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .style-option:hover {
+            border-color: var(--primary);
+        }
+        .style-option.active {
+            border-color: var(--primary);
+            background: rgba(255,107,53,0.1);
+        }
+        .sliders-section {
+            margin-bottom: 1.5rem;
+        }
+        .slider-group {
+            margin-bottom: 1rem;
+        }
+        .slider-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        .slider-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e9ecef;
+            outline: none;
+        }
+        .slider-val {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .sticker-comment-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+        .generate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #e55a2b 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .ai-processing {
+            text-align: center;
+            padding: 2rem;
+        }
+        .ai-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e9ecef;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .sticker-result {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        .sticker-result img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .sticker-result-btn {
+            padding: 0.75rem 2rem;
+            background: var(--dark);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 2rem;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI测评抠图</h1>
+            <p>上传美食图片，AI智能抠图生成测评贴纸</p>
+        </div>
+        
+        <div class="dropzone" id="dropzone">
+            <input type="file" id="file-input" accept="image/*" class="file-input">
+            <div class="dropzone-icon">📸</div>
+            <p class="dropzone-text">拖拽图片到这里，或点击上传</p>
+            <p class="dropzone-hint">支持 JPG、PNG 格式</p>
+        </div>
+        
+        <div id="preview" class="sticker-preview"></div>
+        
+        <div class="style-selector" id="style-selector" style="display:none;">
+            <h4>选择贴纸风格</h4>
+            <div class="style-options">
+                <div class="style-option active" data-style="polaroid" onclick="selectStyle(this)">📷 拍立得</div>
+                <div class="style-option" data-style="circle" onclick="selectStyle(this)">⭕ 圆形</div>
+                <div class="style-option" data-style="card" onclick="selectStyle(this)">📱 卡片</div>
+            </div>
+        </div>
+        
+        <div class="sliders-section" id="sliders-section" style="display:none;">
+            <div class="slider-group">
+                <label>口味评分: <span id="taste-value" class="slider-val">3.0</span></label>
+                <input type="range" id="taste-slider" min="0" max="5" step="0.5" value="3">
+            </div>
+            <div class="slider-group">
+                <label>分量评分: <span id="portion-value" class="slider-val">3.0</span></label>
+                <input type="range" id="portion-slider" min="0" max="5" step="0.5" value="3">
+            </div>
+            <div class="slider-group">
+                <label>性价比评分: <span id="value-value" class="slider-val">3.0</span></label>
+                <input type="range" id="value-slider" min="0" max="5" step="0.5" value="3">
+            </div>
+            <div class="slider-group">
+                <label>评论文字: <span class="slider-hint">(选填，最多20字)</span></label>
+                <input type="text" id="comment" class="sticker-comment-input" placeholder="写点评价吧..." maxlength="20">
+            </div>
+            <button class="generate-btn" onclick="generateSticker()">🎨 AI智能抠图生成</button>
+        </div>
+        
+        <div id="processing" class="ai-processing" style="display:none;">
+            <div class="ai-spinner"></div>
+            <p>AI正在智能抠图中...</p>
+        </div>
+        
+        <div id="result" class="sticker-result"></div>
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn">返回首页</a>
+        </div>
+    </div>
+    
+    <script>
+        let stickerImage = null;
+        let stickerStyle = 'polaroid';
+        
+        const Storage = {
+            get(key) { try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; } },
+            set(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+        };
+
+        // 初始化
+        document.getElementById('dropzone').addEventListener('click', () => document.getElementById('file-input').click());
+        document.getElementById('file-input').addEventListener('change', handleUpload);
+        
+        ['taste', 'portion', 'value'].forEach(type => {
+            document.getElementById(`${type}-slider`).addEventListener('input', (e) => {
+                document.getElementById(`${type}-value`).textContent = parseFloat(e.target.value).toFixed(1);
+            });
+        });
+
+        function handleUpload(e) {
+            const file = e.target.files[0];
+            if (!file || !file.type.startsWith('image/')) {
+                showToast('请上传图片文件');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                stickerImage = new Image();
+                stickerImage.onload = () => {
+                    document.getElementById('preview').innerHTML = `<img src="${e.target.result}" alt="预览">`;
+                    document.getElementById('style-selector').style.display = 'block';
+                    document.getElementById('sliders-section').style.display = 'block';
+                };
+                stickerImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function selectStyle(el) {
+            document.querySelectorAll('.style-option').forEach(o => o.classList.remove('active'));
+            el.classList.add('active');
+            stickerStyle = el.dataset.style;
+        }
+
+        function generateSticker() {
+            if (!stickerImage) {
+                showToast('请先上传图片');
+                return;
+            }
+            
+            document.getElementById('processing').style.display = 'block';
+            
+            setTimeout(() => {
+                const taste = parseFloat(document.getElementById('taste-slider').value);
+                const portion = parseFloat(document.getElementById('portion-slider').value);
+                const value = parseFloat(document.getElementById('value-slider').value);
+                const comment = document.getElementById('comment').value.trim();
+                
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                renderSticker(ctx, canvas, taste, portion, value, comment);
+                
+                const dataUrl = canvas.toDataURL('image/png');
+                
+                // 保存到收藏
+                const stickers = Storage.get('mjufav_stickers');
+                stickers.push({
+                    id: Date.now(),
+                    src: dataUrl,
+                    date: new Date().toLocaleDateString()
+                });
+                Storage.set('mjufav_stickers', stickers);
+                
+                document.getElementById('processing').style.display = 'none';
+                document.getElementById('result').innerHTML = `
+                    <img src="${dataUrl}" alt="测评贴纸">
+                    <div>
+                        <button class="sticker-result-btn" onclick="downloadSticker()">保存图片</button>
+                    </div>
+                    <p style="margin-top:1rem;color:#6c757d;">贴纸已自动保存到收藏页</p>
+                `;
+                
+                showToast('测评贴纸生成成功！');
+            }, 2000);
+        }
+
+        function renderSticker(ctx, canvas, taste, portion, value, comment) {
+            const w = 400, h = 500;
+            canvas.width = w;
+            canvas.height = h;
+            
+            if (stickerStyle === 'polaroid') {
+                canvas.width = 400;
+                canvas.height = 550;
+                
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.shadowColor = 'rgba(0,0,0,0.15)';
+                ctx.shadowBlur = 20;
+                ctx.fillRect(15, 15, canvas.width - 30, canvas.height - 80);
+                
+                const scale = Math.min(1, 350 / stickerImage.width);
+                const iw = stickerImage.width * scale, ih = stickerImage.height * scale;
+                ctx.drawImage(stickerImage, (canvas.width - iw) / 2, 30, iw, ih);
+                
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = '#1a1a2e';
+                ctx.font = 'bold 16px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('舌尖闽大 · 测评', canvas.width / 2, canvas.height - 50);
+                
+                const avg = ((taste + portion + value) / 3).toFixed(1);
+                ctx.font = 'bold 20px sans-serif';
+                ctx.fillStyle = '#ff6b35';
+                ctx.fillText(`综合 ${avg}分`, canvas.width / 2, canvas.height - 25);
+            } else if (stickerStyle === 'circle') {
+                canvas.width = 400;
+                canvas.height = 480;
+                
+                const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                grad.addColorStop(0, '#667eea');
+                grad.addColorStop(1, '#764ba2');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                const cx = canvas.width / 2, cy = 180, r = 140;
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                ctx.clip();
+                const scale = Math.max(r * 2 / stickerImage.width, r * 2 / stickerImage.height);
+                ctx.drawImage(stickerImage, cx - stickerImage.width * scale / 2, cy - stickerImage.height * scale / 2, stickerImage.width * scale, stickerImage.height * scale);
+                ctx.restore();
+                
+                ctx.fillStyle = 'rgba(255,255,255,0.95)';
+                ctx.fillRect(0, 360, canvas.width, 120);
+                
+                const avg = ((taste + portion + value) / 3).toFixed(1);
+                ctx.fillStyle = '#1a1a2e';
+                ctx.font = 'bold 14px sans-serif';
+                ctx.fillText('舌尖闽大 · 测评', canvas.width / 2, 390);
+                ctx.font = 'bold 28px sans-serif';
+                ctx.fillStyle = '#ff6b35';
+                ctx.fillText(`${avg}分`, canvas.width / 2, 430);
+            } else {
+                canvas.width = 400;
+                canvas.height = 520;
+                
+                const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                grad.addColorStop(0, '#1a1a2e');
+                grad.addColorStop(1, '#2d2d44');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                const scale = Math.min(1, 360 / stickerImage.width);
+                const iw = stickerImage.width * scale, ih = stickerImage.height * scale;
+                ctx.drawImage(stickerImage, (canvas.width - iw) / 2, 20, iw, ih);
+                
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 16px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('舌尖闽大 · 测评', canvas.width / 2, canvas.height - 80);
+                
+                const avg = ((taste + portion + value) / 3).toFixed(1);
+                ctx.font = 'bold 32px sans-serif';
+                ctx.fillStyle = '#ff6b35';
+                ctx.fillText(`${avg}`, canvas.width / 2, canvas.height - 40);
+            }
+        }
+
+        function downloadSticker() {
+            const canvas = document.querySelector('#result canvas') || document.createElement('canvas');
+            const link = document.createElement('a');
+            link.download = `舌尖闽大测评_${Date.now()}.png`;
+            link.href = document.querySelector('#result img').src;
+            link.click();
+            showToast('图片已开始下载！');
+        }
+
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+    </script>
+</body>
+</html>
