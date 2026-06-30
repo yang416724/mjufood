@@ -391,13 +391,14 @@ body {
 .view-more-link {
     padding: 0.375rem 1rem;
     background: var(--primary);
-    color: white;
+    color: white !important;
     border-radius: 20px;
     font-size: 0.8rem;
 }
 
 .view-more-link:hover {
     background: var(--primary-dark);
+    color: white !important;
     text-decoration: none !important;
 }
 
