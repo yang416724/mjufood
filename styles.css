@@ -379,67 +379,84 @@ body {
 /* ===== 功能弹窗 ===== */
 .feature-modal {
     position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(8px);
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.feature-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    cursor: move;
+    user-select: none;
+}
+
+.feature-modal-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.feature-modal-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.feature-modal-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
-.feature-modal.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.feature-modal-content {
-    background: white;
-    border-radius: var(--radius);
-    padding: 3rem;
-    max-width: 450px;
-    width: 90%;
-    text-align: center;
-    position: relative;
-    transform: scale(0.8);
-    transition: transform 0.3s ease;
-}
-
-.feature-modal.active .feature-modal-content {
-    transform: scale(1);
-}
-
-.feature-modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--gray);
-    transition: color 0.2s;
+.feature-modal-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
 }
 
 .feature-modal-close:hover {
-    color: var(--danger);
+    background: var(--danger);
 }
 
-.feature-modal-body h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-    color: var(--dark);
+.feature-modal-body {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    background: var(--light);
 }
 
-.feature-modal-body p {
-    color: var(--gray);
-    margin-bottom: 2rem;
-    line-height: 1.6;
+/* 弹窗最小化状态 */
+.feature-modal.minimized .feature-modal-body {
+    display: none;
 }
 
+/* 弹窗最大化状态 */
+.feature-modal.maximized {
+    border-radius: 0;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+/* 保留旧的样式以兼容其他地方可能的使用 */
 .modal-enter-btn {
     padding: 0.875rem 2.5rem;
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -1805,84 +1822,4 @@ body {
     text-align: center;
     color: var(--gray);
     padding: 2rem;
-}
-
-/* ===== 功能弹窗 ===== */
-.feature-modal {
-    position: fixed;
-    top: 10%;
-    left: 10%;
-    width: 80%;
-    height: 80%;
-    background: white;
-    border-radius: var(--radius);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    z-index: 10000;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.feature-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    cursor: move;
-    user-select: none;
-}
-
-.feature-modal-header h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.feature-modal-controls {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.feature-modal-btn {
-    width: 32px;
-    height: 32px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-}
-
-.feature-modal-btn:hover {
-    background: rgba(255,255,255,0.3);
-    transform: scale(1.1);
-}
-
-.feature-modal-close:hover {
-    background: var(--danger);
-}
-
-.feature-modal-body {
-    flex: 1;
-    padding: 1.5rem;
-    overflow-y: auto;
-    background: var(--light);
-}
-
-/* 弹窗最小化状态 */
-.feature-modal.minimized .feature-modal-body {
-    display: none;
-}
-
-/* 弹窗最大化状态 */
-.feature-modal.maximized {
-    border-radius: 0;
-    top: 0 !important;
-    left: 0 !important;
 }
