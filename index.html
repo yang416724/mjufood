@@ -62,41 +62,41 @@
                 </div>
                 <!-- 功能亮点展示 -->
                 <div class="feature-grid" id="feature-grid">
-                    <div class="feature-card" data-page="random" data-action="random" onclick="switchPage('random'); setTimeout(drawRandomFood, 300);">
+                    <div class="feature-card" data-page="random" data-action="random" onclick="openFeatureModal('random')">
                         <div class="feature-icon"><img src="images/美食搭子匹配.jpg" alt=""></div>
                         <h3>今天吃什么</h3>
                         <p>选择困难症？让命运来决定！</p>
                         <span class="feature-tag">HOT</span>
                     </div>
-                    <div class="feature-card" data-page="mealplan" onclick="switchPage('mealplan')">
+                    <div class="feature-card" data-page="mealplan" onclick="openFeatureModal('mealplan')">
                         <div class="feature-icon"><img src="images/icon-mealplan.jpeg" alt=""></div>
                         <h3>一周食谱计划</h3>
                         <p>从收藏中选择美食，安排你的一周饮食</p>
                         <span class="feature-tag">NEW</span>
                     </div>
-                    <div class="feature-card" data-page="buddy" onclick="switchPage('buddy')">
+                    <div class="feature-card" data-page="buddy" onclick="openFeatureModal('buddy')">
                         <div class="feature-icon"><img src="images/icon-buddy.jpeg" alt=""></div>
                         <h3>美食搭子匹配</h3>
                         <p>填写口味偏好，找到志同道合的饭搭子</p>
                         <span class="feature-tag">HOT</span>
                     </div>
-                    <div class="feature-card" data-page="badreview" onclick="switchPage('badreview')">
+                    <div class="feature-card" data-page="badreview" onclick="openFeatureModal('badreview')">
                         <div class="feature-icon"><img src="images/icon-badreview.jpeg" alt=""></div>
                         <h3>避雷吐槽墙</h3>
                         <p>分享踩雷经历，让同学们少走弯路</p>
                         <span class="feature-tag">HOT</span>
                     </div>
-                    <div class="feature-card" data-page="sticker" onclick="switchPage('sticker')">
+                    <div class="feature-card" data-page="sticker" onclick="openFeatureModal('sticker')">
                         <div class="feature-icon"><img src="images/icon-sticker.jpeg" alt=""></div>
                         <h3>AI测评抠图</h3>
                         <p>上传美食图片，AI智能抠图生成测评贴纸</p>
                     </div>
-                    <div class="feature-card" data-page="mbti" onclick="switchPage('mbti')">
+                    <div class="feature-card" data-page="mbti" onclick="openFeatureModal('mbti')">
                         <div class="feature-icon"><img src="images/icon-mbti.jpeg" alt=""></div>
                         <h3>趣味MBTI测评</h3>
                         <p>根据你的收藏，测出你的美食人格</p>
                     </div>
-                    <div class="feature-card" data-page="cafeteria" onclick="switchPage('cafeteria')">
+                    <div class="feature-card" data-page="cafeteria" onclick="openFeatureModal('cafeteria')">
                         <div class="feature-icon"><img src="images/食堂美食测评.jpg" alt=""></div>
                         <h3>食堂美食测评</h3>
                         <p>查看各个食堂的美食评分和真实评价</p>
@@ -502,6 +502,21 @@
             <div class="image-preview-body">
                 <img id="preview-image" src="" alt="预览大图">
             </div>
+        </div>
+    </div>
+
+    <!-- 功能弹窗 - 用于显示各个功能页面 -->
+    <div id="feature-modal" class="feature-modal hidden">
+        <div class="feature-modal-header">
+            <h3 id="feature-modal-title">功能名称</h3>
+            <div class="feature-modal-controls">
+                <button class="feature-modal-btn" onclick="minimizeFeatureModal()" title="最小化">−</button>
+                <button class="feature-modal-btn" onclick="maximizeFeatureModal()" title="最大化">□</button>
+                <button class="feature-modal-btn feature-modal-close" onclick="closeFeatureModal()" title="关闭">×</button>
+            </div>
+        </div>
+        <div class="feature-modal-body" id="feature-modal-body">
+            <!-- 功能内容将动态加载到这里 -->
         </div>
     </div>
 
