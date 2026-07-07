@@ -138,6 +138,96 @@
             border-radius: 25px;
             z-index: 1000;
         }
+
+        /* 移动端响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .container {
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .header p {
+                font-size: 0.9rem;
+            }
+            .buddy-profile {
+                padding: 1.5rem;
+            }
+            .buddy-profile h3 {
+                font-size: 1.1rem;
+            }
+            .buddy-tags {
+                gap: 0.5rem;
+            }
+            .buddy-tag {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            .buddy-match-btn {
+                padding: 0.875rem;
+                font-size: 1rem;
+            }
+            .buddy-match-card {
+                padding: 1.5rem;
+            }
+            .buddy-match-card h3 {
+                font-size: 1.1rem;
+            }
+            .buddy-invite-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .back-btn {
+                padding: 0.5rem 1.5rem;
+                font-size: 0.9rem;
+                margin-top: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.75rem;
+            }
+            .container {
+                padding: 1rem;
+                border-radius: 12px;
+            }
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            .buddy-profile {
+                padding: 1rem;
+            }
+            .buddy-tags {
+                gap: 0.4rem;
+            }
+            .buddy-tag {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.85rem;
+            }
+            .buddy-match-btn {
+                padding: 0.75rem;
+                font-size: 0.95rem;
+            }
+            .buddy-match-card {
+                padding: 1rem;
+            }
+            .buddy-match-card h3 {
+                font-size: 1rem;
+            }
+            .buddy-invite-btn {
+                padding: 0.5rem 1.25rem;
+                font-size: 0.85rem;
+            }
+            .toast {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
