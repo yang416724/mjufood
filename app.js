@@ -6,26 +6,26 @@ const Storage = {
 
 // ===== 内置美食数据（仅保留有图片的） =====
 const foodData = [
-    { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c1-noodle.jpg' },
-    { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c1-duck.jpg' },
-    { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c1-pasta.jpg' },
-    { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c2-steamed.jpg' },
-    { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c2-milk-tea.jpg' },
-    { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c2-beef-noodle.jpg' },
-    { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c2-hotpot.jpg' },
-    { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c2-rice.jpg' },
-    { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c2-bibimbap.jpg' },
-    { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c2-fruit.jpg' },
-    { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c2-fish-noodle.jpg' },
-    { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c2-rice-noodle.jpg' },
-    { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c3-bake.jpg' },
-    { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c3-spicy-pot.jpg' },
-    { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/c3-soup.jpg' },
-    { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/off-snail-noodle.jpg' },
-    { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/off-ice-drink.jpg' },
-    { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/off-clam-noodle.jpg' },
-    { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/off-pot-chicken.jpg' },
-    { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/off-snack.jpg' },
+    { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', canteen: '1', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/一堂拌面扁肉.jpg' },
+    { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', canteen: '1', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/一堂肴伯黑鸭煲.jpg' },
+    { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', canteen: '1', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/一堂意面.jpg' },
+    { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂干蒸菜.jpg' },
+    { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂古茗.jpg' },
+    { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂老丈人牛肉面.jpg' },
+    { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂麻辣烫.jpg' },
+    { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂米婆婆.jpg' },
+    { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂石锅拌饭.jpg' },
+    { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂水果捞.jpg' },
+    { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂五谷渔粉.jpg' },
+    { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', canteen: '2', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/二堂云南鸡汤米线.jpg' },
+    { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', canteen: '3', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/三堂烤盘饭.jpg' },
+    { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', canteen: '3', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/三堂麻辣香锅.jpg' },
+    { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', canteen: '3', type: 'cafeteria', emoji: 'F', tag: '推荐', image: 'images/三堂汤先生.jpg' },
+    { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/北门肥姨妈螺蛳粉.jpg' },
+    { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/北门贵州冰浆2.jpg' },
+    { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/北门花甲粉.jpg' },
+    { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/北门铜锅鸡1.jpg' },
+    { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', canteen: null, type: 'offcampus', emoji: 'F', tag: '推荐', image: 'images/北门云贵川小吃.jpg' },
     // 第四食堂数据（待同学们提交真实测评）
     { id: 21, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: 'F', tag: '待解锁', image: null },
     { id: 22, name: '四堂待解锁', rating: 0, review: '期待同学们来评测第四食堂的美食！', reviewer: '系统', canteen: '4', type: 'cafeteria', emoji: 'F', tag: '待解锁', image: null },
@@ -63,38 +63,846 @@ document.addEventListener('DOMContentLoaded', () => {
     initDropzones();
     initStyleSelector();
     initFavTabs();
-    initFeatureCards();
+    initCarousel();
     checkLoginStatus();
 });
 
-// ===== 功能卡片点击 =====
-function initFeatureCards() {
-    // 功能卡片点击 - 直接跳转页面
-    document.querySelectorAll('.feature-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const page = card.dataset.page;
-            const action = card.dataset.action;
-            
-            if (action === 'random') {
-                drawRandomFood();
-            }
-            if (page) {
-                switchPage(page);
-            }
-        });
-    });
+// ===== 轮播图 =====
+function initCarousel() {
+    // 静态轮播图，无需初始化
+}
 
-    // 查看更多链接点击
-    document.querySelectorAll('.view-more-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const page = link.dataset.page;
-            if (page) {
-                switchPage(page);
-            }
+// ===== 打开功能页面（新窗口） =====
+function openFeaturePage(url) {
+    window.open(url, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+}
+
+// ===== 功能弹窗 =====
+let isModalMinimized = false;
+let isModalMaximized = false;
+let modalOriginalSize = { width: '80%', height: '80%', top: '10%', left: '10%' };
+
+// 功能名称映射
+const featureNames = {
+    'random': '今天吃什么',
+    'mealplan': '一周食谱计划',
+    'buddy': '美食搭子匹配',
+    'badreview': '避雷吐槽墙',
+    'sticker': 'AI测评抠图',
+    'mbti': '趣味MBTI测评',
+    'cafeteria': '食堂美食测评'
+};
+
+function openFeatureModal(page) {
+    const modal = document.getElementById('feature-modal');
+    const title = document.getElementById('feature-modal-title');
+    const body = document.getElementById('feature-modal-body');
+    
+    // 设置标题
+    title.textContent = featureNames[page] || '功能页面';
+    
+    // 根据页面类型加载内容
+    let content = '';
+    switch(page) {
+        case 'random':
+            content = getRandomPageContent();
+            break;
+        case 'mealplan':
+            content = getMealPlanPageContent();
+            break;
+        case 'buddy':
+            content = getBuddyPageContent();
+            break;
+        case 'badreview':
+            content = getBadReviewPageContent();
+            break;
+        case 'sticker':
+            content = getStickerPageContent();
+            break;
+        case 'mbti':
+            content = getMbtiPageContent();
+            break;
+        case 'cafeteria':
+            content = getCafeteriaPageContent();
+            break;
+        default:
+            content = '<p>该功能正在开发中...</p>';
+    }
+    
+    body.innerHTML = content;
+    modal.classList.remove('hidden');
+    isModalMinimized = false;
+    isModalMaximized = false;
+    modal.style.width = '80%';
+    modal.style.height = '80%';
+    modal.style.top = '10%';
+    modal.style.left = '10%';
+    modal.classList.remove('minimized');
+    modal.classList.remove('maximized');
+    
+    // 根据页面类型初始化功能
+    setTimeout(() => {
+        initModalFunctionality(page);
+    }, 100);
+}
+
+function closeFeatureModal() {
+    const modal = document.getElementById('feature-modal');
+    modal.classList.add('hidden');
+}
+
+function minimizeFeatureModal() {
+    const modal = document.getElementById('feature-modal');
+    if (isModalMinimized) {
+        // 恢复
+        modal.style.width = modalOriginalSize.width;
+        modal.style.height = modalOriginalSize.height;
+        modal.style.top = modalOriginalSize.top;
+        modal.style.left = modalOriginalSize.left;
+        modal.classList.remove('minimized');
+        isModalMinimized = false;
+    } else {
+        // 最小化
+        modalOriginalSize = {
+            width: modal.style.width,
+            height: modal.style.height,
+            top: modal.style.top,
+            left: modal.style.left
+        };
+        modal.style.width = '200px';
+        modal.style.height = '40px';
+        modal.style.top = 'auto';
+        modal.style.left = 'auto';
+        modal.style.bottom = '20px';
+        modal.style.right = '20px';
+        modal.classList.add('minimized');
+        isModalMinimized = true;
+    }
+}
+
+function maximizeFeatureModal() {
+    const modal = document.getElementById('feature-modal');
+    if (isModalMaximized) {
+        // 恢复
+        modal.style.width = modalOriginalSize.width;
+        modal.style.height = modalOriginalSize.height;
+        modal.style.top = modalOriginalSize.top;
+        modal.style.left = modalOriginalSize.left;
+        modal.classList.remove('maximized');
+        isModalMaximized = false;
+    } else {
+        // 最大化
+        modalOriginalSize = {
+            width: modal.style.width,
+            height: modal.style.height,
+            top: modal.style.top,
+            left: modal.style.left
+        };
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.classList.add('maximized');
+        isModalMaximized = true;
+    }
+}
+
+// 获取各功能页面的内容
+function getRandomPageContent() {
+    return `
+        <div class="random-container">
+            <button class="random-btn" onclick="drawRandomFood()">随机抽签</button>
+            <div id="random-result" class="random-result"></div>
+        </div>
+    `;
+}
+
+function getMealPlanPageContent() {
+    return `
+        <div class="mealplan-container">
+            <div class="mealplan-header">
+                <div class="mealplan-weekdays">
+                    <div class="weekday-label"></div>
+                    <div class="weekday-label">早餐</div>
+                    <div class="weekday-label">午餐</div>
+                    <div class="weekday-label">晚餐</div>
+                </div>
+            </div>
+            <div class="mealplan-grid" id="modal-mealplan-grid">
+                ${['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map(day => `
+                    <div class="mealplan-row" data-day="${day}">
+                        <div class="weekday-name">${day}</div>
+                        <div class="meal-slot" data-meal="breakfast" onclick="selectMeal(this, '${day}', 'breakfast')">
+                            <span class="meal-placeholder">点击选择</span>
+                        </div>
+                        <div class="meal-slot" data-meal="lunch" onclick="selectMeal(this, '${day}', 'lunch')">
+                            <span class="meal-placeholder">点击选择</span>
+                        </div>
+                        <div class="meal-slot" data-meal="dinner" onclick="selectMeal(this, '${day}', 'dinner')">
+                            <span class="meal-placeholder">点击选择</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function getBuddyPageContent() {
+    return `
+        <div class="buddy-container">
+            <div class="buddy-profile">
+                <h3>设置你的口味偏好</h3>
+                <div class="buddy-tags">
+                    <label class="buddy-tag"><input type="checkbox" name="preference" value="吃辣"> 吃辣</label>
+                    <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃辣"> 不吃辣</label>
+                    <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃面食"> 爱吃面食</label>
+                    <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃米饭"> 爱吃米饭</label>
+                    <label class="buddy-tag"><input type="checkbox" name="preference" value="爱吃甜食"> 爱吃甜食</label>
+                    <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃葱"> 不吃葱</label>
+                    <label class="buddy-tag"><input type="checkbox" name="preference" value="不吃香菜"> 不吃香菜</label>
+                    <label class="buddy-tag"><input type="checkbox" name="preference" value="素食"> 素食</label>
+                    <label class="buddy-tag"><input type="checkbox" name="preference" value="低价实惠"> 低价实惠</label>
+                    <label class="buddy-tag"><input type="checkbox" name="preference" value="追求品质"> 追求品质</label>
+                </div>
+                <button class="buddy-match-btn" onclick="matchBuddy()">匹配饭搭子</button>
+            </div>
+            <div id="buddy-result" class="buddy-result hidden">
+                <h3>匹配到的饭搭子</h3>
+                <div id="buddy-match-list" class="buddy-match-list"></div>
+                <div class="buddy-invite">
+                    <button class="buddy-invite-btn" onclick="generateInviteText()">生成邀约文案</button>
+                    <p class="buddy-invite-hint">复制文案发送给好友，一起约饭吧！</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function getBadReviewPageContent() {
+    return `
+        <div class="badreview-container">
+            <div class="badreview-form">
+                <h3>发布避雷吐槽</h3>
+                <input type="text" id="modal-badreview-shop" class="badreview-input" placeholder="店铺名称" maxlength="30">
+                <textarea id="modal-badreview-content" class="badreview-textarea" placeholder="说说这次踩雷的经历..." maxlength="200"></textarea>
+                <div class="badreview-tags">
+                    <span class="badreview-tag-label">避雷原因：</span>
+                    <label class="badreview-tag"><input type="checkbox" name="badtag" value="分量少"> 分量少</label>
+                    <label class="badreview-tag"><input type="checkbox" name="badtag" value="味道差"> 味道差</label>
+                    <label class="badreview-tag"><input type="checkbox" name="badtag" value="价格贵"> 价格贵</label>
+                    <label class="badreview-tag"><input type="checkbox" name="badtag" value="不新鲜"> 不新鲜</label>
+                    <label class="badreview-tag"><input type="checkbox" name="badtag" value="服务差"> 服务差</label>
+                </div>
+                <button class="badreview-submit" onclick="submitBadReviewFromModal()">发布吐槽</button>
+            </div>
+            <div class="badreview-list">
+                <h3>避雷热榜</h3>
+                <div id="modal-badreview-items" class="badreview-items"></div>
+            </div>
+        </div>
+    `;
+}
+
+function getStickerPageContent() {
+    return `
+        <div class="sticker-container">
+            <div class="dropzone" id="modal-sticker-dropzone">
+                <input type="file" id="modal-sticker-file" accept="image/*" class="file-input">
+                <div class="dropzone-content">
+                    <div class="dropzone-icon">UP</div>
+                    <p class="dropzone-text">拖拽图片到这里，或点击上传</p>
+                    <p class="dropzone-hint">支持 JPG、PNG 格式</p>
+                </div>
+            </div>
+            <div id="modal-sticker-preview" class="sticker-preview"></div>
+            <div class="style-selector" id="modal-style-selector">
+                <h4>选择贴纸风格</h4>
+                <div class="style-options">
+                    <div class="style-option active" data-style="polaroid">
+                        <div class="style-preview polaroid-preview">拍立得</div>
+                    </div>
+                    <div class="style-option" data-style="circle">
+                        <div class="style-preview circle-preview">圆形</div>
+                    </div>
+                    <div class="style-option" data-style="card">
+                        <div class="style-preview card-preview">卡片</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sliders-section" id="modal-sliders-section">
+                <div class="slider-group">
+                    <label>口味评分: <span id="modal-taste-value" class="slider-val">3.0</span></label>
+                    <input type="range" id="modal-taste-slider" min="0" max="5" step="0.5" value="3">
+                </div>
+                <div class="slider-group">
+                    <label>分量评分: <span id="modal-portion-value" class="slider-val">3.0</span></label>
+                    <input type="range" id="modal-portion-slider" min="0" max="5" step="0.5" value="3">
+                </div>
+                <div class="slider-group">
+                    <label>性价比评分: <span id="modal-value-value" class="slider-val">3.0</span></label>
+                    <input type="range" id="modal-value-slider" min="0" max="5" step="0.5" value="3">
+                </div>
+                <div class="slider-group">
+                    <label>评论文字: <span class="slider-hint">(选填，最多20字)</span></label>
+                    <input type="text" id="modal-sticker-comment" class="sticker-comment-input" placeholder="写点评价吧..." maxlength="20">
+                </div>
+                <button class="generate-btn" id="modal-generate-btn" onclick="generateStickerFromModal()">
+                    <span class="btn-icon">AI</span> AI智能抠图生成
+                </button>
+            </div>
+            <div id="modal-ai-processing" class="ai-processing hidden">
+                <div class="ai-spinner"></div>
+                <p class="ai-text">AI正在智能抠图中...</p>
+                <div class="ai-steps">
+                    <div class="ai-step" id="modal-ai-step-1">识别美食区域</div>
+                    <div class="ai-step" id="modal-ai-step-2">智能抠图处理</div>
+                    <div class="ai-step" id="modal-ai-step-3">生成测评贴纸</div>
+                </div>
+            </div>
+            <canvas id="modal-sticker-canvas" class="sticker-canvas"></canvas>
+            <div id="modal-sticker-result" class="sticker-result"></div>
+        </div>
+    `;
+}
+
+function getMbtiPageContent() {
+    return `
+        <div class="mbti-container">
+            <div class="mbti-intro" id="modal-mbti-intro">
+                <h3>你的美食人格是什么？</h3>
+                <p>基于你的收藏偏好，AI将分析你的美食口味、就餐习惯、探索精神，为你生成专属的美食MBTI人格报告！</p>
+                <button class="mbti-start-btn" onclick="startMbtiTestFromModal()">开始测评</button>
+            </div>
+            <div id="modal-mbti-result" class="mbti-result hidden"></div>
+        </div>
+    `;
+}
+
+function getCafeteriaPageContent() {
+    return `
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-canteen="all">全部</button>
+            <button class="filter-tab" data-canteen="1">第一食堂</button>
+            <button class="filter-tab" data-canteen="2">第二食堂</button>
+            <button class="filter-tab" data-canteen="3">第三食堂</button>
+            <button class="filter-tab" data-canteen="4">第四食堂</button>
+        </div>
+        <div class="food-grid" id="modal-cafeteria-food-grid"></div>
+    `;
+}
+
+// 初始化弹窗内的功能
+function initModalFunctionality(page) {
+    switch(page) {
+        case 'mealplan':
+            renderMealPlan();
+            break;
+        case 'badreview':
+            renderBadReviews();
+            break;
+        case 'sticker':
+            initModalStickerDropzone();
+            initModalStyleSelector();
+            initModalSliders();
+            break;
+        case 'cafeteria':
+            initModalCafeteriaFilters();
+            renderCafeteria('all');
+            break;
+    }
+}
+
+// 弹窗内食谱计划相关
+function selectMeal(slotEl, day, meal) {
+    currentMealSlot = { day, meal, element: slotEl };
+    const favorites = Storage.get('mjufav_spa');
+    const favFoods = foodData.filter(f => favorites.includes(f.id));
+
+    if (favFoods.length === 0) {
+        showToast('请先收藏一些美食再来安排食谱吧！');
+        return;
+    }
+
+    const modal = document.getElementById('feature-modal');
+    modal.style.display = 'none';
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'meal-select-overlay';
+    overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:10001;';
+    overlay.onclick = () => {
+        modal.style.display = 'block';
+        document.body.removeChild(overlay);
+    };
+    document.body.appendChild(overlay);
+
+    const grid = document.createElement('div');
+    grid.className = 'meal-select-grid-modal';
+    grid.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:20px;border-radius:16px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;z-index:10002;';
+    grid.innerHTML = `
+        <h3 id="meal-select-title">${day} ${getMealName(meal)}</h3>
+        <p style="color:#6c757d;margin-bottom:15px;">从你的收藏中选择：</p>
+        <div class="meal-select-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;">
+            ${favFoods.map(food => `
+                <div class="meal-select-item" style="border:1px solid #e9ecef;padding:10px;border-radius:8px;cursor:pointer;text-align:center;" onclick="confirmMealSelect(${food.id})">
+                    <div style="font-size:2rem;margin-bottom:5px;">${food.emoji || 'F'}</div>
+                    <div style="font-size:0.9rem;font-weight:500;">${food.name}</div>
+                    <div style="color:#ffc107;">${'★'.repeat(Math.floor(food.rating))}</div>
+                </div>
+            `).join('')}
+        </div>
+        <button onclick="this.closest('.meal-select-grid-modal').previousElementSibling ? this.closest('.meal-select-grid-modal').previousElementSibling.click() : (document.body.removeChild(this.closest('.meal-select-grid-modal')), document.querySelector('.meal-select-overlay')?.click())" style="margin-top:15px;padding:8px 20px;background:#ff6b35;color:white;border:none;border-radius:8px;cursor:pointer;">关闭</button>
+    `;
+    document.body.appendChild(grid);
+}
+
+function submitBadReviewFromModal() {
+    const shop = document.getElementById('modal-badreview-shop').value.trim();
+    const content = document.getElementById('modal-badreview-content').value.trim();
+    const tags = Array.from(document.querySelectorAll('#modal-badreview-content')).map(cb => cb.value);
+
+    if (!shop) { showToast('请输入店铺名称'); return; }
+    if (!content) { showToast('请输入吐槽内容'); return; }
+
+    const reviews = Storage.get('mjufav_badreviews') || [];
+    reviews.unshift({
+        id: Date.now(),
+        shop,
+        content,
+        tags: Array.from(document.querySelectorAll('input[name="badtag"]:checked')).map(cb => cb.value),
+        likes: 0,
+        date: new Date().toLocaleDateString()
+    });
+    Storage.set('mjufav_badreviews', reviews);
+
+    document.getElementById('modal-badreview-shop').value = '';
+    document.getElementById('modal-badreview-content').value = '';
+    document.querySelectorAll('input[name="badtag"]').forEach(cb => cb.checked = false);
+
+    renderBadReviews();
+    showToast('吐槽发布成功！');
+}
+
+// 弹窗内贴纸相关
+let modalStickerImage = null;
+let modalStickerStyle = 'polaroid';
+
+function initModalStickerDropzone() {
+    const dropzone = document.getElementById('modal-sticker-dropzone');
+    const input = document.getElementById('modal-sticker-file');
+    if (!dropzone || !input) return;
+
+    dropzone.addEventListener('click', () => input.click());
+    input.addEventListener('change', (e) => { if (e.target.files.length) handleModalStickerUpload(e.target.files[0]); });
+}
+
+function handleModalStickerUpload(file) {
+    if (!file || !file.type.startsWith('image/')) { showToast('请上传图片文件'); return; }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        modalStickerImage = new Image();
+        modalStickerImage.onload = () => {
+            document.getElementById('modal-sticker-preview').innerHTML = `<img src="${e.target.result}" alt="预览">`;
+            document.getElementById('modal-style-selector').classList.remove('hidden');
+            document.getElementById('modal-sliders-section').classList.remove('hidden');
+        };
+        modalStickerImage.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function initModalStyleSelector() {
+    document.querySelectorAll('#modal-style-selector .style-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            document.querySelectorAll('#modal-style-selector .style-option').forEach(o => o.classList.remove('active'));
+            opt.classList.add('active');
+            modalStickerStyle = opt.dataset.style;
         });
     });
 }
+
+function initModalSliders() {
+    ['taste', 'portion', 'value'].forEach(type => {
+        const slider = document.getElementById(`modal-${type}-slider`);
+        const value = document.getElementById(`modal-${type}-value`);
+        if (slider && value) {
+            slider.addEventListener('input', () => { value.textContent = parseFloat(slider.value).toFixed(1); });
+        }
+    });
+}
+
+function generateStickerFromModal() {
+    if (!modalStickerImage) { showToast('请先上传图片'); return; }
+
+    const taste = parseFloat(document.getElementById('modal-taste-slider').value);
+    const portion = parseFloat(document.getElementById('modal-portion-slider').value);
+    const value = parseFloat(document.getElementById('modal-value-slider').value);
+    const comment = document.getElementById('modal-sticker-comment').value.trim();
+
+    document.getElementById('modal-ai-processing').classList.remove('hidden');
+    document.getElementById('modal-generate-btn').disabled = true;
+
+    const steps = ['modal-ai-step-1', 'modal-ai-step-2', 'modal-ai-step-3'];
+    steps.forEach(s => { document.getElementById(s).className = 'ai-step'; });
+
+    setTimeout(() => document.getElementById('modal-ai-step-1').className = 'ai-step active', 300);
+    setTimeout(() => { document.getElementById('modal-ai-step-1').className = 'ai-step done'; document.getElementById('modal-ai-step-2').className = 'ai-step active'; }, 1000);
+    setTimeout(() => { document.getElementById('modal-ai-step-2').className = 'ai-step done'; document.getElementById('modal-ai-step-3').className = 'ai-step active'; }, 1800);
+    setTimeout(() => {
+        document.getElementById('modal-ai-step-3').className = 'ai-step done';
+        document.getElementById('modal-ai-processing').classList.add('hidden');
+        document.getElementById('modal-generate-btn').disabled = false;
+        renderModalSticker(taste, portion, value, comment);
+    }, 2600);
+}
+
+function renderModalSticker(taste, portion, value, comment) {
+    const canvas = document.getElementById('modal-sticker-canvas');
+    const ctx = canvas.getContext('2d');
+
+    if (modalStickerStyle === 'polaroid') renderModalPolaroid(ctx, canvas, taste, portion, value, comment);
+    else if (modalStickerStyle === 'circle') renderModalCircle(ctx, canvas, taste, portion, value, comment);
+    else renderModalCard(ctx, canvas, taste, portion, value, comment);
+
+    const dataUrl = canvas.toDataURL('image/png');
+
+    const stickers = Storage.get('mjufav_stickers');
+    stickers.push({ id: Date.now(), src: dataUrl, date: new Date().toLocaleDateString(), taste, portion, value, comment });
+    Storage.set('mjufav_stickers', stickers);
+
+    const result = document.getElementById('modal-sticker-result');
+    result.innerHTML = `
+        <img src="${dataUrl}" alt="测评贴纸">
+        <div class="sticker-result-actions">
+            <button class="sticker-result-btn" onclick="downloadModalSticker()">保存图片</button>
+        </div>
+        <p>贴纸已自动保存到收藏页</p>`;
+    showToast('测评贴纸生成成功！');
+}
+
+function downloadModalSticker() {
+    const canvas = document.getElementById('modal-sticker-canvas');
+    const link = document.createElement('a');
+    link.download = `舌尖闽大测评_${Date.now()}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast('图片已开始下载！');
+}
+
+function renderModalPolaroid(ctx, canvas, taste, portion, value, comment) {
+    const maxW = 500, pad = 40, bottom = 160;
+    const scale = Math.min(1, maxW / modalStickerImage.width);
+    const w = modalStickerImage.width * scale, h = modalStickerImage.height * scale;
+    canvas.width = w + pad * 2;
+    canvas.height = h + pad + bottom;
+
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.shadowColor = 'rgba(0,0,0,0.15)';
+    ctx.shadowBlur = 20;
+    ctx.fillRect(10, 10, canvas.width - 20, canvas.height - 20);
+    ctx.shadowBlur = 0;
+    ctx.drawImage(modalStickerImage, pad, pad, w, h);
+
+    ctx.fillStyle = '#1a1a2e';
+    ctx.font = 'bold 18px "Segoe UI", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('舌尖闽大 · 测评', canvas.width / 2, h + pad + 30);
+
+    const ratings = [
+        { label: '口味', val: taste, color: '#ff6b35' },
+        { label: '分量', val: portion, color: '#2ec4b6' },
+        { label: '性价比', val: value, color: '#ffc107' }
+    ];
+    const barStartY = h + pad + 50;
+    const barW = 180, barH = 14, startX = (canvas.width - barW) / 2;
+    ratings.forEach((r, i) => {
+        const y = barStartY + i * 30;
+        ctx.fillStyle = '#1a1a2e'; ctx.font = '13px "Segoe UI", sans-serif'; ctx.textAlign = 'right';
+        ctx.fillText(r.label, startX - 8, y + 11);
+        ctx.fillStyle = '#e9ecef'; ctx.fillRect(startX, y, barW, barH);
+        ctx.fillStyle = r.color; ctx.fillRect(startX, y, barW * (r.val / 5), barH);
+        ctx.fillStyle = '#1a1a2e'; ctx.font = 'bold 13px "Segoe UI", sans-serif'; ctx.textAlign = 'left';
+        ctx.fillText(`${r.val}分`, startX + barW + 8, y + 11);
+    });
+}
+
+function renderModalCircle(ctx, canvas, taste, portion, value, comment) {
+    const size = 500;
+    canvas.width = size;
+    canvas.height = size + 120;
+
+    const grad = ctx.createLinearGradient(0, 0, size, size);
+    grad.addColorStop(0, '#667eea');
+    grad.addColorStop(1, '#764ba2');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const cx = size / 2, cy = size / 2, r = 200;
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.clip();
+    const scale = Math.max(r * 2 / modalStickerImage.width, r * 2 / modalStickerImage.height);
+    const iw = modalStickerImage.width * scale, ih = modalStickerImage.height * scale;
+    ctx.drawImage(modalStickerImage, cx - iw / 2, cy - ih / 2, iw, ih);
+    ctx.restore();
+
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.fillStyle = 'rgba(255,255,255,0.95)';
+    ctx.fillRect(0, size, size, 120);
+
+    const avg = ((taste + portion + value) / 3).toFixed(1);
+    ctx.fillStyle = '#1a1a2e'; ctx.font = 'bold 16px "Segoe UI", sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('舌尖闽大 · 测评', size / 2, size + 25);
+    ctx.font = 'bold 28px "Segoe UI", sans-serif';
+    ctx.fillStyle = '#ff6b35';
+    ctx.fillText(`${avg}分`, size / 2, size + 65);
+    ctx.font = '12px "Segoe UI", sans-serif';
+    ctx.fillStyle = '#6c757d';
+    ctx.fillText(`口味${taste} | 分量${portion} | 性价比${value}`, size / 2, size + 90);
+}
+
+function renderModalCard(ctx, canvas, taste, portion, value, comment) {
+    const maxW = 480, pad = 20, bottom = 140;
+    const scale = Math.min(1, maxW / modalStickerImage.width);
+    const w = modalStickerImage.width * scale, h = modalStickerImage.height * scale;
+    canvas.width = w + pad * 2;
+    canvas.height = h + pad + bottom;
+
+    const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    grad.addColorStop(0, '#1a1a2e');
+    grad.addColorStop(1, '#2d2d44');
+    ctx.fillStyle = grad;
+    roundRect(ctx, 0, 0, canvas.width, canvas.height, 16);
+    ctx.fill();
+
+    ctx.save();
+    roundRect(ctx, pad, pad, w, h, 12);
+    ctx.clip();
+    ctx.drawImage(modalStickerImage, pad, pad, w, h);
+    ctx.restore();
+
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 18px "Segoe UI", sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('舌尖闽大 · 测评', canvas.width / 2, h + pad + 30);
+
+    const avg = ((taste + portion + value) / 3).toFixed(1);
+    const ratingY = h + pad + 70;
+    ctx.font = 'bold 32px "Segoe UI", sans-serif';
+    ctx.fillStyle = '#ff6b35';
+    ctx.fillText(`${avg}`, canvas.width / 2, ratingY);
+    ctx.font = '12px "Segoe UI", sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.fillText('综合评分', canvas.width / 2, ratingY + 18);
+
+    const ratings = [
+        { label: '口味', val: taste, color: '#ff6b35' },
+        { label: '分量', val: portion, color: '#2ec4b6' },
+        { label: '性价比', val: value, color: '#ffc107' }
+    ];
+    const barY = h + pad + 105;
+    const barW = 100, barH = 8, gap = (canvas.width - barW * 3) / 4;
+    ratings.forEach((r, i) => {
+        const x = gap + i * (barW + gap);
+        ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.fillRect(x, barY, barW, barH);
+        ctx.fillStyle = r.color; ctx.fillRect(x, barY, barW * (r.val / 5), barH);
+        ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.font = '10px "Segoe UI", sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText(`${r.label} ${r.val}`, x + barW / 2, barY + barH + 14);
+    });
+}
+
+// 弹窗内MBTI相关
+function startMbtiTestFromModal() {
+    const favorites = Storage.get('mjufav_spa');
+    if (favorites.length === 0) {
+        showToast('至少收藏1个美食才能进行测评哦~');
+        return;
+    }
+
+    const favFoods = foodData.filter(f => favorites.includes(f.id));
+
+    const cafeteriaCount = favFoods.filter(f => f.type === 'cafeteria').length;
+    const offcampusCount = favFoods.filter(f => f.type === 'offcampus').length;
+    const avgRating = favFoods.reduce((s, f) => s + f.rating, 0) / favFoods.length;
+    const canteens = new Set(favFoods.filter(f => f.canteen).map(f => f.canteen));
+    const diversity = canteens.size;
+
+    let type = 'EFNP';
+    const E = offcampusCount >= cafeteriaCount;
+    const S = diversity <= 1;
+    const T = avgRating >= 4.3;
+    const J = favorites.length <= 3;
+
+    if (E && !S && T && !J) type = 'ENTJ';
+    else if (E && !S && !T && !J) type = 'ESTP';
+    else if (E && !S && !T && J) type = 'ENFP';
+    else if (!E && S && !T && !J) type = 'INFP';
+    else if (!E && S && T && J) type = 'ISTJ';
+    else if (!E && !S && T && !J) type = 'INTJ';
+    else if (!E && !S && !T && !J) type = 'ISFP';
+
+    const mbti = foodMBTI[type];
+    const resultDiv = document.getElementById('modal-mbti-result');
+    resultDiv.innerHTML = `
+        <div class="mbti-result-header">
+            <div class="mbti-type">${type}</div>
+            <div class="mbti-title">${mbti.title}</div>
+        </div>
+        <div class="mbti-result-body">
+            <p class="mbti-desc">${mbti.desc}</p>
+            <div class="mbti-traits">
+                ${Object.entries(mbti.traits).map(([k, v]) => `<div class="mbti-trait"><div class="mbti-trait-label">${k}</div><div class="mbti-trait-value">${v}</div></div>`).join('')}
+            </div>
+            <div class="mbti-recommend">
+                <h4>AI推荐</h4>
+                <p>${mbti.recommend}</p>
+            </div>
+            <div class="mbti-share">
+                <button class="mbti-share-btn" onclick="shareMbti('${type}', '${mbti.title}')">分享我的美食人格</button>
+            </div>
+        </div>`;
+
+    document.getElementById('modal-mbti-intro').classList.add('hidden');
+    resultDiv.classList.remove('hidden');
+}
+
+// 弹窗内食堂筛选
+function initModalCafeteriaFilters() {
+    document.querySelectorAll('#modal-cafeteria-food-grid').forEach?.();
+    document.querySelectorAll('#feature-modal-body .filter-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('#feature-modal-body .filter-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            renderModalCafeteria(tab.dataset.canteen);
+        });
+    });
+}
+
+function renderModalCafeteria(canteen) {
+    let filtered = foodData.filter(f => f.type === 'cafeteria');
+    if (canteen !== 'all') filtered = filtered.filter(f => f.canteen === canteen);
+    
+    const container = document.getElementById('modal-cafeteria-food-grid');
+    if (!container) return;
+    
+    container.innerHTML = filtered.map(food => `
+        <div class="food-card" onclick="openDetail(${food.id})">
+            ${food.image ? `<img src="${food.image}" alt="${food.name}" class="food-image" loading="lazy">` : `<div class="food-image-placeholder">${food.emoji}</div>`}
+            <div class="food-content">
+                <div class="food-name">${food.name}</div>
+                <div class="food-rating">
+                    <span class="stars">${'★'.repeat(Math.floor(food.rating))}${'☆'.repeat(5 - Math.floor(food.rating))}</span>
+                    <span class="rating-tag ${food.rating >= 4.5 ? 'excellent' : 'good'}">${food.tag} · ${food.rating}星</span>
+                </div>
+                <div class="food-review">${food.review}</div>
+                <div class="food-footer">
+                    <span class="food-reviewer">${food.reviewer}</span>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// 覆盖原来的renderMealPlan以支持弹窗
+const originalRenderMealPlan = renderMealPlan;
+renderMealPlan = function() {
+    const plan = Storage.get('mjufav_mealplan') || {};
+    const days = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+    const meals = ['breakfast', 'lunch', 'dinner'];
+
+    days.forEach(day => {
+        const row = document.querySelector(`.mealplan-row[data-day="${day}"]`) || document.querySelector(`#modal-mealplan-grid .mealplan-row[data-day="${day}"]`);
+        if (!row) return;
+        meals.forEach(meal => {
+            const slot = row.querySelector(`.meal-slot[data-meal="${meal}"]`);
+            if (!slot) return;
+            const key = `${day}_${meal}`;
+            const foodId = plan[key];
+            if (foodId) {
+                const food = foodData.find(f => f.id === foodId);
+                if (food) {
+                    slot.innerHTML = `<span class="meal-name">${food.name}</span>`;
+                    slot.classList.add('has-food');
+                } else {
+                    slot.innerHTML = '<span class="meal-placeholder">点击选择</span>';
+                    slot.classList.remove('has-food');
+                }
+            } else {
+                slot.innerHTML = '<span class="meal-placeholder">点击选择</span>';
+                slot.classList.remove('has-food');
+            }
+        });
+    });
+};
+
+// 覆盖原来的renderBadReviews以支持弹窗
+const originalRenderBadReviews = renderBadReviews;
+renderBadReviews = function() {
+    const reviews = Storage.get('mjufav_badreviews') || [];
+    const container = document.getElementById('badreview-items') || document.getElementById('modal-badreview-items');
+
+    if (!container) return;
+
+    if (reviews.length === 0) {
+        container.innerHTML = '<p class="empty-hint">暂无避雷吐槽，快来发布第一条吧！</p>';
+        return;
+    }
+
+    reviews.sort((a, b) => b.likes - a.likes);
+
+    container.innerHTML = reviews.map(review => `
+        <div class="badreview-card">
+            <div class="badreview-header">
+                <span class="badreview-shop-name">${review.shop}</span>
+                <span class="badreview-date">${review.date}</span>
+            </div>
+            <div class="badreview-content">${review.content}</div>
+            <div class="badreview-footer">
+                <div class="badreview-tags-small">
+                    ${review.tags.map(t => `<span class="badreview-tag-chip">${t}</span>`).join('')}
+                </div>
+                <button class="badreview-like-btn" onclick="likeBadReview(${review.id})">
+                    + <span>${review.likes}</span>
+                </button>
+            </div>
+        </div>
+    `).join('');
+};
+
+// 让弹窗可以拖拽
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('feature-modal');
+    const header = document.querySelector('.feature-modal-header');
+    
+    if (header && modal) {
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        header.addEventListener('mousedown', (e) => {
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') return;
+            isDragging = true;
+            offsetX = e.clientX - modal.offsetLeft;
+            offsetY = e.clientY - modal.offsetTop;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging || modal.classList.contains('minimized') || modal.classList.contains('maximized')) return;
+            modal.style.left = (e.clientX - offsetX) + 'px';
+            modal.style.top = (e.clientY - offsetY) + 'px';
+            modal.style.right = 'auto';
+            modal.style.bottom = 'auto';
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+    }
+});
 
 // ===== 登录页面交互 =====
 function initLoginPage() {
@@ -148,27 +956,79 @@ function checkLoginStatus() {
 
 // ===== 导航 =====
 function initNavigation() {
+    // 导航链接已经在HTML中通过onclick绑定，这里只需要确保默认行为被阻止
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
+            // onclick已经在HTML中处理，这里只阻止默认行为
             e.preventDefault();
-            switchPage(link.dataset.page);
         });
     });
 }
 
 function switchPage(page) {
-    currentPage = page;
-    document.querySelectorAll('.nav-link').forEach(link => link.classList.toggle('active', link.dataset.page === page));
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(`page-${page}`).classList.add('active');
-    switch(page) {
-        case 'home': renderHome(); break;
-        case 'cafeteria': renderCafeteria('all'); break;
-        case 'offcampus': renderOffCampus('all'); break;
-        case 'favorites': renderFavorites(); break;
-        case 'mealplan': renderMealPlan(); break;
-        case 'badreview': renderBadReviews(); break;
+    console.log('switchPage 被调用:', page);
+    
+    // 验证页面参数
+    if (!page) {
+        console.error('switchPage: page parameter is missing');
+        return;
     }
+    
+    currentPage = page;
+    
+    // 更新导航栏激活状态
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.page === page);
+    });
+    
+    // 切换页面显示
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const targetPage = document.getElementById(`page-${page}`);
+    
+    console.log('目标页面元素:', targetPage);
+    
+    if (!targetPage) {
+        console.error(`switchPage: page-${page} not found in DOM`);
+        return;
+    }
+    
+    targetPage.classList.add('active');
+    console.log('页面已切换到:', page);
+    
+    // 根据页面类型渲染内容
+    try {
+        switch(page) {
+            case 'home': 
+                renderHome(); 
+                break;
+            case 'cafeteria': 
+                renderCafeteria('all'); 
+                break;
+            case 'offcampus': 
+                renderOffCampus('all'); 
+                break;
+            case 'favorites': 
+                renderFavorites(); 
+                break;
+            case 'mealplan': 
+                renderMealPlan(); 
+                break;
+            case 'badreview': 
+                renderBadReviews(); 
+                break;
+            case 'sticker':
+            case 'buddy':
+            case 'mbti':
+            case 'random':
+                console.log('页面无需特殊渲染:', page);
+                break;
+        }
+    } catch (error) {
+        console.error('switchPage: error rendering page:', error);
+    }
+    
+    // 滚动到顶部
+    window.scrollTo(0, 0);
 }
 
 // ===== 筛选器 =====
@@ -239,7 +1099,7 @@ function renderFoodCard(food) {
 function renderFoodGrid(containerId, foods) {
     const container = document.getElementById(containerId);
     if (foods.length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">F</div><p>暂无美食数据</p></div>';
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">?</div><p>暂无美食数据</p></div>';
         return;
     }
     container.innerHTML = foods.map(renderFoodCard).join('');
@@ -274,7 +1134,7 @@ function renderFavorites() {
     const favorites = Storage.get('mjufav_spa');
     const favFoods = foodData.filter(f => favorites.includes(f.id));
     if (favFoods.length === 0) {
-        document.getElementById('favorites-food-grid').innerHTML = '<div class="empty-state"><div class="empty-icon">F</div><p>还没有收藏任何美食哦~</p><p>快去首页发现美食吧！</p></div>';
+        document.getElementById('favorites-food-grid').innerHTML = '<div class="empty-state"><div class="empty-icon">?</div><p>还没有收藏任何美食哦~</p><p>快去首页发现美食吧！</p></div>';
     } else {
         renderFoodGrid('favorites-food-grid', favFoods);
     }
@@ -779,7 +1639,7 @@ function renderStickerGallery() {
     const stickers = Storage.get('mjufav_stickers');
     const container = document.getElementById('favorites-sticker-grid');
     if (stickers.length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">S</div><p>还没有生成测评贴纸</p><p>去"AI测评抠图"生成你的第一张贴纸吧！</p></div>';
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">?</div><p>还没有生成测评贴纸</p><p>去"AI测评抠图"生成你的第一张贴纸吧！</p></div>';
         return;
     }
     container.innerHTML = stickers.slice().reverse().map(s => `

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校外小吃 - 舌尖上的闽大</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #003366;
+            --accent: #FFB6C1;
+            --secondary: #87CEEB;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --warning: #ffc107;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #e8f4fc 0%, #f0e6f6 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .header h1 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            color: var(--gray);
+        }
+        .sort-options {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .sort-btn {
+            padding: 0.5rem 1.25rem;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.875rem;
+        }
+        .sort-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .sort-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .food-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+        .food-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .food-image-placeholder {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+        .food-content {
+            padding: 1rem;
+        }
+        .food-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        .food-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .stars {
+            color: var(--warning);
+        }
+        .rating-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+        }
+        .rating-tag.excellent {
+            background: rgba(255,107,53,0.1);
+            color: var(--primary);
+        }
+        .food-review {
+            color: var(--gray);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        .food-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .food-reviewer {
+            color: #adb5bd;
+            font-size: 0.75rem;
+        }
+        .fav-btn {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .fav-btn:hover {
+            transform: scale(1.2);
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 2rem;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>校外小吃</h1>
+            <p>周边美食，一网打尽</p>
+        </div>
+        
+        <div class="sort-options">
+            <button class="sort-btn active" data-sort="all" onclick="sortFoods('all')">全部</button>
+            <button class="sort-btn" data-sort="rating" onclick="sortFoods('rating')">评分最高</button>
+        </div>
+        
+        <div class="food-grid" id="food-grid"></div>
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn">返回首页</a>
+        </div>
+    </div>
+    
+    <script>
+        const foodData = [
+            { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', type: 'offcampus', tag: '推荐', image: 'images/北门肥姨妈螺蛳粉.jpg' },
+            { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', type: 'offcampus', tag: '推荐', image: 'images/北门贵州冰浆2.jpg' },
+            { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', type: 'offcampus', tag: '推荐', image: 'images/北门花甲粉.jpg' },
+            { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', type: 'offcampus', tag: '推荐', image: 'images/北门铜锅鸡1.jpg' },
+            { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', type: 'offcampus', tag: '推荐', image: 'images/北门云贵川小吃.jpg' }
+        ];
+
+        const Storage = {
+            get(key) { try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; } },
+            set(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+        };
+
+        let currentSort = 'all';
+
+        function init() {
+            renderFoods('all');
+        }
+
+        function sortFoods(sortType) {
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.sort === sortType);
+            });
+            currentSort = sortType;
+            renderFoods(sortType);
+        }
+
+        function renderFoods(sortType) {
+            let filtered = foodData.filter(f => f.type === 'offcampus');
+            
+            if (sortType === 'rating') {
+                filtered.sort((a, b) => b.rating - a.rating);
+            }
+            
+            const favorites = Storage.get('mjufav_spa');
+            const grid = document.getElementById('food-grid');
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '<p style="text-align:center;color:#6c757d;padding:3rem;">暂无数据</p>';
+                return;
+            }
+            
+            grid.innerHTML = filtered.map(food => {
+                const isFav = favorites.includes(food.id);
+                return `
+                    <div class="food-card">
+                        ${food.image ? `<img src="${food.image}" alt="${food.name}" class="food-image" loading="lazy">` : '<div class="food-image-placeholder">F</div>'}
+                        <div class="food-content">
+                            <div class="food-name">${food.name}</div>
+                            <div class="food-rating">
+                                <span class="stars">${'★'.repeat(Math.floor(food.rating))}${'☆'.repeat(5 - Math.floor(food.rating))}</span>
+                                <span class="rating-tag ${food.rating >= 4.5 ? 'excellent' : ''}">${food.tag} · ${food.rating}星</span>
+                            </div>
+                            <div class="food-review">${food.review}</div>
+                            <div class="food-footer">
+                                <span class="food-reviewer">— ${food.reviewer}</span>
+                                <button class="fav-btn" onclick="toggleFav(${food.id}, event)">${isFav ? '★' : '☆'}</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleFav(id, event) {
+            event.stopPropagation();
+            const favorites = Storage.get('mjufav_spa');
+            const index = favorites.indexOf(id);
+            
+            if (index === -1) {
+                favorites.push(id);
+                showToast('已添加到收藏');
+            } else {
+                favorites.splice(index, 1);
+                showToast('已取消收藏');
+            }
+            
+            Storage.set('mjufav_spa', favorites);
+            renderFoods(currentSort);
+        }
+
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+
+        init();
+    </script>
+</body>
+</html>

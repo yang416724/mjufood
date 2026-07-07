@@ -4,112 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>今天吃什么 - 舌尖上的闽大</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #003366;
+            --primary-dark: #e55a2b;
+            --secondary: #f7c59f;
+            --accent: #FFB6C1;
+            --secondary: #87CEEB;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .header h1 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            color: var(--gray);
+        }
+        .random-container {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        .random-btn {
+            padding: 1.25rem 3rem;
+            font-size: 1.25rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255,107,53,0.4);
+        }
+        .random-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255,107,53,0.5);
+        }
+        .random-result {
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .result-card {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+        .result-card img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        .result-card h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .result-card .rating {
+            color: #ffc107;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .result-card .review {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        .result-card .meta {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 2rem;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: var(--primary);
+        }
+    </style>
 </head>
 <body>
-    <div class="app">
-        <nav class="navbar">
-            <div class="nav-brand">
-                <a href="index.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
-                <a href="index.html" class="nav-brand-text">舌尖上的闽大</a>
-            </div>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">首页</a>
-                <a href="cafeteria.html" class="nav-link">食堂测评</a>
-                <a href="mealplan.html" class="nav-link">食谱</a>
-                <a href="buddy.html" class="nav-link">找搭子</a>
-                <a href="badreview.html" class="nav-link">避雷墙</a>
-            </div>
-        </nav>
-
-        <main class="main-content">
-            <section class="page active">
-                <div class="page-header">
-                    <h2>今天吃什么</h2>
-                    <p>选择困难症？让命运来决定！</p>
-                </div>
-                <div class="random-container">
-                    <div id="random-result" class="random-result">
-                        <div class="empty-state">
-                            <div class="empty-icon">?</div>
-                            <p>点击下方按钮开始抽签</p>
-                        </div>
-                    </div>
-                    <button class="random-btn" onclick="drawRandomFood()">随机抽签</button>
-                </div>
-            </section>
-        </main>
-
-        <footer class="footer">
-            <p>© 闽江大学蛋仔派队 · 舌尖上的闽大</p>
-        </footer>
+    <div class="container">
+        <div class="header">
+            <h1>今天吃什么？</h1>
+            <p>选择困难症？让命运来决定你的下一餐！</p>
+        </div>
+        
+        <div class="random-container">
+            <button class="random-btn" onclick="drawRandomFood()">随机抽签决定</button>
+            <div id="random-result" class="random-result"></div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn">返回首页</a>
+        </div>
     </div>
-
-    <div id="toast" class="toast hidden"></div>
-
+    
     <script>
         const foodData = [
-            { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', image: 'images/c1-noodle.jpg' },
-            { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', image: 'images/c1-duck.jpg' },
-            { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', image: 'images/c1-pasta.jpg' },
-            { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', image: 'images/c2-steamed.jpg' },
-            { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', image: 'images/c2-milk-tea.jpg' },
-            { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', image: 'images/c2-beef-noodle.jpg' },
-            { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', image: 'images/c2-hotpot.jpg' },
-            { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', image: 'images/c2-rice.jpg' },
-            { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', image: 'images/c2-bibimbap.jpg' },
-            { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', image: 'images/c2-fruit.jpg' },
-            { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', image: 'images/c2-fish-noodle.jpg' },
-            { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', image: 'images/c2-rice-noodle.jpg' },
-            { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', image: 'images/c3-bake.jpg' },
-            { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', image: 'images/c3-spicy-pot.jpg' },
-            { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', image: 'images/c3-soup.jpg' },
-            { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', image: 'images/off-snail-noodle.jpg' },
-            { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞，夏日解暑神器', reviewer: '甜食控', image: 'images/off-ice-drink.jpg' },
-            { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', image: 'images/off-clam-noodle.jpg' },
-            { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富，适合聚餐', reviewer: '聚餐达人', image: 'images/off-pot-chicken.jpg' },
-            { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', image: 'images/off-snack.jpg' }
+            { id: 1, name: '一堂拌面扁肉', rating: 4.5, review: '拌面劲道，扁肉汤鲜味美，早餐首选', reviewer: '早起鸟', image: 'images/一堂拌面扁肉.jpg' },
+            { id: 2, name: '一堂肴伯黑鸭煲', rating: 4.5, review: '黑鸭煲香辣入味，配菜丰富，超级下饭', reviewer: '辣妹子', image: 'images/一堂肴伯黑鸭煲.jpg' },
+            { id: 3, name: '一堂意面', rating: 4, review: '意面口感不错，煎蛋很香，分量足', reviewer: '西餐控', image: 'images/一堂意面.jpg' },
+            { id: 4, name: '二堂干蒸菜', rating: 4.5, review: '干蒸排骨和牛肉都很香，配米饭绝了', reviewer: '干饭王', image: 'images/二堂干蒸菜.jpg' },
+            { id: 5, name: '二堂古茗奶茶', rating: 4.5, review: '芝士葡萄超好喝，奶盖浓郁，果茶清爽', reviewer: '奶茶控', image: 'images/二堂古茗.jpg' },
+            { id: 6, name: '二堂老丈人牛肉面', rating: 4.5, review: '牛肉大片，汤底醇厚，花生很香', reviewer: '面食控', image: 'images/二堂老丈人牛肉面.jpg' },
+            { id: 7, name: '二堂麻辣烫', rating: 4, review: '菜品丰富，汤底浓郁，丸子很Q弹', reviewer: '辣妹子', image: 'images/二堂麻辣烫.jpg' },
+            { id: 8, name: '二堂米婆婆', rating: 4, review: '锅包肉酥脆，麻婆豆腐嫩滑，金针菇下饭', reviewer: '东北胃', image: 'images/二堂米婆婆.jpg' },
+            { id: 9, name: '二堂石锅拌饭', rating: 4.5, review: '五花肉石锅拌饭，泡菜酸辣开胃，溏心蛋完美', reviewer: '韩料控', image: 'images/二堂石锅拌饭.jpg' },
+            { id: 10, name: '二堂水果捞', rating: 4.5, review: '水果新鲜种类多，芒果超甜，车厘子很大颗', reviewer: '甜食控', image: 'images/二堂水果捞.jpg' },
+            { id: 11, name: '二堂五谷渔粉', rating: 4.5, review: '渔粉滑嫩，炸蛋吸满汤汁，香菜提味', reviewer: '嗦粉达人', image: 'images/二堂五谷渔粉.jpg' },
+            { id: 12, name: '二堂云南鸡汤米线', rating: 4.5, review: '鸡汤鲜美，鱼肉嫩滑，豌豆酥脆', reviewer: '养生党', image: 'images/二堂云南鸡汤米线.jpg' },
+            { id: 13, name: '三堂烤盘饭', rating: 4.5, review: '烤盘饭香辣过瘾，配菜丰富，米饭管饱', reviewer: '干饭王', image: 'images/三堂烤盘饭.jpg' },
+            { id: 14, name: '三堂麻辣香锅', rating: 4.5, review: '麻辣香锅料足味正，丸子和蔬菜搭配完美', reviewer: '重口味', image: 'images/三堂麻辣香锅.jpg' },
+            { id: 15, name: '三堂汤先生', rating: 4, review: '黑椒肉片嫩滑，配菜丰富，营养均衡', reviewer: '养生党', image: 'images/三堂汤先生.jpg' },
+            { id: 16, name: '北门肥姨妈螺蛳粉', rating: 4.5, review: '螺蛳粉正宗，腐竹和酸笋超多，汤底浓郁', reviewer: '嗦粉达人', image: 'images/北门肥姨妈螺蛳粉.jpg' },
+            { id: 17, name: '北门贵州冰浆', rating: 4.5, review: '冰浆绵密细腻，芒果和绿豆口味都超赞', reviewer: '甜食控', image: 'images/北门贵州冰浆2.jpg' },
+            { id: 18, name: '北门花甲粉', rating: 4, review: '花甲新鲜，锡纸锁住鲜味，汤底香辣可口', reviewer: '夜宵党', image: 'images/北门花甲粉.jpg' },
+            { id: 19, name: '北门铜锅鸡', rating: 4.5, review: '铜锅鸡分量超大，鸡肉嫩滑，配菜丰富', reviewer: '聚餐达人', image: 'images/北门铜锅鸡1.jpg' },
+            { id: 20, name: '北门云贵川小吃', rating: 4, review: '土豆和米粉搭配很有特色，香辣入味', reviewer: '重口味', image: 'images/北门云贵川小吃.jpg' }
         ];
 
         function drawRandomFood() {
-            const container = document.getElementById('random-result');
-            container.innerHTML = '<div class="food-card" style="max-width:400px;margin:0 auto;pointer-events:none"><div class="food-image-placeholder" style="font-size:4rem">?</div></div>';
-
+            const resultDiv = document.getElementById('random-result');
+            resultDiv.innerHTML = '<p style="color: white; font-size: 1.25rem;">命运在转动中...</p>';
+            
             let count = 0;
             const interval = setInterval(() => {
-                const r = foodData[Math.floor(Math.random() * foodData.length)];
-                container.innerHTML = `<div class="food-card" style="max-width:400px;margin:0 auto;pointer-events:none;opacity:0.7">
-                    ${r.image ? `<img src="${r.image}" class="food-image" alt="${r.name}">` : `<div class="food-image-placeholder">F</div>`}
-                    <div class="food-content"><div class="food-name">${r.name}</div></div></div>`;
+                const random = foodData[Math.floor(Math.random() * foodData.length)];
+                resultDiv.innerHTML = `
+                    <div class="result-card">
+                        <p style="color: var(--gray);">命运决定...</p>
+                        <h2>${random.name}</h2>
+                    </div>
+                `;
                 count++;
-                if (count > 15) {
+                if (count > 10) {
                     clearInterval(interval);
-                    const random = foodData[Math.floor(Math.random() * foodData.length)];
-                    const tagClass = random.rating >= 4.5 ? 'excellent' : random.rating >= 3 ? 'good' : 'bad';
-                    container.innerHTML = `
-                        <div class="food-card" style="max-width:400px;margin:0 auto">
-                            ${random.image ? `<img src="${random.image}" class="food-image" alt="${random.name}">` : `<div class="food-image-placeholder">F</div>`}
-                            <div class="food-content">
-                                <div class="food-name">${random.name}</div>
-                                <div class="food-rating">
-                                    <span class="stars">${'★'.repeat(Math.floor(random.rating))}${'☆'.repeat(5 - Math.floor(random.rating))}</span>
-                                    <span class="rating-tag ${tagClass}">推荐 · ${random.rating}星</span>
-                                </div>
-                                <div class="food-review">${random.review}</div>
-                                <div class="food-footer"><span class="food-reviewer">${random.reviewer}</span></div>
-                            </div>
-                        </div>`;
-                    showToast(`今天推荐：${random.name}！`);
+                    const final = foodData[Math.floor(Math.random() * foodData.length)];
+                    resultDiv.innerHTML = `
+                        <div class="result-card">
+                            ${final.image ? `<img src="${final.image}" alt="${final.name}">` : ''}
+                            <h2>${final.name}</h2>
+                            <div class="rating">${'★'.repeat(Math.floor(final.rating))}${'☆'.repeat(5 - Math.floor(final.rating))} ${final.rating}分</div>
+                            <p class="review">"${final.review}"</p>
+                            <div class="meta">— ${final.reviewer}</div>
+                        </div>
+                    `;
                 }
             }, 100);
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.remove('hidden');
-            clearTimeout(toast._timer);
-            toast._timer = setTimeout(() => toast.classList.add('hidden'), 2500);
         }
     </script>
 </body>

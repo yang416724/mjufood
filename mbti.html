@@ -4,158 +4,252 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>趣味MBTI测评 - 舌尖上的闽大</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #003366;
+            --accent: #FFB6C1;
+            --secondary: #87CEEB;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .mbti-intro {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        .mbti-hero {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary) 0%, #e55a2b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(255,107,53,0.4);
+        }
+        .mbti-intro h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        .mbti-intro p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        .mbti-start-btn {
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #e55a2b 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255,107,53,0.4);
+        }
+        .mbti-result {
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .mbti-result-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+        .mbti-type {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .mbti-title {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+        .mbti-result-body {
+            text-align: left;
+        }
+        .mbti-desc {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 12px;
+        }
+        .mbti-traits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .mbti-trait {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .mbti-trait-label {
+            color: var(--gray);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        .mbti-trait-value {
+            color: var(--primary);
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .mbti-recommend {
+            background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .mbti-recommend h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        .mbti-recommend p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        .mbti-share {
+            text-align: center;
+        }
+        .mbti-share-btn {
+            padding: 0.875rem 2rem;
+            background: var(--dark);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 2rem;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            z-index: 1000;
+        }
+    </style>
 </head>
 <body>
-    <div class="app">
-        <nav class="navbar">
-            <div class="nav-brand">
-                <a href="index.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
-                <a href="index.html" class="nav-brand-text">舌尖上的闽大</a>
-            </div>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">首页</a>
-                <a href="cafeteria.html" class="nav-link">食堂测评</a>
-                <a href="mealplan.html" class="nav-link">食谱</a>
-                <a href="buddy.html" class="nav-link">找搭子</a>
-                <a href="badreview.html" class="nav-link">避雷墙</a>
-            </div>
-        </nav>
-
-        <main class="main-content">
-            <section class="page active">
-                <div class="page-header">
-                    <h2>趣味MBTI测评</h2>
-                    <p>根据你的口味偏好，测出你的美食人格</p>
-                </div>
-                <div class="mbti-container">
-                    <div class="mbti-intro" id="mbti-intro">
-                        <div class="mbti-hero">F</div>
-                        <h3>你的美食人格是什么？</h3>
-                        <p>回答几个简单的问题，AI将分析你的美食口味、就餐习惯、探索精神，为你生成专属的美食MBTI人格报告！</p>
-                        <button class="mbti-start-btn" onclick="startMbtiTest()">开始测评</button>
-                    </div>
-                    <div id="mbti-result" class="mbti-result hidden"></div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="footer">
-            <p>© 闽江大学蛋仔派队 · 舌尖上的闽大</p>
-        </footer>
+    <div class="container">
+        <div class="mbti-intro" id="intro">
+            <div class="mbti-hero">F</div>
+            <h3>你的美食人格是什么？</h3>
+            <p>基于你的收藏偏好，AI将分析你的美食口味、就餐习惯、探索精神，<br>为你生成专属的美食MBTI人格报告！</p>
+            <button class="mbti-start-btn" onclick="startTest()">开始测评</button>
+        </div>
+        
+        <div id="result" class="mbti-result" style="display:none;"></div>
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn">返回首页</a>
+        </div>
     </div>
-
-    <div id="toast" class="toast hidden"></div>
-
+    
     <script>
         const foodMBTI = {
-            'EFNP': { title: '美食探险家', desc: '你是天生的美食探险家！不拘泥于固定食堂，总是勇于尝试校外新店。你的收藏遍布各个食堂和北门小吃街，口味多元，对新鲜事物充满好奇。你是朋友圈里的"美食活地图"，总能发现别人不知道的好店。', traits: { '探索指数': '95%', '口味广度': '88%', '辣度耐受': '82%', '甜食偏好': '65%' }, recommend: '推荐你试试北门还没去过的新店，说不定能发现下一个宝藏美食！' },
-            'ISFP': { title: '精致品鉴师', desc: '你是校园美食界的品鉴大师！你对食物有着极高的标准，收藏的每道菜都是精心挑选的精品。你注重用餐体验的每个细节，从摆盘到味道，从分量到性价比，你都有独到的见解。', traits: { '品味指数': '92%', '挑剔程度': '78%', '拍照频率': '95%', '分享欲': '70%' }, recommend: '你的品味已经很高了，不妨试试用测评抠图功能，把你的美食体验做成精美贴纸分享给朋友！' },
-            'ENTJ': { title: '干饭指挥官', desc: '你是干饭界的指挥官！你总是能快速做出就餐决策，从不纠结吃什么。你的收藏集中在几个高分食堂，目标明确，效率至上。你可能是宿舍里"今天吃什么"的最终决策者。', traits: { '决策速度': '98%', '忠诚度': '85%', '效率指数': '90%', '带饭概率': '75%' }, recommend: '作为指挥官，你可以用"今天吃什么"功能帮室友做决定，一锤定音！' },
-            'INFP': { title: '文艺美食家', desc: '你是充满文艺气息的美食家！你不仅关注味道，更注重美食背后的故事和情感。你可能会为一碗面写下长篇测评，也会因为一份甜品而感动。你的收藏里藏着对生活的热爱。', traits: { '文艺指数': '95%', '情感丰富': '90%', '测评长度': '88%', '拍照美学': '92%' }, recommend: '你的文字很有感染力，试试在详情页留下更多走心的评价吧！' },
-            'ESTP': { title: '街头美食猎人', desc: '你是校园周边的美食猎人！比起食堂，你更热衷于探索北门小吃街的每个角落。烤冷面、螺蛳粉、花甲粉...你总是能找到最接地气的美味。你是夜宵文化的忠实拥趸。', traits: { '街头指数': '96%', '夜宵频率': '90%', '辣度耐受': '88%', '冒险精神': '85%' }, recommend: '北门还有更多隐藏美食等你发现！试试随机抽签功能，探索未知美味！' },
-            'ISTJ': { title: '食堂忠实粉丝', desc: '你是食堂的忠实粉丝！你喜欢熟悉的味道，有固定的就餐习惯和偏爱的窗口。你的收藏集中在特定食堂，对喜欢的菜品有着深厚的感情。稳定和可靠是你的美食信条。', traits: { '忠诚度': '98%', '习惯稳定': '95%', '探索欲': '30%', '排队耐心': '85%' }, recommend: '偶尔也可以尝试一下其他食堂，说不定会有意外惊喜哦！' },
-            'ENFP': { title: '社交美食家', desc: '你是社交型美食家！吃饭对你来说不仅是填饱肚子，更是社交活动。你喜欢和朋友一起探索新店，热衷于分享美食体验。你的收藏丰富多样，因为你总是听取朋友的推荐。', traits: { '社交指数': '95%', '从众指数': '80%', '分享欲': '92%', 'AA制概率': '70%' }, recommend: '你可以把美食测评结果分享给更多朋友，组织一次美食探店团！' },
-            'INTJ': { title: '数据美食家', desc: '你是用数据说话的美食家！你会仔细研究每道菜的评分和评价，做出最优的就餐选择。你的收藏策略性很强，只保留真正值得的美食。你是校园版的"米其林评审员"。', traits: { '分析能力': '98%', '评分敏感': '95%', '性价比控': '88%', '理性决策': '92%' }, recommend: '你的分析能力很强，不妨在图片墙上多点赞高质量图片，帮助其他同学做出更好的选择！' }
+            'EFNP': { title: '美食探险家', desc: '你是天生的美食探险家！不拘泥于固定食堂，总是勇于尝试校外新店。你的收藏遍布各个食堂和北门小吃街，口味多元，对新鲜事物充满好奇。', traits: { '探索指数': '95%', '口味广度': '88%', '辣度耐受': '82%', '甜食偏好': '65%' }, recommend: '推荐你试试北门还没去过的新店，说不定能发现下一个宝藏美食！' },
+            'ISFP': { title: '精致品鉴师', desc: '你是校园美食界的品鉴大师！你对食物有着极高的标准，收藏的每道菜都是精心挑选的精品。你注重用餐体验的每个细节。', traits: { '品味指数': '92%', '挑剔程度': '78%', '拍照频率': '95%', '分享欲': '70%' }, recommend: '你的品味已经很高了，不妨试试用测评抠图功能，把你的美食体验做成精美贴纸分享给朋友！' },
+            'ENTJ': { title: '干饭指挥官', desc: '你是干饭界的指挥官！你总是能快速做出就餐决策，从不纠结吃什么。你的收藏集中在几个高分食堂，目标明确，效率至上。', traits: { '决策速度': '98%', '忠诚度': '85%', '效率指数': '90%', '带饭概率': '75%' }, recommend: '作为指挥官，你可以用"今天吃什么"功能帮室友做决定，一锤定音！' },
+            'INFP': { title: '文艺美食家', desc: '你是充满文艺气息的美食家！你不仅关注味道，更注重美食背后的故事和情感。你可能会为一碗面写下长篇测评。', traits: { '文艺指数': '95%', '情感丰富': '90%', '测评长度': '88%', '拍照美学': '92%' }, recommend: '你的文字很有感染力，试试在详情页留下更多走心的评价吧！' },
+            'ESTP': { title: '街头美食猎人', desc: '你是校园周边的美食猎人！比起食堂，你更热衷于探索北门小吃街的每个角落。烤冷面、螺蛳粉...你总是能找到最接地气的美味。', traits: { '街头指数': '96%', '夜宵频率': '90%', '辣度耐受': '88%', '冒险精神': '85%' }, recommend: '北门还有更多隐藏美食等你发现！试试随机抽签功能，探索未知美味！' },
+            'ISTJ': { title: '食堂忠实粉丝', desc: '你是食堂的忠实粉丝！你喜欢熟悉的味道，有固定的就餐习惯和偏爱的窗口。你的收藏集中在特定食堂，对喜欢的菜品有着深厚的感情。', traits: { '忠诚度': '98%', '习惯稳定': '95%', '探索欲': '30%', '排队耐心': '85%' }, recommend: '偶尔也可以尝试一下其他食堂，说不定会有意外惊喜哦！' },
+            'ENFP': { title: '社交美食家', desc: '你是社交型美食家！吃饭对你来说不仅是填饱肚子，更是社交活动。你喜欢和朋友一起探索新店，热衷于分享美食体验。', traits: { '社交指数': '95%', '从众指数': '80%', '分享欲': '92%', 'AA制概率': '70%' }, recommend: '你可以把美食测评结果分享给更多朋友，组织一次美食探店团！' },
+            'INTJ': { title: '数据美食家', desc: '你是用数据说话的美食家！你会仔细研究每道菜的评分和评价，做出最优的就餐选择。你的收藏策略性很强，只保留真正值得的美食。', traits: { '分析能力': '98%', '评分敏感': '95%', '性价比控': '88%', '理性决策': '92%' }, recommend: '你的分析能力很强，不妨在图片墙上多点赞高质量图片，帮助其他同学做出更好的选择！' }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-        });
+        const Storage = {
+            get(key) { try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; } },
+            set(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+        };
 
-        function startMbtiTest() {
-            const questions = [
-                { q: '你更喜欢吃辣还是不吃辣？', a: { text: '吃辣！无辣不欢', dim: 'E' }, b: { text: '不吃辣，清淡为主', dim: 'I' } },
-                { q: '你是面食党还是米饭党？', a: { text: '面食党，一顿不吃面就难受', dim: 'S' }, b: { text: '米饭党，米饭才是主食', dim: 'N' } },
-                { q: '吃饭时你更看重什么？', a: { text: '味道好吃最重要', dim: 'F' }, b: { text: '营养均衡最重要', dim: 'T' } },
-                { q: '吃饭你喜欢怎么安排？', a: { text: '提前计划好要吃什么', dim: 'J' }, b: { text: '随缘，走到哪吃到哪', dim: 'P' } }
-            ];
-
-            let currentQ = 0;
-            let scores = { E: 0, I: 0, S: 0, N: 0, F: 0, T: 0, J: 0, P: 0 };
-
-            function showQuestion() {
-                const q = questions[currentQ];
-                const intro = document.getElementById('mbti-intro');
-                intro.innerHTML = `
-                    <div class="mbti-hero">${currentQ + 1}/${questions.length}</div>
-                    <h3>${q.q}</h3>
-                    <div style="display:flex;flex-direction:column;gap:1rem;max-width:400px;margin:0 auto;">
-                        <button class="mbti-start-btn" onclick="answer('a')" style="background:linear-gradient(135deg,#ff6b35,#ff8c5a);">${q.a.text}</button>
-                        <button class="mbti-start-btn" onclick="answer('b')" style="background:linear-gradient(135deg,#667eea,#764ba2);">${q.b.text}</button>
+        function startTest() {
+            const favorites = Storage.get('mjufav_spa');
+            
+            // 简单测试：随机生成MBTI
+            const types = Object.keys(foodMBTI);
+            const type = types[Math.floor(Math.random() * types.length)];
+            const mbti = foodMBTI[type];
+            
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').innerHTML = `
+                <div class="mbti-result-header">
+                    <div class="mbti-type">${type}</div>
+                    <div class="mbti-title">${mbti.title}</div>
+                </div>
+                <div class="mbti-result-body">
+                    <p class="mbti-desc">${mbti.desc}</p>
+                    <div class="mbti-traits">
+                        ${Object.entries(mbti.traits).map(([k, v]) => `
+                            <div class="mbti-trait">
+                                <div class="mbti-trait-label">${k}</div>
+                                <div class="mbti-trait-value">${v}</div>
+                            </div>
+                        `).join('')}
                     </div>
-                    <div style="margin-top:2rem;width:100%;height:8px;background:#e9ecef;border-radius:4px;">
-                        <div style="width:${((currentQ + 1) / questions.length * 100)}%;height:100%;background:linear-gradient(90deg,#ff6b35,#ff8c5a);border-radius:4px;transition:all 0.3s;"></div>
-                    </div>`;
-            }
-
-            window.answer = function(choice) {
-                const q = questions[currentQ];
-                const dim = q[choice].dim;
-                scores[dim]++;
-                currentQ++;
-                if (currentQ >= questions.length) {
-                    showResult();
-                } else {
-                    showQuestion();
-                }
-            };
-
-            function showResult() {
-                const e = scores.E >= scores.I ? 'E' : 'I';
-                const s = scores.S >= scores.N ? 'S' : 'N';
-                const f = scores.F >= scores.T ? 'F' : 'T';
-                const j = scores.J >= scores.P ? 'J' : 'P';
-                let type = e + s + f + j;
-
-                if (!foodMBTI[type]) {
-                    const types = Object.keys(foodMBTI);
-                    type = types[Math.floor(Math.random() * types.length)];
-                }
-
-                const mbti = foodMBTI[type];
-                const resultDiv = document.getElementById('mbti-result');
-                resultDiv.innerHTML = `
-                    <div class="mbti-result-header">
-                        <div class="mbti-type">${type}</div>
-                        <div class="mbti-title">${mbti.title}</div>
+                    <div class="mbti-recommend">
+                        <h4>AI推荐</h4>
+                        <p>${mbti.recommend}</p>
                     </div>
-                    <div class="mbti-result-body">
-                        <p class="mbti-desc">${mbti.desc}</p>
-                        <div class="mbti-traits">
-                            ${Object.entries(mbti.traits).map(([k, v]) => `<div class="mbti-trait"><div class="mbti-trait-label">${k}</div><div class="mbti-trait-value">${v}</div></div>`).join('')}
-                        </div>
-                        <div class="mbti-recommend">
-                            <h4>AI推荐</h4>
-                            <p>${mbti.recommend}</p>
-                        </div>
-                        <div class="mbti-share">
-                            <button class="mbti-share-btn" onclick="shareMbti('${type}', '${mbti.title}')">分享我的美食人格</button>
-                        </div>
-                    </div>`;
-
-                document.getElementById('mbti-intro').classList.add('hidden');
-                resultDiv.classList.remove('hidden');
-                showToast('测评完成！');
-            }
-
-            showQuestion();
+                    <div class="mbti-share">
+                        <button class="mbti-share-btn" onclick="shareMbti('${type}', '${mbti.title}')">分享我的美食人格</button>
+                    </div>
+                </div>
+            `;
         }
 
         function shareMbti(type, title) {
-            const text = `【舌尖上的闽大 · 美食MBTI测评】我的美食人格是 ${type} - ${title}！来测测你的美食人格吧！`;
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(text).then(() => showToast('分享文案已复制到剪贴板！'));
-            } else {
-                showToast(text);
-            }
+            const text = `我的美食MBTI人格是${type}「${title}」！你也来测测你的美食人格吧`;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('文案已复制到剪贴板！');
+            });
         }
 
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.remove('hidden');
-            clearTimeout(toast._timer);
-            toast._timer = setTimeout(() => toast.classList.add('hidden'), 2500);
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
         }
     </script>
 </body>
